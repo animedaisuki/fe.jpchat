@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-image: url("https://theme.zdassets.com/theme_assets/678183/b7e9dce75f9edb23504e13b4699e208f204e5015.png");
+  //background-image: url("https://theme.zdassets.com/theme_assets/678183/b7e9dce75f9edb23504e13b4699e208f204e5015.png");
+  background-image: url("https://webstatic.hoyoverse.com/upload/contentweb/2022/08/15/04d542b08cdee91e5dabfa0e85b8995e_4692024198088601985.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -23,7 +24,7 @@
       align-self: center;
       .loginDesc {
         color: #7e8287;
-        margin-top: -20px;
+        margin-top: 0px;
       }
     }
 
