@@ -1,0 +1,77 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "useJSXTextNode": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "jest", "no-secrets"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["src/stories/**"], // Or *.test.js
+      "rules": {
+        "eslint-disable react/jsx-props-no-spreading": "off",
+        "eslint-disable react/function-component-definition": "off",
+        "eslint-disable import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "no-secrets/no-secrets": ["error", { "ignoreContent": "^https" }],
+    "no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/button-has-type": [
+      0,
+      {
+        "button": 0,
+        "submit": 0,
+        "reset": 0
+      }
+    ],
+    "linebreak-style": "off",
+    "no-console": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-key": "error",
+    "react/no-array-index-key": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  }
+}
