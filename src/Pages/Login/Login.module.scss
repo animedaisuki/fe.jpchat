@@ -1,0 +1,76 @@
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-image: url("https://theme.zdassets.com/theme_assets/678183/b7e9dce75f9edb23504e13b4699e208f204e5015.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    background: #313338;
+    padding: 30px 40px 40px 40px;
+    border-radius: 10px;
+    width: 350px;
+    align-self: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+    .loginHeading {
+      color: #f0f1f3;
+      align-self: center;
+      .loginDesc {
+        color: #7e8287;
+        margin-top: -20px;
+      }
+    }
+
+    .loginInputContainer {
+      display: flex;
+      flex-direction: column;
+      color: #878b92;
+      .loginLabel {
+        margin-top: 20px;
+      }
+      .loginInput {
+        height: 27px;
+        padding: 5px;
+        margin-top: 7px;
+        border: none;
+        border-radius: 5px;
+      }
+      .loginToForgetPassword {
+        margin-top: 5px;
+        .loginToForgetPasswordLink {
+          text-decoration: none;
+          color: #1575a7;
+        }
+      }
+    }
+
+    .loginBtn {
+      margin-top: 40px;
+      padding: 10px;
+      background-color: #5865f2;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+      font-size: 16px;
+    }
+
+    .loginRegisterNotification {
+      margin-top: 5px;
+      color: #7e8287;
+      .loginToRegisterLink {
+        text-decoration: none;
+        color: #1575a7;
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.HomepageContainer {
+  .homepageVideoContainer {
+    position: relative;
+    height: auto;
+    width: auto;
+
+    .homepageVideo {
+      display: block; //使其具有块状属性，父容器的高度根据这个来计算
+      max-height: 100%;
+      width: 120%;
+      overflow: hidden;
+      object-fit: cover;
+      box-sizing: border-box;
+    }
+
+    .videoOverlay {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+
+      .homePageTitle {
+        font-size: 30px;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(114, 71, 21, 0.68),
+          0 0 10px rgba(114, 71, 21, 0.68);
+      }
+    }
+  }
+  .test {
+    background: #5865f2;
+  }
+}
