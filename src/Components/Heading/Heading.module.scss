@@ -1,0 +1,36 @@
+.headingContainer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding: 20px 35px 20px 35px;
+  width: 100%;
+  background-color: rgba(64, 64, 64, 0.5);
+  z-index: 1;
+
+  .headingLogoImg {
+    height: 50px;
+  }
+
+  .headingOptions {
+    display: flex;
+    margin-left: 70px;
+    .headingOption {
+      font-size: 20px;
+      margin-right: 30px;
+      color: #cccc;
+      cursor: pointer;
+    }
+  }
+
+  .homepageLoginContainer {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: 20px;
+    color: #cccc;
+    cursor: pointer;
+    .homepageLogin {
+      margin-right: 10px;
+    }
+  }
+}

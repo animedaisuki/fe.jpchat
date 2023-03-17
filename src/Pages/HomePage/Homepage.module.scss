@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .HomepageContainer {
   .homepageVideoContainer {
     position: relative;
@@ -9,6 +14,7 @@
       height: 100vh;
       width: 100%;
       overflow: hidden;
+      border: none;
       object-fit: cover;
       box-sizing: border-box;
     }
@@ -41,7 +47,21 @@
       }
     }
   }
-  .test {
-    background: #5865f2;
+
+  .homepageIntroContainer {
+    position: relative;
+    height: 100vh;
+    .homepageIntroBackground {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      box-sizing: border-box;
+    }
+    .homepageIntroCharImg {
+      position: absolute;
+      left: 330px;
+      height: 100%;
+      overflow: hidden;
+    }
   }
 }
