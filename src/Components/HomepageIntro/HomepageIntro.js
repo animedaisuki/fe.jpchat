@@ -31,7 +31,13 @@ export default function HomepageIntro() {
           src={require("../../assets/Characters/Ayaka/char-ayaka-desc.png")}
           alt="shogun"
         />
+        <img
+          className={styles.homepageIntroLight}
+          src={require("../../assets/Characters/light.png")}
+          alt="light"
+        />
       </div>
+
       <CharacterCard />
     </div>
   );
