@@ -4,10 +4,11 @@
 }
 
 .HomepageContainer {
+  width: auto;
   .homepageVideoContainer {
     position: relative;
     height: auto;
-    width: auto;
+    width: 100%;
 
     .homepageVideo {
       display: block; //使其具有块状属性，父容器的高度根据这个来计算
@@ -45,23 +46,6 @@
           cursor: pointer;
         }
       }
-    }
-  }
-
-  .homepageIntroContainer {
-    position: relative;
-    height: 100vh;
-    .homepageIntroBackground {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      box-sizing: border-box;
-    }
-    .homepageIntroCharImg {
-      position: absolute;
-      left: 330px;
-      height: 100%;
-      overflow: hidden;
     }
   }
 }

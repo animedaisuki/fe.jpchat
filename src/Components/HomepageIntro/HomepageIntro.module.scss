@@ -1,0 +1,77 @@
+.homepageIntroContainer {
+  position: relative;
+  overflow: hidden;
+  .homepageIntroImgContainer {
+    height: 100vh;
+    width: 100%;
+    background: #5865f2;
+    overflow: hidden; //要加在父容器上
+    .homepageIntroBackground {
+      height: 100%;
+      width: 100%;
+      min-height: 100%;
+      min-width: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .homepageIntroCharImg {
+      position: absolute;
+      left: 350px;
+      bottom: 0;
+      height: 100%;
+      width: auto;
+      //max-height: 90%;
+      //max-width: 90%;
+      //object-fit: contain;
+    }
+    .homepageIntroCharNameImg {
+      position: absolute;
+      left: 170px;
+      top: 200px;
+    }
+    .homepageIntroCharSnow {
+      position: absolute;
+      left: 250px;
+      top: 100px;
+      height: 350px;
+      opacity: 0.3;
+    }
+    .homepageIntroCharDescImg {
+      position: absolute;
+      left: 250px;
+      top: 470px;
+      width: 450px;
+    }
+  }
+  .homepageIntroCardsContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    .cardContainer {
+      margin: 20px;
+      border: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      .homepageCardImg {
+        background-image: linear-gradient(#e66465, #9198e5);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        width: 90px;
+      }
+      .homepageCardNameContainer {
+        margin: 5px;
+        color: white;
+      }
+    }
+  }
+}

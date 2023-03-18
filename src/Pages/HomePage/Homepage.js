@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Homepage.module.scss";
 import Heading from "../../Components/Heading/Heading";
+import HomepageIntro from "../../Components/HomepageIntro/HomepageIntro";
 
 export default function Homepage() {
   const shopUrls = [
@@ -48,18 +49,7 @@ export default function Homepage() {
             </div>
           </div>
         </div>
-        <div className={styles.homepageIntroContainer}>
-          <img
-            className={styles.homepageIntroBackground}
-            src={require("../../assets/HomepageBackground/homepageIntro1.jpg")}
-            alt="mura"
-          />
-          <img
-            className={styles.homepageIntroCharImg}
-            src={require("../../assets/Characters/char-shogun.png")}
-            alt={"shogun"}
-          />
-        </div>
+        <HomepageIntro />
       </div>
     </>
   );
