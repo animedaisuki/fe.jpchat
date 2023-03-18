@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./HomepageIntro.module.scss";
+import CharacterCard from "./CharacterCard/CharacterCard";
 
 export default function HomepageIntro() {
   return (
@@ -31,19 +32,7 @@ export default function HomepageIntro() {
           alt="shogun"
         />
       </div>
-      <div className={styles.homepageIntroCardsContainer}>
-        <button className={styles.cardContainer}>
-          <img
-            className={styles.homepageCardImg}
-            src={require("../../assets/Characters/Ayaka/char-ayaka-small.png")}
-            alt="shogun"
-          />
-          <div className={styles.homepageCardNameContainer}>
-            <p>Kamisato</p>
-            <p>Ayaka</p>
-          </div>
-        </button>
-      </div>
+      <CharacterCard />
     </div>
   );
 }
