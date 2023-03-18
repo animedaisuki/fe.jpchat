@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./CharacterCard.module.scss";
 import AyakaImg from "../../../assets/Characters/Ayaka/char-ayaka-small.png";
 import YoimiyaImg from "../../../assets/Characters/Yoimiya/char-yoimiya-small.png";
+import RaidenImg from "../../../assets/Characters/Shogun/char-shogun-samll.png";
 
 export default function CharacterCard() {
   const characters = [
@@ -15,6 +16,7 @@ export default function CharacterCard() {
       lname: "Chan",
       avatar: YoimiyaImg,
     },
+    { fname: "Raiden", lname: "Shogun", avatar: RaidenImg },
   ];
 
   return (
@@ -24,7 +26,7 @@ export default function CharacterCard() {
           <img
             className={styles.homepageCardImg}
             src={character.avatar}
-            alt="shogun"
+            alt={character.fname}
           />
           <div className={styles.homepageCardNameContainer}>
             <p>{character.fname}</p>
