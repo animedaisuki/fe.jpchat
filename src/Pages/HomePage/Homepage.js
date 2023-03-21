@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Homepage.module.scss";
 import Heading from "../../Components/Heading/Heading";
 import HomepageIntro from "../../Components/HomepageIntro/HomepageIntro";
+import Footer from "../../Components/Footer/Footer";
 
 export default function Homepage() {
   const shopUrls = [
@@ -51,6 +52,7 @@ export default function Homepage() {
         </div>
         <HomepageIntro />
       </div>
+      <Footer />
     </>
   );
 }
