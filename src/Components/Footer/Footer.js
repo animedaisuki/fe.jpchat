@@ -45,7 +45,7 @@ export default function Footer() {
       </div>
       <div className={styles.footerCopyrightContainer}>
         <p className={styles.footerCopyright}>
-          Copyright © COGNOSPHERE. All Rights Reserved.
+          Copyright © DOCTRINA. All Rights Reserved.
         </p>
       </div>
     </div>
