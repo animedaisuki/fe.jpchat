@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Heading.module.scss";
 import { BsPersonCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export default function Heading() {
   return (
@@ -17,7 +18,11 @@ export default function Heading() {
         <p className={styles.headingOption}>More</p>
       </div>
       <div className={styles.homepageLoginContainer}>
-        <p className={styles.homepageLogin}>Log In</p>
+        <p className={styles.homepageLogin}>
+          <Link className={styles.homepageToLogin} to="/login">
+            Log In
+          </Link>
+        </p>
         <BsPersonCircle />
       </div>
     </div>
