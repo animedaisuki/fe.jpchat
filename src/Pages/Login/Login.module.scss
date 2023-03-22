@@ -12,12 +12,14 @@
   .loginForm {
     display: flex;
     flex-direction: column;
+    position: relative;
     background: #313338;
     padding: 30px 40px 40px 40px;
     border-radius: 10px;
     width: 350px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    height: 55vh;
 
     .loginHeading {
       color: #f0f1f3;
@@ -72,6 +74,21 @@
         text-decoration: none;
         color: #1575a7;
       }
+    }
+
+    .loginBottomLeftImg {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 65px;
+      border-bottom-left-radius: 5px;
+    }
+    .loginBottomRightImg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 65px;
+      border-bottom-right-radius: 5px;
     }
   }
 }

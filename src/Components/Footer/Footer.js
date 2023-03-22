@@ -39,7 +39,7 @@ export default function Footer() {
       <div className={styles.footerLogoContainer}>
         <img
           className={styles.footerLogo}
-          src={require("../../assets/Logo/doctrina.png")}
+          src={require("../../assets/Logo/doctrina-b.png")}
           alt="logo"
         />
       </div>
