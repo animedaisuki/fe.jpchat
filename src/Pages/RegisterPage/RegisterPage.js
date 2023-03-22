@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
+  const [emailRecorder, setEmailRecorder] = useState("");
+  const [usernameRecorder, setUsernameRecorder] = useState("");
+  const [passwordRecorder, setPasswordRecorder] = useState("");
+
   const myRef = useRef(null);
   const handleClickOutside = (e) => {
     const target = e.target;
@@ -32,15 +36,28 @@ export default function RegisterPage() {
         <h2 className={styles.registerHeading}>Create an account</h2>
         <div className={styles.registerInputContainer}>
           <label className={styles.registerLabel}>Email</label>
-          <input className={styles.registerInput} type="email" />
+          <input
+            className={styles.registerInput}
+            type="email"
+            onChange={(e) => {
+              setEmailRecorder(e.target.value);
+            }}
+          />
           <label className={styles.registerLabel}>Username</label>
-          <input className={styles.registerInput} type="text" />
+          <input
+            className={styles.registerInput}
+            type="text"
+            onChange={(e) => {}}
+          />
           <label className={styles.registerLabel}>Password</label>
           <input
             className={styles.registerInput}
             type="password"
             ref={myRef}
             onClick={() => {
+              setIsTypingPassword(true);
+            }}
+            onChange={(e) => {
               setIsTypingPassword(true);
             }}
           />

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Login.module.scss";
 import { Link } from "react-router-dom";
+import { login } from "../../api/login/login";
 
 export default function LoginPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -16,8 +17,9 @@ export default function LoginPage() {
     return () => document.removeEventListener("click", handleClickOutside);
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await login({ email: "test@gmail.com", password: "12345678" });
   };
 
   return (
@@ -41,6 +43,9 @@ export default function LoginPage() {
             ref={myRef}
             type="password"
             onClick={() => {
+              setIsTypingPassword(true);
+            }}
+            onChange={() => {
               setIsTypingPassword(true);
             }}
           />
