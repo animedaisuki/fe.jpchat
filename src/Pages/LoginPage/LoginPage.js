@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Login.module.scss";
 import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function LoginPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
   const myRef = useRef(null);
   const handleClickOutside = (e) => {
@@ -64,10 +64,12 @@ export default function Login() {
             <img
               className={styles.loginBottomLeftImg}
               src={require("../../assets/LoginPage/left-close.png")}
+              alt="hime-left-close"
             />
             <img
               className={styles.loginBottomRightImg}
               src={require("../../assets/LoginPage/right-close.png")}
+              alt="hime-right-close"
             />
           </>
         ) : (
@@ -75,10 +77,12 @@ export default function Login() {
             <img
               className={styles.loginBottomLeftImg}
               src={require("../../assets/LoginPage/left-open.png")}
+              alt="hime-left-open"
             />
             <img
               className={styles.loginBottomRightImg}
               src={require("../../assets/LoginPage/right-open.png")}
+              alt="hime-right-open"
             />
           </>
         )}
