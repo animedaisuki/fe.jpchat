@@ -28,7 +28,8 @@ export default function Homepage() {
           <video
             className={styles.homepageVideo}
             // src="http://konosuba.com/bakuen/assets/img/index/pv.mp4"
-            src={require("../../assets/HomepageBackground/homePageBg.mp4")}
+            // src={require("../../assets/HomepageBackground/homePageBg.mp4")}
+            src="https://genshin.hoyoverse.com/_nuxt/videos/3e78e80.mp4"
             autoPlay
             loop
             muted
@@ -36,7 +37,7 @@ export default function Homepage() {
           <div className={styles.videoOverlay}>
             <div>
               <h1 className={styles.homePageTitle}>
-                Explore Anime Land with JP Chat!
+                Explore Anime Land with Amahane Chat!
               </h1>
             </div>
             <div className={styles.platformContainer}>

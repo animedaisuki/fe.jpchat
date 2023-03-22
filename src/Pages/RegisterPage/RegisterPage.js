@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
+import { register } from "../../api/register/register";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -21,8 +22,14 @@ export default function RegisterPage() {
     return () => document.removeEventListener("click", handleClickOutside);
   });
 
-  const onHandleSubmit = (e) => {
+  const onHandleSubmit = async (e) => {
     e.preventDefault();
+    const data = {
+      email: emailRecorder,
+      username: usernameRecorder,
+      password: passwordRecorder,
+    };
+    await register(data);
   };
 
   return (
@@ -47,7 +54,9 @@ export default function RegisterPage() {
           <input
             className={styles.registerInput}
             type="text"
-            onChange={(e) => {}}
+            onChange={(e) => {
+              setUsernameRecorder(e.target.value);
+            }}
           />
           <label className={styles.registerLabel}>Password</label>
           <input
@@ -59,6 +68,7 @@ export default function RegisterPage() {
             }}
             onChange={(e) => {
               setIsTypingPassword(true);
+              setPasswordRecorder(e.target.value);
             }}
           />
         </div>
