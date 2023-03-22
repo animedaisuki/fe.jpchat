@@ -15,8 +15,8 @@
     background: #313338;
     padding: 30px 40px 40px 40px;
     border-radius: 10px;
-    width: 500px;
-    height: 500px;
+    width: 350px;
+    height: 550px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     .registerHeading {
@@ -60,6 +60,14 @@
         "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
         "Helvetica Neue", sans-serif;
       font-size: 16px;
+    }
+    .registerToLoginNotification {
+      margin-top: 5px;
+      color: #7e8287;
+      .registerToLoginLink {
+        text-decoration: none;
+        color: #1575a7;
+      }
     }
     .registerBottomLeftImg {
       position: absolute;

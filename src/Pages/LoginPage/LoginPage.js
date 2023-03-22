@@ -55,7 +55,7 @@ export default function LoginPage() {
         </button>
         <p className={styles.loginRegisterNotification}>
           Need an account?{" "}
-          <Link className={styles.loginToRegisterLink} to="">
+          <Link className={styles.loginToRegisterLink} to="/register">
             Register here
           </Link>
         </p>

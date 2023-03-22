@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Register.module.scss";
+import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -59,6 +60,11 @@ export default function RegisterPage() {
           </label>
         </div>
         <button className={styles.registerBtn}>Register</button>
+        <p className={styles.registerToLoginNotification}>
+          <Link className={styles.registerToLoginLink} to="/login">
+            Already have an account?
+          </Link>
+        </p>
         {isTypingPassword ? (
           <>
             <img
