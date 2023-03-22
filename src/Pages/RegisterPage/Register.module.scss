@@ -1,0 +1,79 @@
+.registerContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-image: url("https://webstatic.hoyoverse.com/upload/contentweb/2022/08/15/04d542b08cdee91e5dabfa0e85b8995e_4692024198088601985.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #313338;
+    padding: 30px 40px 40px 40px;
+    border-radius: 10px;
+    width: 500px;
+    height: 500px;
+    align-self: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .registerHeading {
+      color: #f0f1f3;
+      align-self: center;
+    }
+    .registerInputContainer {
+      display: flex;
+      flex-direction: column;
+      color: #878b92;
+      .registerLabel {
+        margin-top: 20px;
+      }
+      .registerInput {
+        height: 30px;
+        padding: 5px;
+        margin-top: 7px;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+    .registerCheckBoxContainer {
+      margin-top: 20px;
+      color: #878b92;
+      .registerCheckBox {
+        margin-right: 10px;
+      }
+      .registerCheckBoxLabel {
+        font-size: 12px;
+      }
+    }
+    .registerBtn {
+      margin-top: 40px;
+      padding: 10px;
+      background-color: #5865f2;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+      font-size: 16px;
+    }
+    .registerBottomLeftImg {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 65px;
+      border-bottom-left-radius: 5px;
+    }
+    .registerBottomRightImg {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 65px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}

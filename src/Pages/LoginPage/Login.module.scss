@@ -17,10 +17,9 @@
     padding: 30px 40px 40px 40px;
     border-radius: 10px;
     width: 350px;
+    height: 440px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    height: 55vh;
-
     .loginHeading {
       color: #f0f1f3;
       align-self: center;
@@ -38,7 +37,7 @@
         margin-top: 20px;
       }
       .loginInput {
-        height: 27px;
+        height: 30px;
         padding: 5px;
         margin-top: 7px;
         border: none;
