@@ -25,8 +25,14 @@ export default function loadOhMyLive2DConfig() {
           lateNight: "おやすみなさい、主人様~",
           weeHours: "おやすみなさい、主人様~",
         },
+        persistTime: 2000,
+        interval: 60000,
       },
-      idleTips: { message: "世界のことすきです" },
+      idleTips: {
+        message: "世界のことすきです",
+        persistTime: 2000,
+        interval: 60000,
+      },
     },
   });
 }
