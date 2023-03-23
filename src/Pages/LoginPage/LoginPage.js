@@ -30,6 +30,7 @@ export default function LoginPage() {
           handleSubmit(e);
         }}
       >
+        {/*<loadOhMyLive2D />*/}
         <div className={styles.loginHeading}>
           <h2>Welcome Back</h2>
           <p className={styles.loginDesc}>Nice to see you again!</p>

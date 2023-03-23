@@ -4,8 +4,10 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import loadOhMyLive2DConfig from "./config/live2d";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+loadOhMyLive2DConfig();
 root.render(
   <React.StrictMode>
     <BrowserRouter>
