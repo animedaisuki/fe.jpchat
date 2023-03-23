@@ -27,8 +27,6 @@ export default function Homepage() {
         <div className={styles.homepageVideoContainer}>
           <video
             className={styles.homepageVideo}
-            // src="http://konosuba.com/bakuen/assets/img/index/pv.mp4"
-            // src={require("../../assets/HomepageBackground/homePageBg.mp4")}
             src="https://amahane.s3.ap-northeast-1.amazonaws.com/homePageBg.mp4"
             autoPlay
             loop
