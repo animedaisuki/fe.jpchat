@@ -3,7 +3,7 @@ import { loadOhMyLive2D } from "oh-my-live2d";
 export default function loadOhMyLive2DConfig() {
   loadOhMyLive2D({
     sayHello: false,
-    source: "",
+    source: "https://amahane.s3.ap-northeast-1.amazonaws.com/live2dmodels",
     models: [
       {
         path: `/live2d-widget-model-poi/poi.model.json`,
