@@ -63,6 +63,8 @@ export default function RegisterPage() {
             className={styles.registerInput}
             type="password"
             ref={myRef}
+            minLength={8}
+            maxLength={16}
             onClick={() => {
               setIsTypingPassword(true);
             }}
