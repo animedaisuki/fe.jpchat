@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
+import errors from "../../helper/errorHandler";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -29,7 +30,18 @@ export default function RegisterPage() {
       username: usernameRecorder,
       password: passwordRecorder,
     };
-    await register(data);
+    const result = await register(data);
+    if (result.error) {
+      if (result.error === errors.EMAIL_DUPLICATION) {
+        console.log(errors.EMAIL_DUPLICATION);
+      }
+      if (result.error === errors.USERNAME_DUPLICATION) {
+        console.log(errors.EMAIL_DUPLICATION);
+      }
+    }
+    if (!result.error) {
+      console.log("OK");
+    }
   };
 
   return (
