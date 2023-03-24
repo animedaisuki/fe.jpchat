@@ -1,4 +1,4 @@
 export default {
   apiAddress:
-    process.env.REACT_APP_BACKEND_URL || "http://localhost:8080/api/v1",
+    process.env.REACT_APP_BACKEND_URL || "https://amahanechat.fly.dev/api/v1",
 };
