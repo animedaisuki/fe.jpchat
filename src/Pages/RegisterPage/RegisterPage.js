@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
 import { MdError } from "react-icons/md";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import config from "../../config/config";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -12,8 +14,16 @@ export default function RegisterPage() {
   const [passwordRecorder, setPasswordRecorder] = useState("");
   const [checked, setChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [hcToken, setHcToken] = useState(null);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const myRef = useRef(null);
+  const captchaRef = useRef(null);
+
+  const resetCaptcha = () => {
+    captchaRef.current.resetCaptcha();
+  };
+
   const handleClickOutside = (e) => {
     const target = e.target;
     if (myRef.current !== null && !myRef.current.contains(target)) {
@@ -27,26 +37,37 @@ export default function RegisterPage() {
   });
 
   const onHandleSubmit = async (e) => {
+    setIsRegistering(true);
     e.preventDefault();
-    const data = {
-      email: emailRecorder,
-      username: usernameRecorder,
-      password: passwordRecorder,
-      checked,
-    };
-    const result = await register(data);
-    if (result.error) {
-      if (result.status === 422) {
-        setErrorMessage("Something goes wrong");
-      } else {
-        setErrorMessage(result.error.explanation);
-      }
+    if (!hcToken) {
+      setErrorMessage("Please complete HCaptcha verification");
       setTimeout(() => {
         setErrorMessage(null);
       }, 2000);
+    } else {
+      const data = {
+        email: emailRecorder,
+        username: usernameRecorder,
+        password: passwordRecorder,
+        checked,
+        token: hcToken,
+      };
+      const result = await register(data);
+      if (result.error) {
+        if (result.status === 422) {
+          setErrorMessage("Something goes wrong");
+        } else {
+          setErrorMessage(result.error.explanation);
+        }
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 2000);
+      }
+      if (!result.error) {
+      }
     }
-    if (!result.error) {
-    }
+    resetCaptcha();
+    setIsRegistering(false);
   };
 
   return (
@@ -131,7 +152,17 @@ export default function RegisterPage() {
             Policy.
           </label>
         </div>
-        <button className={styles.registerBtn}>Register</button>
+        <div className={styles.registerHCaptcha}>
+          <HCaptcha
+            sitekey={config.hCaptchaSiteKey}
+            onVerify={(token) => setHcToken(token)}
+            onExpire={resetCaptcha}
+            ref={captchaRef}
+          />
+        </div>
+        <button className={styles.registerBtn} disabled={isRegistering}>
+          Register
+        </button>
         <p className={styles.registerToLoginNotification}>
           <Link className={styles.registerToLoginLink} to="/login">
             Already have an account?

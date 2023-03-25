@@ -16,7 +16,7 @@
     padding: 30px 40px 40px 40px;
     border-radius: 10px;
     width: 350px;
-    height: 550px;
+    height: 620px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 
@@ -98,8 +98,14 @@
         font-size: 12px;
       }
     }
+    .registerHCaptcha {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      transform: scale(0.89);
+    }
     .registerBtn {
-      margin-top: 40px;
+      margin-top: 20px;
       padding: 10px;
       background-color: #5865f2;
       border: none;
