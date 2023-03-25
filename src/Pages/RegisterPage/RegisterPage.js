@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
@@ -16,6 +17,8 @@ export default function RegisterPage() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [hcToken, setHcToken] = useState(null);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [hasPassedChecks, setHasPassedChecks] = useState(false);
+  const navigate = useNavigate();
 
   const myRef = useRef(null);
   const captchaRef = useRef(null);
@@ -64,6 +67,10 @@ export default function RegisterPage() {
         }, 2000);
       }
       if (!result.error) {
+        setHasPassedChecks(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 6000);
       }
     }
     resetCaptcha();
@@ -72,130 +79,145 @@ export default function RegisterPage() {
 
   return (
     <div className={styles.registerContainer}>
-      <form
-        className={styles.registerForm}
-        onSubmit={(e) => {
-          onHandleSubmit(e);
-        }}
-      >
-        <TransitionGroup>
-          {errorMessage && (
-            <CSSTransition
-              timeout={500}
-              unmountOnExit
-              classNames={{
-                enter: styles.registerErrorContainerEnter,
-                enterActive: styles.registerErrorContainerEnterActive,
-                exit: styles.registerErrorContainerExit,
-                exitActive: styles.registerErrorContainerExitActive,
+      {hasPassedChecks ? (
+        <div className={styles.registerCompleteContainer}>
+          <img
+            className={styles.registerCompleteLoadingImg}
+            src={require("../../assets/RegisterPage/anime_logo.png")}
+            alt="loading"
+          />
+          <img
+            className={styles.registerCompleteDescImg}
+            src={require("../../assets/RegisterPage/sao_desc.png")}
+            alt="description"
+          />
+        </div>
+      ) : (
+        <form
+          className={styles.registerForm}
+          onSubmit={(e) => {
+            onHandleSubmit(e);
+          }}
+        >
+          <TransitionGroup>
+            {errorMessage && (
+              <CSSTransition
+                timeout={500}
+                unmountOnExit
+                classNames={{
+                  enter: styles.registerErrorContainerEnter,
+                  enterActive: styles.registerErrorContainerEnterActive,
+                  exit: styles.registerErrorContainerExit,
+                  exitActive: styles.registerErrorContainerExitActive,
+                }}
+              >
+                <div className={styles.registerErrorContainer}>
+                  <div className={styles.registerIconErrorContainer}>
+                    <MdError />
+                  </div>
+                  <div className={styles.registerErrorMsgContainer}>
+                    <p className={styles.registerErrorMsg}>{errorMessage}</p>
+                  </div>
+                </div>
+              </CSSTransition>
+            )}
+          </TransitionGroup>
+          <h2 className={styles.registerHeading}>Create an account</h2>
+          <div className={styles.registerInputContainer}>
+            <label className={styles.registerLabel}>Email</label>
+            <input
+              className={styles.registerInput}
+              type="email"
+              onChange={(e) => {
+                setEmailRecorder(e.target.value);
               }}
+            />
+            <label className={styles.registerLabel}>Username</label>
+            <input
+              className={styles.registerInput}
+              type="text"
+              onChange={(e) => {
+                setUsernameRecorder(e.target.value);
+              }}
+            />
+            <label className={styles.registerLabel}>Password</label>
+            <input
+              className={styles.registerInput}
+              type="password"
+              ref={myRef}
+              minLength={8}
+              maxLength={16}
+              onClick={() => {
+                setIsTypingPassword(true);
+              }}
+              onChange={(e) => {
+                setIsTypingPassword(true);
+                setPasswordRecorder(e.target.value);
+              }}
+            />
+          </div>
+          <div className={styles.registerCheckBoxContainer}>
+            <input
+              className={styles.registerCheckBox}
+              type="checkbox"
+              name="privacy-checkbox"
+              onChange={(e) => {
+                setChecked(e.target.checked);
+              }}
+            />
+            <label
+              className={styles.registerCheckBoxLabel}
+              htmlFor="privacy-checkbox"
             >
-              <div className={styles.registerErrorContainer}>
-                <div className={styles.registerIconErrorContainer}>
-                  <MdError />
-                </div>
-                <div className={styles.registerErrorMsgContainer}>
-                  <p className={styles.registerErrorMsg}>{errorMessage}</p>
-                </div>
-              </div>
-            </CSSTransition>
+              I have read and agree to Doctrina's Terms of Service and Privacy
+              Policy.
+            </label>
+          </div>
+          <div className={styles.registerHCaptcha}>
+            <HCaptcha
+              sitekey={config.hCaptchaSiteKey}
+              onVerify={(token) => setHcToken(token)}
+              onExpire={resetCaptcha}
+              ref={captchaRef}
+            />
+          </div>
+          <button className={styles.registerBtn} disabled={isRegistering}>
+            Register
+          </button>
+          <p className={styles.registerToLoginNotification}>
+            <Link className={styles.registerToLoginLink} to="/login">
+              Already have an account?
+            </Link>
+          </p>
+          {isTypingPassword ? (
+            <>
+              <img
+                className={styles.registerBottomLeftImg}
+                src={require("../../assets/LoginPage/left-close.png")}
+                alt="hime-left-close"
+              />
+              <img
+                className={styles.registerBottomRightImg}
+                src={require("../../assets/LoginPage/right-close.png")}
+                alt="hime-right-close"
+              />
+            </>
+          ) : (
+            <>
+              <img
+                className={styles.registerBottomLeftImg}
+                src={require("../../assets/LoginPage/left-open.png")}
+                alt="hime-left-open"
+              />
+              <img
+                className={styles.registerBottomRightImg}
+                src={require("../../assets/LoginPage/right-open.png")}
+                alt="hime-right-open"
+              />
+            </>
           )}
-        </TransitionGroup>
-        <h2 className={styles.registerHeading}>Create an account</h2>
-        <div className={styles.registerInputContainer}>
-          <label className={styles.registerLabel}>Email</label>
-          <input
-            className={styles.registerInput}
-            type="email"
-            onChange={(e) => {
-              setEmailRecorder(e.target.value);
-            }}
-          />
-          <label className={styles.registerLabel}>Username</label>
-          <input
-            className={styles.registerInput}
-            type="text"
-            onChange={(e) => {
-              setUsernameRecorder(e.target.value);
-            }}
-          />
-          <label className={styles.registerLabel}>Password</label>
-          <input
-            className={styles.registerInput}
-            type="password"
-            ref={myRef}
-            minLength={8}
-            maxLength={16}
-            onClick={() => {
-              setIsTypingPassword(true);
-            }}
-            onChange={(e) => {
-              setIsTypingPassword(true);
-              setPasswordRecorder(e.target.value);
-            }}
-          />
-        </div>
-        <div className={styles.registerCheckBoxContainer}>
-          <input
-            className={styles.registerCheckBox}
-            type="checkbox"
-            name="privacy-checkbox"
-            onChange={(e) => {
-              setChecked(e.target.checked);
-            }}
-          />
-          <label
-            className={styles.registerCheckBoxLabel}
-            htmlFor="privacy-checkbox"
-          >
-            I have read and agree to Doctrina's Terms of Service and Privacy
-            Policy.
-          </label>
-        </div>
-        <div className={styles.registerHCaptcha}>
-          <HCaptcha
-            sitekey={config.hCaptchaSiteKey}
-            onVerify={(token) => setHcToken(token)}
-            onExpire={resetCaptcha}
-            ref={captchaRef}
-          />
-        </div>
-        <button className={styles.registerBtn} disabled={isRegistering}>
-          Register
-        </button>
-        <p className={styles.registerToLoginNotification}>
-          <Link className={styles.registerToLoginLink} to="/login">
-            Already have an account?
-          </Link>
-        </p>
-        {isTypingPassword ? (
-          <>
-            <img
-              className={styles.registerBottomLeftImg}
-              src={require("../../assets/LoginPage/left-close.png")}
-              alt="hime-left-close"
-            />
-            <img
-              className={styles.registerBottomRightImg}
-              src={require("../../assets/LoginPage/right-close.png")}
-              alt="hime-right-close"
-            />
-          </>
-        ) : (
-          <>
-            <img
-              className={styles.registerBottomLeftImg}
-              src={require("../../assets/LoginPage/left-open.png")}
-              alt="hime-left-open"
-            />
-            <img
-              className={styles.registerBottomRightImg}
-              src={require("../../assets/LoginPage/right-open.png")}
-              alt="hime-right-open"
-            />
-          </>
-        )}
-      </form>
+        </form>
+      )}
     </div>
   );
 }
