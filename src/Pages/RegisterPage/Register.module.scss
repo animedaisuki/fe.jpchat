@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background-image: url("https://webstatic.hoyoverse.com/upload/contentweb/2022/08/15/04d542b08cdee91e5dabfa0e85b8995e_4692024198088601985.jpg");
+  align-items: center;
+  background-image: url("https://amahane.s3.ap-northeast-1.amazonaws.com/loginPage/loginPageBg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -16,9 +17,60 @@
     padding: 30px 40px 40px 40px;
     border-radius: 10px;
     width: 350px;
-    height: 550px;
+    height: 620px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: registerFormGrow 0.2s ease-in forwards;
+
+    .registerErrorContainer {
+      display: flex;
+      align-items: center;
+      background-color: #7e8287;
+      border-radius: 5px;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 7px 10px 10px 8px;
+      width: 250px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      .registerIconErrorContainer {
+        width: 10%;
+        color: orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .registerErrorMsgContainer {
+        width: 90%;
+        text-align: center;
+        .registerErrorMsg {
+          color: #313338;
+          text-align: center;
+        }
+      }
+    }
+
+    .registerErrorContainerEnter {
+      opacity: 0;
+    }
+
+    .registerErrorContainerEnterActive {
+      opacity: 1;
+      transition: opacity 500ms;
+    }
+
+    .registerErrorContainerExit {
+      opacity: 1;
+    }
+
+    .registerErrorContainerExitActive {
+      opacity: 0;
+      transition: opacity 500ms;
+    }
+
     .registerHeading {
       color: #f0f1f3;
       align-self: center;
@@ -48,8 +100,14 @@
         font-size: 12px;
       }
     }
+    .registerHCaptcha {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      transform: scale(0.89);
+    }
     .registerBtn {
-      margin-top: 40px;
+      margin-top: 20px;
       padding: 10px;
       background-color: #5865f2;
       border: none;
@@ -83,5 +141,119 @@
       height: 65px;
       border-bottom-right-radius: 5px;
     }
+  }
+
+  @keyframes registerFormGrow {
+    0% {
+      transform: scale(0);
+    }
+    33% {
+      transform: scale(0.33);
+    }
+    50% {
+      transform: scale(0.5);
+    }
+    66% {
+      transform: scale(0.66);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .registerFormEnter {
+    opacity: 0;
+  }
+  .registerFormEnterActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .registerFormExit {
+    opacity: 1;
+  }
+  .registerFormExitActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+
+  .registerCompleteContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    background-image: url("https://amahane.s3.ap-northeast-1.amazonaws.com/registerPage/sao.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding: 30px 40px 40px 40px;
+    border-radius: 10px;
+    width: 450px;
+    height: 450px;
+    align-self: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: registerFormGrow 0.2s ease-in forwards;
+
+    .registerCompleteDescImg {
+      align-self: center;
+      color: white;
+      animation: completeHeadingFadeIn 1s ease-in forwards;
+    }
+    @keyframes completeHeadingFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      33% {
+        opacity: 0.33;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      66% {
+        opacity: 0.66;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .registerCompleteLoadingImg {
+      padding-top: 50px;
+      animation: loadingImgFadeInOut 2s ease-in-out infinite;
+    }
+    @keyframes loadingImgFadeInOut {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .registerCompleteDescImg {
+      padding-top: 30px;
+      width: 430px;
+    }
+  }
+
+  .registerCompleteContainerEnter {
+    opacity: 1;
+    transition: opacity;
+  }
+  .registerCompleteContainerEnterActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .registerCompleteContainerExit {
+    opacity: 0;
+  }
+
+  .registerCompleteContainerExitActive {
+    opacity: 0;
+    transition: opacity 500ms;
   }
 }
