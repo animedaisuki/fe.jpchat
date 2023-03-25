@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   background-image: url("https://amahane.s3.ap-northeast-1.amazonaws.com/loginPage/loginPageBg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,6 +20,7 @@
     height: 620px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: registerFormGrow 0.2s ease-in forwards;
 
     .registerErrorContainer {
       display: flex;
@@ -141,6 +143,39 @@
     }
   }
 
+  @keyframes registerFormGrow {
+    0% {
+      transform: scale(0);
+    }
+    33% {
+      transform: scale(0.33);
+    }
+    50% {
+      transform: scale(0.5);
+    }
+    66% {
+      transform: scale(0.66);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .registerFormEnter {
+    opacity: 0;
+  }
+  .registerFormEnterActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .registerFormExit {
+    opacity: 1;
+  }
+  .registerFormExitActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+
   .registerCompleteContainer {
     display: flex;
     flex-direction: column;
@@ -156,6 +191,7 @@
     height: 450px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: registerFormGrow 0.2s ease-in forwards;
 
     .registerCompleteDescImg {
       align-self: center;
@@ -202,5 +238,22 @@
       padding-top: 30px;
       width: 430px;
     }
+  }
+
+  .registerCompleteContainerEnter {
+    opacity: 1;
+    transition: opacity;
+  }
+  .registerCompleteContainerEnterActive {
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .registerCompleteContainerExit {
+    opacity: 0;
+  }
+
+  .registerCompleteContainerExitActive {
+    opacity: 0;
+    transition: opacity 500ms;
   }
 }
