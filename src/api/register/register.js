@@ -7,7 +7,10 @@ export const register = async (data) => {
     const result = await axios.post(path, data);
     return result;
   } catch (error) {
-    const result = { error: error.response.data.error };
+    const result = {
+      status: error.response.status,
+      error: error.response.data.error,
+    };
     return result;
   }
 };

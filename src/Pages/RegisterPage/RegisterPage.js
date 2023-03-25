@@ -2,13 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
-import errors from "../../helper/errorHandler";
+import { MdError } from "react-icons/md";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
   const [emailRecorder, setEmailRecorder] = useState("");
   const [usernameRecorder, setUsernameRecorder] = useState("");
   const [passwordRecorder, setPasswordRecorder] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const myRef = useRef(null);
   const handleClickOutside = (e) => {
@@ -29,18 +32,20 @@ export default function RegisterPage() {
       email: emailRecorder,
       username: usernameRecorder,
       password: passwordRecorder,
+      checked,
     };
     const result = await register(data);
     if (result.error) {
-      if (result.error === errors.EMAIL_DUPLICATION) {
-        console.log(errors.EMAIL_DUPLICATION);
+      if (result.status === 422) {
+        setErrorMessage("Something goes wrong");
+      } else {
+        setErrorMessage(result.error.explanation);
       }
-      if (result.error === errors.USERNAME_DUPLICATION) {
-        console.log(errors.EMAIL_DUPLICATION);
-      }
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
     }
     if (!result.error) {
-      console.log("OK");
     }
   };
 
@@ -52,6 +57,29 @@ export default function RegisterPage() {
           onHandleSubmit(e);
         }}
       >
+        <TransitionGroup>
+          {errorMessage && (
+            <CSSTransition
+              timeout={500}
+              unmountOnExit
+              classNames={{
+                enter: styles.registerErrorContainerEnter,
+                enterActive: styles.registerErrorContainerEnterActive,
+                exit: styles.registerErrorContainerExit,
+                exitActive: styles.registerErrorContainerExitActive,
+              }}
+            >
+              <div className={styles.registerErrorContainer}>
+                <div className={styles.registerIconErrorContainer}>
+                  <MdError />
+                </div>
+                <div className={styles.registerErrorMsgContainer}>
+                  <p className={styles.registerErrorMsg}>{errorMessage}</p>
+                </div>
+              </div>
+            </CSSTransition>
+          )}
+        </TransitionGroup>
         <h2 className={styles.registerHeading}>Create an account</h2>
         <div className={styles.registerInputContainer}>
           <label className={styles.registerLabel}>Email</label>
@@ -91,6 +119,9 @@ export default function RegisterPage() {
             className={styles.registerCheckBox}
             type="checkbox"
             name="privacy-checkbox"
+            onChange={(e) => {
+              setChecked(e.target.checked);
+            }}
           />
           <label
             className={styles.registerCheckBoxLabel}

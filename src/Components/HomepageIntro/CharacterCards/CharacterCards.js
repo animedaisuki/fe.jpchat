@@ -9,6 +9,7 @@ export default function CharacterCards(props) {
     <div className={styles.homepageIntroCardsContainer}>
       {characters.map((character) => (
         <CharacterCardButton
+          key={character.id}
           character={character}
           currentCharacter={currentCharacter}
           setCurrentCharacter={setCurrentCharacter}
