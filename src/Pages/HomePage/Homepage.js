@@ -3,6 +3,7 @@ import styles from "./Homepage.module.scss";
 import Heading from "../../Components/Heading/Heading";
 import HomepageIntro from "../../Components/HomepageIntro/HomepageIntro";
 import Footer from "../../Components/Footer/Footer";
+import { v4 as uuid } from "uuid";
 
 export default function Homepage() {
   const shopUrls = [
@@ -41,6 +42,7 @@ export default function Homepage() {
             <div className={styles.platformContainer}>
               {shopUrls.map((shopUrl) => (
                 <img
+                  key={uuid()}
                   className={styles.platformImg}
                   src={shopUrl.src}
                   alt={shopUrl.alt}

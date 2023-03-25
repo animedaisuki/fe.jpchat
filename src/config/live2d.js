@@ -33,6 +33,7 @@ export default function loadOhMyLive2DConfig() {
         persistTime: 2000,
         interval: 60000,
       },
+      copyTips: { message: "ジー", persistTime: 2000 },
     },
   });
 }

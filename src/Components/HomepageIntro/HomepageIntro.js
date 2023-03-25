@@ -25,9 +25,11 @@ import RaidenAvatar from "../../assets/Characters/Shogun/char-shogun-samll.png";
 import VentiAvatar from "../../assets/Characters/Venti/char-venti-small.png";
 import KujouAvatar from "../../assets/Characters/Kujou/char-kujou-small.png";
 import NahidaAvatar from "../../assets/Characters/Nahida/char-nahida-small.png";
+import { v4 as uuid } from "uuid";
 
 export default function HomepageIntro() {
   const ayaka = {
+    id: uuid(),
     fname: "Kamisato",
     lname: "Ayaka",
     image: AyakaImg,
@@ -36,6 +38,7 @@ export default function HomepageIntro() {
     avatar: AyakaAvatar,
   };
   const yoimiya = {
+    id: uuid(),
     fname: "Yoimiya",
     lname: "Chan",
     image: YoimiyaImg,
@@ -44,6 +47,7 @@ export default function HomepageIntro() {
     avatar: YoimiyaAvatar,
   };
   const raiden = {
+    id: uuid(),
     fname: "Raiden",
     lname: "Shogun",
     image: RaidenImg,
@@ -52,6 +56,7 @@ export default function HomepageIntro() {
     avatar: RaidenAvatar,
   };
   const venti = {
+    id: uuid(),
     fname: "Venti",
     lname: "Chan",
     image: VentiImg,
@@ -60,6 +65,7 @@ export default function HomepageIntro() {
     avatar: VentiAvatar,
   };
   const kujou = {
+    id: uuid(),
     fname: "Kujou",
     lname: "Sara",
     image: KujouImg,
@@ -68,6 +74,7 @@ export default function HomepageIntro() {
     avatar: KujouAvatar,
   };
   const nahida = {
+    id: uuid(),
     fname: "Nahida",
     lname: "Chan",
     image: NahidaImg,
