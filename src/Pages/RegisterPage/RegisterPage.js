@@ -42,37 +42,38 @@ export default function RegisterPage() {
   const onHandleSubmit = async (e) => {
     setIsRegistering(true);
     e.preventDefault();
-    if (!hcToken) {
-      setErrorMessage("Please complete HCaptcha verification");
+    const data = {
+      email: emailRecorder,
+      username: usernameRecorder,
+      password: passwordRecorder,
+      checked,
+      token: hcToken,
+    };
+    const result = await register(data);
+    if (result.error) {
+      if (result.status === 422) {
+        setErrorMessage("Something goes wrong");
+      } else {
+        setErrorMessage(result.error.explanation);
+      }
       setTimeout(() => {
         setErrorMessage(null);
       }, 2000);
-    } else {
-      const data = {
-        email: emailRecorder,
-        username: usernameRecorder,
-        password: passwordRecorder,
-        checked,
-        token: hcToken,
-      };
-      const result = await register(data);
-      if (result.error) {
-        if (result.status === 422) {
-          setErrorMessage("Something goes wrong");
-        } else {
-          setErrorMessage(result.error.explanation);
-        }
+    }
+    if (!result.error) {
+      if (!hcToken) {
+        setErrorMessage("Please complete HCaptcha verification");
         setTimeout(() => {
           setErrorMessage(null);
         }, 2000);
-      }
-      if (!result.error) {
+      } else {
         setHasPassedChecks(true);
         setTimeout(() => {
           navigate("/login");
         }, 6000);
       }
     }
+
     resetCaptcha();
     setIsRegistering(false);
   };
