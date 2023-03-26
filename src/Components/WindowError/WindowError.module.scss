@@ -1,0 +1,44 @@
+.windowErrorContainer {
+  display: flex;
+  align-items: center;
+  background-color: #7e8287;
+  border-radius: 5px;
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 10px 10px 8px;
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation: error-window-fade-in-out 2s ease-in-out forwards;
+
+  .windowIconErrorContainer {
+    width: 10%;
+    color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .windowErrorMsgContainer {
+    width: 90%;
+    text-align: center;
+    .windowErrorMsg {
+      color: #313338;
+      text-align: center;
+    }
+  }
+}
+@keyframes error-window-fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

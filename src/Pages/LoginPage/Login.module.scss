@@ -21,6 +21,21 @@
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     animation: loginFormGrow 0.2s ease-in forwards;
+    .test {
+      background-color: white;
+      animation: test 2s ease-in-out forwards;
+    }
+    @keyframes test {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
     .loginHeading {
       color: #f0f1f3;
       align-self: center;

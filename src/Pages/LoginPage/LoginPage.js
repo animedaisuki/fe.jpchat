@@ -3,9 +3,14 @@ import styles from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { login } from "../../api/login/login";
 import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
+import WindowError from "../../Components/WindowError/WindowError";
 
 export default function LoginPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
+  const [emailRecorder, setEmailRecorder] = useState("");
+  const [passwordRecorder, setPasswordRecorder] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const myRef = useRef(null);
   const handleClickOutside = (e) => {
     const target = e.target;
@@ -20,7 +25,27 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login({ email: "test@gmail.com", password: "12345678" });
+    if (emailRecorder === "" || passwordRecorder === "") {
+      setErrorMessage("Please fill in your email and password");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
+      return;
+    }
+    const result = await login({
+      email: emailRecorder,
+      password: passwordRecorder,
+    });
+    if (result.error) {
+      if (result.status === 422) {
+        setErrorMessage("Something goes wrong");
+      } else {
+        setErrorMessage(result.error.explanation);
+      }
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
+    }
   };
 
   return (
@@ -32,13 +57,20 @@ export default function LoginPage() {
         }}
       >
         <WindowCloseIcon />
+        {errorMessage && <WindowError errorMessage={errorMessage} />}
         <div className={styles.loginHeading}>
           <h2>Welcome Back</h2>
           <p className={styles.loginDesc}>Nice to see you again!</p>
         </div>
         <div className={styles.loginInputContainer}>
           <label className={styles.loginLabel}>Email address</label>
-          <input className={styles.loginInput} type="email" />
+          <input
+            className={styles.loginInput}
+            type="email"
+            onChange={(e) => {
+              setEmailRecorder(e.target.value);
+            }}
+          />
           <label className={styles.loginLabel}>Password</label>
           <input
             className={styles.loginInput}
@@ -47,8 +79,9 @@ export default function LoginPage() {
             onClick={() => {
               setIsTypingPassword(true);
             }}
-            onChange={() => {
+            onChange={(e) => {
               setIsTypingPassword(true);
+              setPasswordRecorder(e.target.value);
             }}
           />
           <p className={styles.loginToForgetPassword}>
