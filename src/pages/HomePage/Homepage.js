@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Homepage.module.scss";
-import Heading from "../../Components/Heading/Heading";
-import HomepageIntro from "../../Components/HomepageIntro/HomepageIntro";
-import Footer from "../../Components/Footer/Footer";
+import Heading from "../../components/Heading/Heading";
+import HomepageIntro from "../../components/HomepageIntro/HomepageIntro";
+import Footer from "../../components/Footer/Footer";
 import { v4 as uuid } from "uuid";
 
 export default function Homepage() {
