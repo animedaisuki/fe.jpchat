@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
-import { MdError } from "react-icons/md";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import config from "../../config/config";
-import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
+import WindowCloseIcon from "../../components/WindoCloseIcon/WindowCloseIcon";
+import WindowError from "../../components/WindowError/WindowError";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -102,29 +101,7 @@ export default function RegisterPage() {
           }}
         >
           <WindowCloseIcon />
-          <TransitionGroup>
-            {errorMessage && (
-              <CSSTransition
-                timeout={500}
-                unmountOnExit
-                classNames={{
-                  enter: styles.registerErrorContainerEnter,
-                  enterActive: styles.registerErrorContainerEnterActive,
-                  exit: styles.registerErrorContainerExit,
-                  exitActive: styles.registerErrorContainerExitActive,
-                }}
-              >
-                <div className={styles.registerErrorContainer}>
-                  <div className={styles.registerIconErrorContainer}>
-                    <MdError />
-                  </div>
-                  <div className={styles.registerErrorMsgContainer}>
-                    <p className={styles.registerErrorMsg}>{errorMessage}</p>
-                  </div>
-                </div>
-              </CSSTransition>
-            )}
-          </TransitionGroup>
+          {errorMessage && <WindowError errorMessage={errorMessage} />}
           <h2 className={styles.registerHeading}>Create an account</h2>
           <div className={styles.registerInputContainer}>
             <label className={styles.registerLabel}>Email</label>
