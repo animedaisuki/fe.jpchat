@@ -29,9 +29,9 @@ export default function LoginPage() {
   const userInfo = localStorage.getItem("user");
 
   useEffect(() => {
-    // if (userInfo) {
-    //   navigate("/");
-    // }
+    if (userInfo) {
+      navigate("/");
+    }
   }, [userInfo]);
 
   const handleSubmit = async (e) => {
@@ -60,7 +60,9 @@ export default function LoginPage() {
     if (!result.error) {
       localStorage.setItem("access_token", result.data.token);
       localStorage.setItem("user", JSON.stringify(result.data));
+      localStorage.setItem("username", result.data.username);
       setUserInfo(JSON.parse(localStorage.getItem("user")));
+      navigate("/");
     }
   };
 

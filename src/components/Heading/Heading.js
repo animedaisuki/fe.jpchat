@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Heading.module.scss";
 import { BsPersonCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserInfoProvider";
+import { UserDispatchContext } from "../../context/UserInfoProvider";
 
 export default function Heading() {
+  const user = useContext(UserContext);
+  const setUserInfo = useContext(UserDispatchContext);
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    setUserInfo(null);
+    navigate("/");
+  };
   return (
     <div className={styles.headingContainer}>
       <img
@@ -18,12 +28,26 @@ export default function Heading() {
         <p className={styles.headingOption}>More</p>
       </div>
       <div className={styles.homepageLoginContainer}>
-        <p className={styles.homepageLogin}>
-          <Link className={styles.homepageToLogin} to="/login">
-            Log In
-          </Link>
-        </p>
-        <BsPersonCircle />
+        {user ? (
+          <div className={styles.headingUserOuterContainer}>
+            <div className={styles.headingUserContainer}>{user.username}</div>
+            <div className={styles.headingUserActionContainer}>
+              <button className={styles.headingUserAction}>Account</button>
+              <button className={styles.headingUserAction} onClick={logout}>
+                Log out
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p className={styles.homepageLogin}>
+              <Link className={styles.homepageToLogin} to="/login">
+                Log In
+              </Link>
+            </p>
+            <BsPersonCircle />
+          </>
+        )}
       </div>
     </div>
   );

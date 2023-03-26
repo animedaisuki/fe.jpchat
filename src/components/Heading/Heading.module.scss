@@ -6,7 +6,7 @@
   width: 100%;
   background-color: rgba(64, 64, 64, 0.5);
   z-index: 1;
-  overflow: hidden;
+  //overflow: visible;
 
   .headingLogoImg {
     height: 50px;
@@ -37,6 +37,40 @@
         text-decoration: none;
         color: #cccc;
       }
+    }
+    .headingUserOuterContainer {
+      padding: 10px;
+      .headingUserContainer {
+      }
+      .headingUserActionContainer {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border-radius: 5px;
+        top: 65px;
+        right: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        transition: opacity 0.5s;
+        .headingUserAction {
+          margin: 5px;
+          padding: 5px;
+          font-size: 15px;
+          background: none;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: ease-in 0.3s;
+        }
+        .headingUserAction:hover {
+          background-color: #cccdd3;
+          transition: ease-in 0.3s;
+        }
+      }
+    }
+    .headingUserOuterContainer:hover .headingUserActionContainer {
+      display: block;
+      opacity: 1;
     }
   }
 }

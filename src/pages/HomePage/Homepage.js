@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import styles from "./Homepage.module.scss";
 import Heading from "../../components/Heading/Heading";
 import HomepageIntro from "../../components/HomepageIntro/HomepageIntro";
 import Footer from "../../components/Footer/Footer";
 import { v4 as uuid } from "uuid";
-import { UserContext } from "../../context/UserInfoProvider";
 
 export default function Homepage() {
   const shopUrls = [
@@ -21,11 +20,6 @@ export default function Homepage() {
       alt: "windows",
     },
   ];
-
-  const user = useContext(UserContext);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <>
