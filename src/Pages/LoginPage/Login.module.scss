@@ -20,6 +20,7 @@
     height: 440px;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: loginFormGrow 0.2s ease-in forwards;
     .loginHeading {
       color: #f0f1f3;
       align-self: center;
@@ -88,6 +89,21 @@
       bottom: 0;
       height: 65px;
       border-bottom-right-radius: 5px;
+    }
+  }
+
+  @keyframes loginFormGrow {
+    0% {
+      transform: scale(0);
+    }
+    33% {
+      transform: scale(0.33);
+    }
+    66% {
+      transform: scale(0.66);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
