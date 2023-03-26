@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Login.module.scss";
 import { Link } from "react-router-dom";
 import { login } from "../../api/login/login";
+import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
 
 export default function LoginPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -30,7 +31,7 @@ export default function LoginPage() {
           handleSubmit(e);
         }}
       >
-        {/*<loadOhMyLive2D />*/}
+        <WindowCloseIcon />
         <div className={styles.loginHeading}>
           <h2>Welcome Back</h2>
           <p className={styles.loginDesc}>Nice to see you again!</p>

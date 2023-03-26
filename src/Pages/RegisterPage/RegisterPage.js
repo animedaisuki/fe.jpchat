@@ -7,6 +7,7 @@ import { MdError } from "react-icons/md";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import config from "../../config/config";
+import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -100,6 +101,7 @@ export default function RegisterPage() {
             onHandleSubmit(e);
           }}
         >
+          <WindowCloseIcon />
           <TransitionGroup>
             {errorMessage && (
               <CSSTransition
