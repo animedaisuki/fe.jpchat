@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Login.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/login/login";
-import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
-import WindowError from "../../Components/WindowError/WindowError";
+import WindowCloseIcon from "../../components/WindoCloseIcon/WindowCloseIcon";
+import WindowError from "../../components/WindowError/WindowError";
+import { UserDispatchContext } from "../../context/UserInfoProvider";
 
 export default function LoginPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
   const [emailRecorder, setEmailRecorder] = useState("");
   const [passwordRecorder, setPasswordRecorder] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+  const setUserInfo = useContext(UserDispatchContext);
 
+  const navigate = useNavigate();
   const myRef = useRef(null);
   const handleClickOutside = (e) => {
     const target = e.target;
@@ -22,6 +25,14 @@ export default function LoginPage() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   });
+
+  const userInfo = localStorage.getItem("user");
+
+  useEffect(() => {
+    // if (userInfo) {
+    //   navigate("/");
+    // }
+  }, [userInfo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,6 +56,11 @@ export default function LoginPage() {
       setTimeout(() => {
         setErrorMessage(null);
       }, 2000);
+    }
+    if (!result.error) {
+      localStorage.setItem("access_token", result.data.token);
+      localStorage.setItem("user", JSON.stringify(result.data));
+      setUserInfo(JSON.parse(localStorage.getItem("user")));
     }
   };
 

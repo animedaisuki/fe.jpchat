@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import config from "../../config/config";
-import WindowCloseIcon from "../../Components/WindoCloseIcon/WindowCloseIcon";
-import WindowError from "../../Components/WindowError/WindowError";
+import WindowCloseIcon from "../../components/WindoCloseIcon/WindowCloseIcon";
+import WindowError from "../../components/WindowError/WindowError";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
