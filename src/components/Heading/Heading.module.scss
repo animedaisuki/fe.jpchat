@@ -16,6 +16,7 @@
   .headingOptions {
     display: flex;
     margin-left: 70px;
+    height: 30px;
     .headingOption {
       font-size: 20px;
       margin-right: 30px;
@@ -31,6 +32,7 @@
     font-size: 20px;
     color: #cccc;
     cursor: pointer;
+    padding-right: 30px;
     .homepageLogin {
       margin-right: 10px;
       .homepageToLogin {
@@ -39,21 +41,26 @@
       }
     }
     .headingUserOuterContainer {
-      padding: 10px;
+      align-items: center;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      position: relative;
       .headingUserContainer {
+        display: flex;
+        .headingUserAvatar {
+          height: 30px;
+          width: 30px;
+          border-radius: 100%;
+          animation: user-info-fade-out 0.5s ease-in forwards;
+        }
       }
       .headingUserActionContainer {
         display: none;
+        background-color: white; //#313338; //#7e8287
         position: absolute;
-        background-color: white;
-        border-radius: 5px;
-        top: 65px;
-        right: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-          0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        transition: opacity 0.5s;
+        transition: 0.5s fade-in;
         .headingUserAction {
-          margin: 5px;
           padding: 5px;
           font-size: 15px;
           background: none;
@@ -61,6 +68,7 @@
           border-radius: 5px;
           cursor: pointer;
           transition: ease-in 0.3s;
+          width: 100px;
         }
         .headingUserAction:hover {
           background-color: #cccdd3;
@@ -68,9 +76,61 @@
         }
       }
     }
-    .headingUserOuterContainer:hover .headingUserActionContainer {
-      display: block;
-      opacity: 1;
+    .headingUserOuterContainer:hover {
+      .headingUserActionContainer {
+        display: block;
+        position: absolute;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        padding: 35px 5px 10px 5px;
+        right: 50%;
+        transform: translateX(31%);
+        border-radius: 5px;
+        animation: user-action-fade-in 0.5s ease-in-out forwards;
+      }
+      .headingUserAvatar {
+        position: absolute;
+        height: 70px;
+        width: 70px;
+        right: 90%;
+        top: 50px;
+        transform: translate(50%, -50%);
+        border: 2px solid white;
+        z-index: 3;
+        animation: user-info-fade-in 0.5s ease-in-out forwards;
+      }
+    }
+    @keyframes user-action-fade-in {
+      from {
+        opacity: 1;
+        transform: translate(65%, -50%);
+        scale: (0.6);
+      }
+      to {
+        opacity: 1;
+        scale: (1);
+      }
+    }
+    @keyframes user-info-fade-in {
+      from {
+        opacity: 1;
+        transform: translate(100%, -100%);
+        scale: (0.6);
+      }
+      to {
+        opacity: 1;
+        scale: (1);
+      }
+    }
+    @keyframes user-info-fade-out {
+      from {
+        opacity: 0;
+        scale: (1.6);
+        transform: translate(-50%, 80%);
+      }
+      to {
+        opacity: 1;
+      }
     }
   }
 }
