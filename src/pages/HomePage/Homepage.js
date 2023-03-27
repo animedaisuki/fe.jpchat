@@ -3,20 +3,23 @@ import styles from "./Homepage.module.scss";
 import Heading from "../../components/Heading/Heading";
 import HomepageIntro from "../../components/HomepageIntro/HomepageIntro";
 import Footer from "../../components/Footer/Footer";
+import Apple from "../../assets/HomepageBackground/apple.png";
+import Google from "../../assets/HomepageBackground/google_play.png";
+import Windows from "../../assets/HomepageBackground/windows.png";
 import { v4 as uuid } from "uuid";
 
 export default function Homepage() {
   const shopUrls = [
     {
-      src: "https://webstatic.hoyoverse.com/upload/event/2020/12/14/6ff53bc5d797e9efc2ac7b2b602c267a_8295237617862628623.png",
+      src: Apple,
       alt: "apple",
     },
     {
-      src: "https://webstatic.hoyoverse.com/upload/event/2020/12/14/396b8eb0d0d2f27aadb476e0b62d0926_8878641138830187947.png",
+      src: Google,
       alt: "google",
     },
     {
-      src: "https://webstatic.hoyoverse.com/upload/event/2020/12/14/a27edf5aa048e9509f0850856ad3f403_396608336029707725.png",
+      src: Windows,
       alt: "windows",
     },
   ];
