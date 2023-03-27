@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./Heading.module.scss";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,13 +31,17 @@ export default function Heading() {
         {user ? (
           <div className={styles.headingUserOuterContainer}>
             <div className={styles.headingUserContainer}>
-              <img src={user.avatar} />{" "}
-            </div>
-            <div className={styles.headingUserActionContainer}>
-              <button className={styles.headingUserAction}>Account</button>
-              <button className={styles.headingUserAction} onClick={logout}>
-                Log out
-              </button>
+              <img
+                src={user.avatar}
+                className={styles.headingUserAvatar}
+                alt={user.username}
+              />
+              <div className={styles.headingUserActionContainer}>
+                <button className={styles.headingUserAction}>Account</button>
+                <button className={styles.headingUserAction} onClick={logout}>
+                  Log out
+                </button>
+              </div>
             </div>
           </div>
         ) : (
