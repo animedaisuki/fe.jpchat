@@ -22,7 +22,12 @@ const UserInfoProvider = ({ children }) => {
         }
       }
     };
-    fetchUserInfo();
+    try {
+      fetchUserInfo();
+    } catch (e) {
+      localStorage.clear();
+      navigate("/login");
+    }
   }, []);
   return (
     <UserContext.Provider value={userInfo}>

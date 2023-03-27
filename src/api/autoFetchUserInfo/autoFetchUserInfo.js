@@ -11,10 +11,14 @@ export const autoFetchUserInfo = async (token) => {
     );
     return result;
   } catch (error) {
-    const result = {
-      status: error.response.status,
-      error: error.response.data.error,
-    };
-    return result;
+    try {
+      const result = {
+        status: error.response.status,
+        error: error.response.data.error,
+      };
+      return result;
+    } catch (error) {
+      localStorage.clear();
+    }
   }
 };
