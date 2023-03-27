@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import config from "../../config/config";
 import WindowCloseIcon from "../../components/WindoCloseIcon/WindowCloseIcon";
 import WindowError from "../../components/WindowError/WindowError";
+import { UserContext } from "../../context/UserInfoProvider";
 
 export default function RegisterPage() {
   const [isTypingPassword, setIsTypingPassword] = useState(false);
@@ -22,6 +23,12 @@ export default function RegisterPage() {
 
   const myRef = useRef(null);
   const captchaRef = useRef(null);
+
+  const userInfo = useContext(UserContext);
+
+  if (userInfo) {
+    navigate("/");
+  }
 
   const resetCaptcha = () => {
     captchaRef.current.resetCaptcha();
