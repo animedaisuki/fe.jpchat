@@ -30,7 +30,9 @@ export default function Heading() {
       <div className={styles.homepageLoginContainer}>
         {user ? (
           <div className={styles.headingUserOuterContainer}>
-            <div className={styles.headingUserContainer}>{user.username}</div>
+            <div className={styles.headingUserContainer}>
+              <img src={user.avatar} />{" "}
+            </div>
             <div className={styles.headingUserActionContainer}>
               <button className={styles.headingUserAction}>Account</button>
               <button className={styles.headingUserAction} onClick={logout}>
