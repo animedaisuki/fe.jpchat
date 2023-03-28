@@ -1,19 +1,21 @@
 .chatFriendContainer {
   display: flex;
   align-items: center;
+  background: none;
+  border: none;
   width: 100%;
-  margin: 10px 15px 8px 5px;
+  margin: 0 15px 8px 5px;
   border-radius: 5px;
   padding: 8px;
   cursor: pointer;
   .chatFriendAvatarContainer {
-    background-color: white;
+    background-image: linear-gradient(#e66465, #9198e5);
     border-radius: 100%;
     min-width: 50px;
     height: 50px;
     display: flex;
     overflow: hidden;
-    transition: 0.5s;
+    transition: 0.3s;
     .chatFriendImg {
       width: 50px;
       height: 50px;
@@ -21,7 +23,7 @@
   }
   .chatFriendAvatarContainer:hover {
     border-radius: 10px;
-    transition: 0.5s;
+    transition: 0.3s;
   }
   .chatFriendNameContainer {
     width: 100px;
@@ -30,6 +32,7 @@
     font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
+    text-align: left;
     text-overflow: ellipsis;
   }
 }
