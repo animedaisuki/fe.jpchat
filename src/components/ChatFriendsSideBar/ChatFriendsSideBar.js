@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ChatFriendsSideBar.module.scss";
 import { FaUserFriends } from "react-icons/fa";
+import { BiPlus } from "react-icons/bi";
 import ChatFriendView from "./ChatFriendView/ChatFriendView";
 import { v4 as uuid } from "uuid";
 
@@ -82,6 +83,14 @@ export default function ChatFriendsSideBar() {
           <p className={styles.chatWindowLeftFunctionBarFriendsBtnDesc}>
             Friends
           </p>
+        </div>
+      </div>
+      <div className={styles.chatWindowLeftFunctionBarDMSplitContainer}>
+        <p className={styles.chatWindowLeftFunctionBarDMDesc}>
+          DIRECT MESSAGES
+        </p>
+        <div className={styles.chatWindowLeftFunctionBarDMSplitIconContainer}>
+          <BiPlus className={styles.chatWindowLeftFunctionBarDMSplitIcon} />
         </div>
       </div>
       {friends.map((friend) => (

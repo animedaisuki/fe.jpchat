@@ -35,6 +35,34 @@
       }
     }
   }
+  .chatWindowLeftFunctionBarDMSplitContainer {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 5px 15px 15px;
+    .chatWindowLeftFunctionBarDMDesc {
+      white-space: nowrap;
+      color: #6e7278;
+      font-size: 12px;
+      font-weight: bolder;
+      cursor: default;
+    }
+    .chatWindowLeftFunctionBarDMDesc:hover {
+      color: white;
+    }
+    .chatWindowLeftFunctionBarDMSplitIconContainer {
+      display: flex;
+      align-items: center;
+      color: #6e7278;
+      margin-left: 10px;
+      .chatWindowLeftFunctionBarDMSplitIcon {
+        cursor: pointer;
+      }
+      .chatWindowLeftFunctionBarDMSplitIcon:hover {
+        color: white;
+      }
+    }
+  }
 }
 .chatWindowLeftFunctionBarFriendsContainer::-webkit-scrollbar {
   width: 0;
