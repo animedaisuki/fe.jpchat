@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
   .chatWindowContainer {
     display: flex;
     height: 85vh;
@@ -14,7 +15,7 @@
     border-radius: 10px;
     background: #313338;
     backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
     .chatWindowLeftContent {
       display: flex;
       width: 33%;
@@ -33,13 +34,19 @@
         .chatWindowUserAvatarContainer {
           display: flex;
           justify-content: center;
-          width: 100%;
-          padding-top: 15px;
+          width: auto;
+          padding: 15px 5px 0 5px;
           .chatWindowUserAvatar {
             width: 50px;
             height: 50px;
+            background-color: white;
             border-radius: 100%;
             cursor: pointer;
+            transition: 0.5s;
+          }
+          .chatWindowUserAvatar:hover {
+            border-radius: 10px;
+            transition: 0.5s;
           }
         }
         .chatWindowActionContainer {
@@ -59,7 +66,34 @@
           }
         }
       }
+
+      .chatWindowLeftFunctionBar {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        overflow: hidden;
+        .chatWindowLeftFunctionBarSearchContainer {
+          width: 100%;
+          padding: 10px;
+          border-bottom: 2px solid #1e1f22;
+          .chatWindowLeftFunctionBarSearch {
+            width: 100%;
+            height: 30px;
+            background-color: #1e1f22;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 5px;
+          }
+        }
+        .chatWindowLeftFunctionBarFriendsContainer {
+          width: 100%;
+          padding-right: 10px;
+        }
+      }
     }
+
     .chatWindowRightContent {
     }
   }
