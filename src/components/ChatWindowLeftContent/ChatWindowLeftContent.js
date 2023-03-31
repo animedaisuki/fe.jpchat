@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ChatWindowLeftContent.module.scss";
 import { IoSettingsSharp } from "react-icons/io5";
 import { RiLogoutBoxFill } from "react-icons/ri";
-import ChatFriendsSideBar from "../ChatFriendsSideBar/ChatFriendsSideBar";
+import ChatFriendsSideBar from "./ChatFriendsSideBar/ChatFriendsSideBar";
 
 export default function ChatWindowLeftContent() {
   return (
