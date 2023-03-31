@@ -94,12 +94,7 @@ export default function ChatFriendsSideBar() {
         </div>
       </div>
       {friends.map((friend) => (
-        <ChatFriendView
-          key={friend.id}
-          id={friend.id}
-          username={friend.username}
-          avatar={friend.avatar}
-        />
+        <ChatFriendView key={friend.id} id={friend.id} friend={friend} />
       ))}
     </div>
   );

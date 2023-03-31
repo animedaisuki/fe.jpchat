@@ -1,0 +1,33 @@
+.chatDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  .chatDetailsHeading {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    border-bottom: 2px solid #1e1f22;
+    .chatOverviewContainer {
+      margin: 10px 0 10px 20px;
+      display: flex;
+      align-items: center;
+      color: #eff0f2;
+      .chatOverviewUsername {
+        margin-left: 10px;
+      }
+    }
+  }
+  .chatDetailsFriendInfoArea {
+    color: #eff0f2;
+    margin: 10px 0 0 20px;
+    .chatDetailsFriendAvatar {
+      background-image: linear-gradient(#e66465, #9198e5);
+      border-radius: 100%;
+      scale: 85%;
+    }
+    .chatDetailsFriendName {
+      margin-left: 10px;
+    }
+  }
+}
