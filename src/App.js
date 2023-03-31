@@ -14,7 +14,11 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/chat" element={<ChatPage />}>
+          <Route path="/chat/:chatId" element="" />
+          <Route path="/chat/friends" element="" />
+          <Route path="/chat/settings" element="" />
+        </Route>
       </Routes>
     </UserInfoProvider>
   );
