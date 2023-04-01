@@ -13,6 +13,9 @@ const UserInfoProvider = ({ children }) => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem("access_token");
+      if (!token) {
+        localStorage.clear();
+      }
       if (token) {
         const result = await autoFetchUserInfo(token);
         if (result.error) {
