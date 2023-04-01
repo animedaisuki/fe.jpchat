@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 export default function ChatFriendsSideBar() {
   const friendZura = {
-    id: uuid(),
+    id: "21f307a2-b840-414e-9f2b-9f070979ba63",
     username: "ZuraHararara",
     avatar:
       "https://amahane.s3.ap-northeast-1.amazonaws.com/users/defaultAvatar/char-ayaka-small.png",
