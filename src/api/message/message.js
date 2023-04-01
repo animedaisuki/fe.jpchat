@@ -14,3 +14,17 @@ export const getMessage = async (conversationId) => {
     return result;
   }
 };
+
+export const sendMessage = async (data) => {
+  try {
+    const path = `${config.apiAddress}/messages/send`;
+    const result = await axios.post(path, data);
+    return result;
+  } catch (error) {
+    const result = {
+      status: error.response.status,
+      error: error.response.data.error,
+    };
+    return result;
+  }
+};
