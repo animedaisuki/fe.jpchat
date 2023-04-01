@@ -18,7 +18,10 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/chat" element={<ChatPage />}>
-            <Route path="/chat/:chatId" element={<ChatDetails />} />
+            <Route
+              path="/chat/:conversationId/:friendId"
+              element={<ChatDetails />}
+            />
             <Route path="/chat/friends" element="" />
             <Route path="/chat/settings" element="" />
           </Route>

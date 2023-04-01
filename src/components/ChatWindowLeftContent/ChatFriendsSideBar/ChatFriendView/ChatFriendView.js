@@ -16,7 +16,7 @@ export default function ChatFriendView(props) {
   return (
     <div className={styles.chatFriendOuterContainer}>
       <NavLink
-        to={`/chat/${friend._id}`}
+        to={`/chat/${conversation._id}/${friend._id}`}
         className={({ isActive }) => (isActive ? styles.active : undefined)}
       >
         <button
