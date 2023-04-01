@@ -1,0 +1,54 @@
+.chatDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
+  .chatDetailsHeading {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    max-height: 52px;
+    border-bottom: 2px solid #1e1f22;
+    cursor: default;
+    .chatOverviewContainer {
+      margin: 10px 0 10px 20px;
+      display: flex;
+      align-items: center;
+      color: #eff0f2;
+      .chatOverviewUsername {
+        margin-left: 10px;
+      }
+    }
+  }
+  .chatDetailsInfoAndChatContainer {
+    margin: 10px 0 0 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .chatDetailsInfoAndChatContainer::-webkit-scrollbar {
+    width: 6px;
+  }
+  .chatDetailsInfoAndChatContainer:hover::-webkit-scrollbar {
+    width: 6px;
+  }
+  .chatDetailsInfoAndChatContainer::-webkit-scrollbar-thumb {
+    background-color: #1a1b1e;
+    border-radius: 15px;
+  }
+  .chatDetailsInfoAndChatContainer::-webkit-scrollbar-track {
+    color: #5865f2;
+  }
+
+  .sendMessageInputContainer {
+    padding: 15px;
+    .sendMessageInput {
+      background-color: #41444a;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      height: 35px;
+      padding: 10px;
+      color: white;
+    }
+  }
+}
