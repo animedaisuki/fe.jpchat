@@ -6,12 +6,21 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import FriendInfo from "./FriendInfo/FriendInfo";
 import ChatMessage from "./ChatMessage/ChatMessage";
 import { v4 as uuid } from "uuid";
+import { getMessage } from "../../../api/message/message";
 
 export default function ChatDetails() {
-  const { chatId } = useParams();
+  const { conversationId } = useParams();
   const currentFriend = useContext(CurrentFriendContext);
   const [inputValue, setInputValue] = useState("");
-  const [messages, setMessages] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const result = await getMessage(conversationId);
+      setMessages(result.data);
+    };
+    fetchMessages();
+  }, [conversationId]);
 
   const handleChatInputChange = (e) => {
     if (e.key !== "Enter") {
