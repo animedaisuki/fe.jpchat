@@ -41,7 +41,7 @@ export default function ChatDetails() {
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
         {messages?.map((message) => (
-          <ChatMessage message={message} />
+          <ChatMessage key={uuid()} message={message} />
         ))}
       </div>
       <div className={styles.sendMessageInputContainer}>

@@ -5,6 +5,7 @@ import { BiPlus } from "react-icons/bi";
 import ChatFriendView from "./ChatFriendView/ChatFriendView";
 import { UserContext } from "../../../context/UserInfoProvider";
 import { getConversation } from "../../../api/conversation/conversation";
+import { v4 as uuid } from "uuid";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
@@ -111,7 +112,7 @@ export default function ChatFriendsSideBar() {
         </div>
       </div>
       {conversations?.map((conversation) => (
-        <ChatFriendView key={conversation.id} conversation={conversation} />
+        <ChatFriendView key={uuid()} conversation={conversation} />
       ))}
     </div>
   );
