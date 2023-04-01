@@ -11,11 +11,11 @@ export default function ChatMessage(props) {
     <div className={styles.chatDetailsChatArea}>
       <div className={styles.chatDetailsChatAreaAvatarContainer}>
         {/*之后可以通过senderId找到对应的avatar*/}
-        {message.sender === currentFriend.id ? (
+        {message?.sender === currentFriend?.id ? (
           <img
             className={styles.chatDetailsChatAreaAvatar}
-            src={currentFriend.avatar}
-            alt={currentFriend.username}
+            src={currentFriend?.avatar}
+            alt={currentFriend?.username}
           />
         ) : (
           <img
@@ -29,7 +29,7 @@ export default function ChatMessage(props) {
         <div>
           <p>
             <span className={styles.chatDetailsChatAreaChatBoxUsername}>
-              {currentFriend.username}
+              {currentFriend?.username}
             </span>{" "}
             01-03-2023
           </p>
