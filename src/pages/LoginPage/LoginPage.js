@@ -62,7 +62,7 @@ export default function LoginPage() {
       localStorage.setItem("user", JSON.stringify(result.data));
       localStorage.setItem("username", result.data.username);
       setUserInfo(JSON.parse(localStorage.getItem("user")));
-      navigate("/");
+      navigate("/chat");
     }
   };
 
