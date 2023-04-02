@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ChatDetails.module.scss";
 import { CurrentFriendContext } from "../../../context/CurrentFriendInfoProvider";
@@ -6,50 +6,51 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import FriendInfo from "./FriendInfo/FriendInfo";
 import ChatMessage from "./ChatMessage/ChatMessage";
 import { v4 as uuid } from "uuid";
+import { getMessage, sendMessage } from "../../../api/message/message";
+import { UserContext } from "../../../context/UserInfoProvider";
 
 export default function ChatDetails() {
-  const { chatId } = useParams();
+  const { conversationId } = useParams();
+  const user = useContext(UserContext);
   const currentFriend = useContext(CurrentFriendContext);
-  const messages = [
-    {
-      id: uuid(),
-      sender: "21f307a2-b840-414e-9f2b-9f070979ba63",
-      receiver: "me",
-      text: "喜欢二次元",
-    },
-    {
-      id: uuid(),
-      sender: "me",
-      receiver: "21f307a2-b840-414e-9f2b-9f070979ba63",
-      text: "我也喜欢二次元",
-    },
-    {
-      id: uuid(),
-      sender: "21f307a2-b840-414e-9f2b-9f070979ba63",
-      receiver: "me",
-      text:
-        "Hello a Hello a Hello a Hello a Hello a Hello a Hello a " +
-        "Hello a Hello a Hello a Hello a Hello a Hello a " +
-        "Hello a Hello a Hello a Hello a Hello a",
-    },
-    {
-      id: uuid(),
-      sender: "21f307a2-b840-414e-9f2b-9f070979ba63",
-      receiver: "me",
-      text: "测试测试",
-    },
-    {
-      id: uuid(),
-      sender: "me",
-      receiver: "21f307a2-b840-414e-9f2b-9f070979ba63",
-      text: "好欸好欸",
-    },
-  ];
+  const [inputValue, setInputValue] = useState("");
+  const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
 
-  const handleKeyPress = (e) => {
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const result = await getMessage(conversationId);
+      setMessages(result.data);
+    };
+    fetchMessages();
+  }, [conversationId]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  const handleChatInputChange = (e) => {
+    if (e.key !== "Enter") {
+      setInputValue(e.target.value);
+    }
+  };
+
+  const handleKeyPress = async (e) => {
     if (e.key === "Enter") {
-      //提交内容
-      console.log("提交");
+      //如果输入框不为空
+      if (e.target.value.trim() !== "") {
+        //提交内容
+        const messageData = {
+          senderId: user.id,
+          conversation: conversationId,
+          text: inputValue,
+        };
+        const result = await sendMessage(messageData);
+        //setMessages
+        setMessages([...messages, result.data]);
+        //清空输入框
+        setInputValue("");
+      }
     }
   };
 
@@ -59,24 +60,30 @@ export default function ChatDetails() {
         <div className={styles.chatOverviewContainer}>
           <BsFillChatDotsFill size={20} />
           <p className={styles.chatOverviewUsername}>
-            {currentFriend.username}
+            {currentFriend?.username}
           </p>
         </div>
       </div>
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
-        {messages.map((message) => (
-          <ChatMessage message={message} />
+        {messages?.map((message) => (
+          <div key={uuid()} ref={scrollRef}>
+            <ChatMessage message={message} />
+          </div>
         ))}
       </div>
       <div className={styles.sendMessageInputContainer}>
         <input
           className={styles.sendMessageInput}
+          value={inputValue}
+          onChange={(e) => {
+            handleChatInputChange(e);
+          }}
           onKeyPress={(e) => {
             handleKeyPress(e);
           }}
           type="text"
-          placeholder={`Message @${currentFriend.username}`}
+          placeholder={`Message @${currentFriend?.username}`}
         />
       </div>
     </div>

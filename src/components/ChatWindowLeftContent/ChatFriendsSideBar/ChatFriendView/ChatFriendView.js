@@ -2,14 +2,21 @@ import React, { useContext } from "react";
 import styles from "./ChatFriendView.module.scss";
 import { NavLink } from "react-router-dom";
 import { CurrentFriendDispatchContext } from "../../../../context/CurrentFriendInfoProvider";
+import { UserContext } from "../../../../context/UserInfoProvider";
 
 export default function ChatFriendView(props) {
   const setCurrentFriend = useContext(CurrentFriendDispatchContext);
-  const { friend } = props;
+  const user = useContext(UserContext);
+  const { conversation } = props;
+  const friendIdArr = conversation.members.filter(
+    (member) => member._id !== user.id
+  );
+  const friend = friendIdArr[0];
+
   return (
     <div className={styles.chatFriendOuterContainer}>
       <NavLink
-        to={`/chat/${friend.id}`}
+        to={`/chat/${conversation._id}/${friend._id}`}
         className={({ isActive }) => (isActive ? styles.active : undefined)}
       >
         <button

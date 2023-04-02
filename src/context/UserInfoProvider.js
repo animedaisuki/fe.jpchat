@@ -6,12 +6,16 @@ const UserContext = createContext({});
 const UserDispatchContext = createContext(() => {});
 
 const UserInfoProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [userInfo, setUserInfo] = useState(user);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       const token = localStorage.getItem("access_token");
+      if (!token) {
+        localStorage.clear();
+      }
       if (token) {
         const result = await autoFetchUserInfo(token);
         if (result.error) {

@@ -11,26 +11,19 @@ export default function ChatMessage(props) {
     <div className={styles.chatDetailsChatArea}>
       <div className={styles.chatDetailsChatAreaAvatarContainer}>
         {/*之后可以通过senderId找到对应的avatar*/}
-        {message.sender === currentFriend.id ? (
-          <img
-            className={styles.chatDetailsChatAreaAvatar}
-            src={currentFriend.avatar}
-            alt={currentFriend.username}
-          />
-        ) : (
-          <img
-            className={styles.chatDetailsChatAreaAvatar}
-            src="https://amahane.s3.ap-northeast-1.amazonaws.com/users/defaultAvatar/char-venti-small.png"
-            alt="user"
-          />
-        )}
+        <img
+          className={styles.chatDetailsChatAreaAvatar}
+          src={message?.senderId.avatar}
+          alt={message?.senderId.username}
+        />
       </div>
       <div className={styles.chatDetailsChatAreaDateAndBoxContainer}>
         <div>
           <p>
             <span className={styles.chatDetailsChatAreaChatBoxUsername}>
-              {currentFriend.username}
-            </span>{" "}
+              {message?.senderId.username}
+            </span>
+            {"  "}
             01-03-2023
           </p>
         </div>
