@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ChatDetails.module.scss";
 import { CurrentFriendContext } from "../../../context/CurrentFriendInfoProvider";
 import { BsFillChatDotsFill } from "react-icons/bs";
@@ -8,6 +8,8 @@ import ChatMessage from "./ChatMessage/ChatMessage";
 import { v4 as uuid } from "uuid";
 import { getMessage, sendMessage } from "../../../api/message/message";
 import { UserContext } from "../../../context/UserInfoProvider";
+import { io } from "socket.io-client";
+import config from "../../../config/config";
 
 export default function ChatDetails() {
   const { conversationId } = useParams();
@@ -15,7 +17,46 @@ export default function ChatDetails() {
   const currentFriend = useContext(CurrentFriendContext);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
+  const [arrivalMessages, setArrivalMessages] = useState(null);
   const scrollRef = useRef();
+
+  const socket = useRef(null);
+
+  useEffect(() => {
+    const onBeforeUnload = () => {
+      localStorage.clear();
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", onBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!socket.current) {
+      socket.current = io(config.socketServerAddress);
+    }
+    if (socket.current) {
+      socket.current.on("getMessages", (data) => {
+        setArrivalMessages(data);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (arrivalMessages) {
+      setMessages((prevState) => [...prevState, arrivalMessages]);
+    }
+  }, [arrivalMessages]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", user?.id);
+    socket.current.on("getUsers", (users) => {
+      //拿到在线用户
+      // console.log(users);
+    });
+  }, [user]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -46,6 +87,12 @@ export default function ChatDetails() {
           conversation: conversationId,
           text: inputValue,
         };
+        //socket event
+        socket.current.emit("sendMessage", {
+          senderId: user,
+          receiverId: currentFriend._id,
+          text: inputValue,
+        });
         const result = await sendMessage(messageData);
         //setMessages
         setMessages([...messages, result.data]);
