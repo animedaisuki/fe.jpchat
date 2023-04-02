@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ChatDetails.module.scss";
 import { CurrentFriendContext } from "../../../context/CurrentFriendInfoProvider";
@@ -15,6 +15,7 @@ export default function ChatDetails() {
   const currentFriend = useContext(CurrentFriendContext);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -23,6 +24,10 @@ export default function ChatDetails() {
     };
     fetchMessages();
   }, [conversationId]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleChatInputChange = (e) => {
     if (e.key !== "Enter") {
@@ -41,6 +46,8 @@ export default function ChatDetails() {
           text: inputValue,
         };
         const result = await sendMessage(messageData);
+        //setMessages
+        setMessages([...messages, result.data]);
         //清空输入框
         setInputValue("");
       }
@@ -60,7 +67,9 @@ export default function ChatDetails() {
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
         {messages?.map((message) => (
-          <ChatMessage key={uuid()} message={message} />
+          <div key={uuid()} ref={scrollRef}>
+            <ChatMessage message={message} />
+          </div>
         ))}
       </div>
       <div className={styles.sendMessageInputContainer}>
