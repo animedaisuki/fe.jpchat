@@ -42,6 +42,7 @@ export default function ChatDetails() {
         //提交内容
         const messageData = {
           senderId: user.id,
+          senderDetail: user,
           conversation: conversationId,
           text: inputValue,
         };
