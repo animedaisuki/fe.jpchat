@@ -34,7 +34,7 @@ export default function ChatDetails() {
   }, []);
 
   useEffect(() => {
-    if (!socket.current) {
+    if (!socket.current && user) {
       socket.current = io(config.socketServerAddress);
     }
     if (socket.current) {
@@ -51,11 +51,13 @@ export default function ChatDetails() {
   }, [arrivalMessages]);
 
   useEffect(() => {
-    socket.current.emit("addUser", user?.id);
-    socket.current.on("getUsers", (users) => {
-      //拿到在线用户
-      // console.log(users);
-    });
+    if (user) {
+      socket.current?.emit("addUser", user?.id);
+      socket.current?.on("getUsers", (users) => {
+        //拿到在线用户
+        // console.log(users);
+      });
+    }
   }, [user]);
 
   useEffect(() => {
