@@ -24,11 +24,14 @@
         margin-left: 10px;
         color: #7e8287;
         font-size: 15px;
+        overflow: hidden;
       }
     }
 
     a.active .chatWindowLeftFunctionBarFriendsBtn {
       background-color: #404249;
+      width: 100%;
+      overflow: hidden;
       .chatWindowLeftFunctionBarFriendsBtnDesc {
         color: #eff0f2;
       }
