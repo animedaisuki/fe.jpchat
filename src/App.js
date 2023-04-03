@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ChatDetails from "./components/ChatWindowRightContent/ChatDetails/ChatDetails";
 import { CurrentFriendInfoProvider } from "./context/CurrentFriendInfoProvider";
+import FriendsManagement from "./components/ChatWindowRightContent/FriendsManagement/FriendsManagement";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
               path="/chat/:conversationId/:friendId"
               element={<ChatDetails />}
             />
-            <Route path="/chat/friends" element="" />
+            <Route path="/chat/friends" element={<FriendsManagement />} />
             <Route path="/chat/settings" element="" />
           </Route>
         </Routes>
