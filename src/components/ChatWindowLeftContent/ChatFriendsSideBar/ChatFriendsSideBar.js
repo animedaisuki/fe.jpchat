@@ -6,6 +6,7 @@ import ChatFriendView from "./ChatFriendView/ChatFriendView";
 import { UserContext } from "../../../context/UserInfoProvider";
 import { getConversation } from "../../../api/conversation/conversation";
 import { v4 as uuid } from "uuid";
+import { NavLink } from "react-router-dom";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
@@ -22,16 +23,23 @@ export default function ChatFriendsSideBar() {
   return (
     <div className={styles.chatWindowLeftFunctionBarFriendsContainer}>
       <div className={styles.chatWindowLeftFunctionBarFriendsBtnContainer}>
-        <div className={styles.chatWindowLeftFunctionBarFriendsBtn}>
-          <div
-            className={styles.chatWindowLeftFunctionBarFriendsBtnIconContainer}
-          >
-            <FaUserFriends size={30} />
-          </div>
-          <p className={styles.chatWindowLeftFunctionBarFriendsBtnDesc}>
-            Friends
-          </p>
-        </div>
+        <NavLink
+          to={`/chat/friends`}
+          className={({ isActive }) => (isActive ? styles.active : undefined)}
+        >
+          <button className={styles.chatWindowLeftFunctionBarFriendsBtn}>
+            <div
+              className={
+                styles.chatWindowLeftFunctionBarFriendsBtnIconContainer
+              }
+            >
+              <FaUserFriends size={30} />
+            </div>
+            <p className={styles.chatWindowLeftFunctionBarFriendsBtnDesc}>
+              Friends
+            </p>
+          </button>
+        </NavLink>
       </div>
       <div className={styles.chatWindowLeftFunctionBarDMSplitContainer}>
         <p className={styles.chatWindowLeftFunctionBarDMDesc}>
