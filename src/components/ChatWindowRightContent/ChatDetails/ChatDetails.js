@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./ChatDetails.module.scss";
 import { CurrentFriendContext } from "../../../context/CurrentFriendInfoProvider";
 import { BsFillChatDotsFill } from "react-icons/bs";
@@ -8,8 +8,7 @@ import ChatMessage from "./ChatMessage/ChatMessage";
 import { v4 as uuid } from "uuid";
 import { getMessage, sendMessage } from "../../../api/message/message";
 import { UserContext } from "../../../context/UserInfoProvider";
-import { io } from "socket.io-client";
-import config from "../../../config/config";
+import { SocketContext } from "../../../context/SocketRefProvider";
 
 export default function ChatDetails() {
   const { conversationId } = useParams();
@@ -20,23 +19,9 @@ export default function ChatDetails() {
   const [arrivalMessages, setArrivalMessages] = useState(null);
   const scrollRef = useRef();
 
-  const socket = useRef(null);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
-    const onBeforeUnload = () => {
-      localStorage.clear();
-    };
-    window.addEventListener("beforeunload", onBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", onBeforeUnload);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!socket.current && user) {
-      socket.current = io(config.socketServerAddress);
-    }
     if (socket.current) {
       socket.current.on("getMessages", (data) => {
         setArrivalMessages(data);
