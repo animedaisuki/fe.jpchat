@@ -7,10 +7,15 @@ import { UserContext } from "../../../context/UserInfoProvider";
 import { getConversation } from "../../../api/conversation/conversation";
 import { v4 as uuid } from "uuid";
 import { NavLink } from "react-router-dom";
+import {
+  ConversationContext,
+  ConversationDispatchContext,
+} from "../../../context/ConversationProvider";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
-  const [conversations, setConversations] = useState(null);
+  const conversations = useContext(ConversationContext);
+  const setConversations = useContext(ConversationDispatchContext);
 
   useEffect(() => {
     const fetchConversations = async () => {
