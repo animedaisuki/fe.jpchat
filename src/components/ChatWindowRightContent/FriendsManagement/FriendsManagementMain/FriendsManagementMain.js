@@ -4,6 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { ConversationContext } from "../../../../context/ConversationProvider";
 import { UserContext } from "../../../../context/UserInfoProvider";
 import ActiveFriendsList from "./ActiveFriendsList/ActiveFriendsList";
+import { v4 as uuid } from "uuid";
 
 export default function FriendsManagementMain(props) {
   const conversations = useContext(ConversationContext);
@@ -37,17 +38,21 @@ export default function FriendsManagementMain(props) {
           <FiSearch />
         </div>
       </div>
-      <div className={styles.friendManagementOverviewContainer}>
-        <div className={styles.friendsManagementOverviewDescContainer}>
-          <h5 className={styles.friendsManagementOverviewDesc}>
-            {statusState?.currentStatus} - {friends?.length}
-          </h5>
+      {statusState.currentStatus !== "ADD FRIEND" && (
+        <div className={styles.friendManagementOverviewContainer}>
+          <div className={styles.friendsManagementOverviewDescContainer}>
+            <h5 className={styles.friendsManagementOverviewDesc}>
+              {statusState?.currentStatus} - {friends?.length}
+            </h5>
+          </div>
         </div>
-      </div>
+      )}
       <div className={styles.activeFriendsOuterContainer}>
         {(statusState.currentStatus === "ONLINE" ||
           statusState.currentStatus === "ALL") &&
-          friends.map((friend) => <ActiveFriendsList friend={friend} />)}
+          friends.map((friend) => (
+            <ActiveFriendsList key={uuid()} friend={friend} />
+          ))}
       </div>
     </div>
   );
