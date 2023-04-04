@@ -40,6 +40,9 @@
       .friendsManagementHeadingStatusButton:hover {
         background-color: #43444b;
       }
+      .active {
+        background-color: #43444b;
+      }
       .friendsManagementHeadingAddFriendButton {
         padding: 5px;
         background-image: linear-gradient(to right top, #5665f1, #0679c5);
@@ -47,45 +50,6 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-      }
-    }
-  }
-
-  .friendManagementMainContainer {
-    margin: 10px 20px 10px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    .friendSearchBarContainer {
-      width: 100%;
-      min-height: 52px;
-      .friendSearchBar {
-        width: 100%;
-        height: 30px;
-        background-color: #1e1f22;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        padding: 5px;
-      }
-      .friendSearchBarSearchIcon {
-        position: absolute;
-        top: 26px;
-        transform: translateY(-100%);
-        right: 10px;
-        color: #6e7278;
-      }
-    }
-    .friendManagementOverviewContainer {
-      margin-top: 15px;
-      width: 100%;
-      .friendsManagementOverviewDescContainer {
-        margin-left: 5px;
-        .friendsManagementOverviewDesc {
-          color: #6e7278;
-          white-space: nowrap;
-        }
       }
     }
   }

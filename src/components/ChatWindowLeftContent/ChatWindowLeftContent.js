@@ -22,22 +22,22 @@ export default function ChatWindowLeftContent() {
     }
   }, [userInfo]);
 
-  useEffect(() => {
-    const onBeforeUnload = () => {
-      localStorage.clear();
-    };
-    window.addEventListener("beforeunload", onBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", onBeforeUnload);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const onBeforeUnload = () => {
+  //     localStorage.clear();
+  //   };
+  //   window.addEventListener("beforeunload", onBeforeUnload);
+  //
+  //   return () => {
+  //     window.removeEventListener("beforeunload", onBeforeUnload);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (!socket.current && userInfo) {
       socket.current = io(config.socketServerAddress);
     }
-    console.log(socket.current);
+    // console.log(socket.current);
 
     return () => {
       socket.current?.disconnect();
