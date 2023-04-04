@@ -20,7 +20,6 @@ export default function ChatFriendsSideBar() {
   useEffect(() => {
     const fetchConversations = async () => {
       const result = await getConversation(user?.id);
-      const test = result.data;
       setConversations(result.data);
     };
     fetchConversations();
