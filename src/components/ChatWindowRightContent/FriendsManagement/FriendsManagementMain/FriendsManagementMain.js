@@ -28,24 +28,26 @@ export default function FriendsManagementMain(props) {
 
   return (
     <div className={styles.friendManagementMainContainer}>
-      <div className={styles.friendSearchBarContainer}>
-        <input
-          className={styles.friendSearchBar}
-          type="text"
-          placeholder="Search"
-        />
-        <div className={styles.friendSearchBarSearchIcon}>
-          <FiSearch />
-        </div>
-      </div>
       {statusState.currentStatus !== "ADD FRIEND" && (
-        <div className={styles.friendManagementOverviewContainer}>
-          <div className={styles.friendsManagementOverviewDescContainer}>
-            <h5 className={styles.friendsManagementOverviewDesc}>
-              {statusState?.currentStatus} - {friends?.length}
-            </h5>
+        <>
+          <div className={styles.friendSearchBarContainer}>
+            <input
+              className={styles.friendSearchBar}
+              type="text"
+              placeholder="Search"
+            />
+            <div className={styles.friendSearchBarSearchIcon}>
+              <FiSearch />
+            </div>
           </div>
-        </div>
+          <div className={styles.friendManagementOverviewContainer}>
+            <div className={styles.friendsManagementOverviewDescContainer}>
+              <h5 className={styles.friendsManagementOverviewDesc}>
+                {statusState?.currentStatus} - {friends?.length}
+              </h5>
+            </div>
+          </div>
+        </>
       )}
       <div className={styles.activeFriendsOuterContainer}>
         {(statusState.currentStatus === "ONLINE" ||
@@ -54,6 +56,27 @@ export default function FriendsManagementMain(props) {
             <ActiveFriendsList key={uuid()} friend={friend} />
           ))}
       </div>
+      {statusState.currentStatus === "ADD FRIEND" && (
+        <div className={styles.addFriendContainer}>
+          <div className={styles.addFriendTitleAndDescContainer}>
+            <h3 className={styles.addFriendTitle}>ADD FRIEND</h3>
+            <p className={styles.addFriendDesc}>
+              You can add a friend with their Discord Tag. It's cAsE-sEnSitIvE!
+            </p>
+          </div>
+
+          <div className={styles.addFriendInputContainer}>
+            <input
+              className={styles.addFriendInput}
+              type="text"
+              placeholder="Enter a Username"
+            />
+            <button className={styles.addFriendButton}>
+              Send Friend Request
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
