@@ -9,11 +9,11 @@ import loadOhMyLive2DConfig from "./config/live2d";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 loadOhMyLive2DConfig();
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

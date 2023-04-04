@@ -1,0 +1,106 @@
+@import "../../../../styles/variables";
+
+.friendManagementMainContainer {
+  margin: 10px 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  //确保不会超过父容器的高度
+  //因为heading把这部分往下挤了
+  max-height: calc(100% - 68px);
+  .friendSearchBarContainer {
+    width: 98%;
+    min-height: 52px;
+    margin-top: 3px;
+    .friendSearchBar {
+      width: 100%;
+      height: 30px;
+      background-color: #1e1f22;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      padding: 5px;
+    }
+    .friendSearchBarSearchIcon {
+      position: absolute;
+      top: 28px;
+      transform: translateY(-100%);
+      right: 10px;
+      color: #6e7278;
+    }
+  }
+  .friendManagementOverviewContainer {
+    margin: 15px 0 20px 0;
+    width: 100%;
+    .friendsManagementOverviewDescContainer {
+      margin-left: 5px;
+      .friendsManagementOverviewDesc {
+        color: #6e7278;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .activeFriendsOuterContainer {
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .activeFriendsOuterContainer::-webkit-scrollbar {
+    width: 6px;
+  }
+  .activeFriendsOuterContainer::-webkit-scrollbar-thumb {
+    background-color: #1a1b1e;
+    border-radius: 15px;
+  }
+  .activeFriendsOuterContainer::-webkit-scrollbar-track {
+    color: #5865f2;
+  }
+  .activeFriendsFakeBottom {
+    margin-top: 90px;
+    height: 0;
+  }
+
+  .addFriendContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .addFriendTitleAndDescContainer {
+      width: 95%;
+      margin: 10px 0 0 8px;
+      .addFriendTitle {
+        color: $title-color;
+        margin-top: 10px;
+      }
+      .addFriendDesc {
+        color: $desc-color;
+      }
+    }
+    .addFriendInputContainer {
+      width: 95%;
+      margin: 15px 0 3px 0;
+      position: relative;
+      .addFriendInput {
+        @include input-style(100%, 60px);
+        font-size: 20px;
+        padding: 15px;
+        border-radius: 10px;
+      }
+      .addFriendButton {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        padding: 8px 12px 8px 12px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background-image: linear-gradient(to right top, #5565f0, #0479c4);
+        color: white;
+      }
+    }
+  }
+}

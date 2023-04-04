@@ -3,6 +3,7 @@ import styles from "./ChatFriendView.module.scss";
 import { NavLink } from "react-router-dom";
 import { CurrentFriendDispatchContext } from "../../../../context/CurrentFriendInfoProvider";
 import { UserContext } from "../../../../context/UserInfoProvider";
+import Avatar from "../../../Avatar/Avatar";
 
 export default function ChatFriendView(props) {
   const setCurrentFriend = useContext(CurrentFriendDispatchContext);
@@ -25,13 +26,15 @@ export default function ChatFriendView(props) {
             setCurrentFriend(friend);
           }}
         >
-          <div className={styles.chatFriendAvatarContainer}>
-            <img
-              className={styles.chatFriendImg}
-              src={friend.avatar}
-              alt={friend.username}
-            />
-          </div>
+          {/*now use avatar component*/}
+          {/*<div className={styles.chatFriendAvatarContainer}>*/}
+          {/*  <img*/}
+          {/*    className={styles.chatFriendImg}*/}
+          {/*    src={friend.avatar}*/}
+          {/*    alt={friend.username}*/}
+          {/*  />*/}
+          {/*</div>*/}
+          <Avatar user={friend} />
           <div className={styles.chatFriendNameContainer}>
             <p>{friend.username}</p>
           </div>
