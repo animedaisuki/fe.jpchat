@@ -35,15 +35,15 @@ export default function ChatDetails() {
     }
   }, [arrivalMessages]);
 
-  useEffect(() => {
-    if (user) {
-      socket.current?.emit("addUser", user?.id);
-      socket.current?.on("getUsers", (users) => {
-        //拿到在线用户
-        // console.log(users);
-      });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     socket.current?.emit("addUser", user?.id);
+  //     socket.current?.on("getUsers", (users) => {
+  //       //拿到在线用户
+  //       // console.log(users);
+  //     });
+  //   }
+  // }, [user]);
 
   useEffect(() => {
     const fetchMessages = async () => {
