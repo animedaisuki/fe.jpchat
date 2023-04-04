@@ -8,22 +8,23 @@ import Avatar from "../../../Avatar/Avatar";
 export default function ChatFriendView(props) {
   const setCurrentFriend = useContext(CurrentFriendDispatchContext);
   const user = useContext(UserContext);
-  const { conversation } = props;
-  const friendIdArr = conversation.members.filter(
-    (member) => member._id !== user.id
-  );
-  const friend = friendIdArr[0];
+  // const { conversation } = props;
+  // const friendIdArr = conversation.members.filter(
+  //   (member) => member._id !== user.id
+  // );
+  // const friend = friendIdArr[0];
+  const { friend } = props;
 
   return (
     <div className={styles.chatFriendOuterContainer}>
       <NavLink
-        to={`/chat/${conversation._id}/${friend._id}`}
+        to={`/chat/${friend?.conversationId}/${friend?.user._id}`}
         className={({ isActive }) => (isActive ? styles.active : undefined)}
       >
         <button
           className={styles.chatFriendContainer}
           onClick={() => {
-            setCurrentFriend(friend);
+            setCurrentFriend(friend.user);
           }}
         >
           {/*now use avatar component*/}
@@ -34,9 +35,9 @@ export default function ChatFriendView(props) {
           {/*    alt={friend.username}*/}
           {/*  />*/}
           {/*</div>*/}
-          <Avatar user={friend} />
+          <Avatar friend={friend} />
           <div className={styles.chatFriendNameContainer}>
-            <p>{friend.username}</p>
+            <p>{friend.user.username}</p>
           </div>
         </button>
       </NavLink>
