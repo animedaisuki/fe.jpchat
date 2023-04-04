@@ -1,0 +1,11 @@
+$title-color: #dbdcde;
+$desc-color: #83878d;
+@mixin input-style($width, $height) {
+  width: $width;
+  height: $height;
+  background-color: #1e1f22;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+}
