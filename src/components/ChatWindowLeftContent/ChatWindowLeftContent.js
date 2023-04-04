@@ -8,13 +8,16 @@ import { UserContext } from "../../context/UserInfoProvider";
 import { io } from "socket.io-client";
 import config from "../../config/config";
 import { SocketContext } from "../../context/SocketRefProvider";
+import { ConversationContext } from "../../context/ConversationProvider";
+import { FriendsOfUserDispatchContext } from "../../context/FriendsOfUserProvider";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
+  const socket = useContext(SocketContext);
+  const conversations = useContext(ConversationContext);
+  const setFriends = useContext(FriendsOfUserDispatchContext);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
-
-  const socket = useContext(SocketContext);
 
   useEffect(() => {
     if (!userInfo || !token) {
@@ -22,6 +25,18 @@ export default function ChatWindowLeftContent() {
     }
   }, [userInfo]);
 
+  useEffect(() => {
+    let friends = [];
+    conversations?.forEach((conversation) => {
+      const friend = conversation?.members.find(
+        (member) => member._id !== userInfo?.id
+      );
+      friends.push({ user: friend, conversationId: conversation._id });
+      setFriends(friends);
+    });
+  }, [userInfo, conversations]);
+
+  //set friend issue, need to log out after every refresh
   // useEffect(() => {
   //   const onBeforeUnload = () => {
   //     localStorage.clear();
@@ -43,6 +58,16 @@ export default function ChatWindowLeftContent() {
       socket.current?.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (userInfo) {
+      socket.current?.emit("addUser", userInfo?.id);
+      socket.current?.on("getUsers", (users) => {
+        //拿到在线用户
+        // console.log(users);
+      });
+    }
+  }, [userInfo]);
 
   const handleLogout = () => {
     localStorage.clear();
