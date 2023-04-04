@@ -1,40 +1,55 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ChatWindowLeftContent.module.scss";
 import { IoSettingsSharp } from "react-icons/io5";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import ChatFriendsSideBar from "./ChatFriendsSideBar/ChatFriendsSideBar";
-import { UserContext } from "../../context/UserInfoProvider";
+import {
+  UserContext,
+  UserDispatchContext,
+} from "../../context/UserInfoProvider";
 import { io } from "socket.io-client";
 import config from "../../config/config";
 import { SocketContext } from "../../context/SocketRefProvider";
 import { ConversationContext } from "../../context/ConversationProvider";
-import { FriendsOfUserDispatchContext } from "../../context/FriendsOfUserProvider";
+import {
+  FriendsOfUserContext,
+  FriendsOfUserDispatchContext,
+} from "../../context/FriendsOfUserProvider";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
+  const setUserInfo = useContext(UserDispatchContext);
   const socket = useContext(SocketContext);
   const conversations = useContext(ConversationContext);
   const setFriends = useContext(FriendsOfUserDispatchContext);
+  const friends = useContext(FriendsOfUserContext);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
+
+  const [onlineUsers, setOnlineUsers] = useState(null);
 
   useEffect(() => {
     if (!userInfo || !token) {
       navigate("/login");
     }
-  }, [userInfo]);
+  }, [navigate, token, userInfo]);
 
   useEffect(() => {
-    let friends = [];
+    let friendsArr = [];
+    //TODO:OPTIMIZE THIS CODE
     conversations?.forEach((conversation) => {
       const friend = conversation?.members.find(
         (member) => member._id !== userInfo?.id
       );
-      friends.push({ user: friend, conversationId: conversation._id });
-      setFriends(friends);
+      friendsArr.push({
+        user: friend,
+        conversationId: conversation._id,
+        isOnline: false,
+      });
+      setFriends(friendsArr);
     });
-  }, [userInfo, conversations]);
+  }, [userInfo, conversations, setFriends]);
 
   //set friend issue, need to log out after every refresh
   // useEffect(() => {
@@ -52,25 +67,52 @@ export default function ChatWindowLeftContent() {
     if (!socket.current && userInfo) {
       socket.current = io(config.socketServerAddress);
     }
+
     // console.log(socket.current);
 
-    return () => {
-      socket.current?.disconnect();
-    };
-  }, []);
+    // return () => {
+    //   socket.current?.disconnect();
+    // };
+  }, [socket, userInfo]);
 
   useEffect(() => {
     if (userInfo) {
       socket.current?.emit("addUser", userInfo?.id);
       socket.current?.on("getUsers", (users) => {
         //拿到在线用户
-        // console.log(users);
+        setOnlineUsers(users);
       });
     }
-  }, [userInfo]);
+  }, [socket, userInfo]);
+
+  useEffect(() => {
+    // console.log(onlineUsers);
+    //之前的问题出在直接去更改state
+    // 现在是没有在friends状态改变后重新执行
+    // TODO:OPTIMIZE THIS CODE
+    if (friends && onlineUsers) {
+      const updatedFriends = friends?.map((friend) => {
+        const isOnline = !!onlineUsers[friend.user._id];
+        if (isOnline) {
+          console.log("a friend connected");
+        }
+        return { ...friend, isOnline };
+      });
+      // 防止无限循环
+      if (JSON.stringify(updatedFriends) !== JSON.stringify(friends)) {
+        setFriends(updatedFriends);
+      }
+    }
+  }, [friends, onlineUsers, setFriends]);
+
+  // useEffect(() => {
+  //   console.log(friends);
+  // }, [friends]);
 
   const handleLogout = () => {
     localStorage.clear();
+    socket.current?.disconnect();
+    setUserInfo(null);
     navigate("/login");
   };
 
