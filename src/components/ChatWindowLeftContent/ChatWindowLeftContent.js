@@ -44,6 +44,11 @@ export default function ChatWindowLeftContent() {
     };
   }, []);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+
   return (
     <div className={styles.chatWindowLeftContent}>
       <div className={styles.chatWindowLeftSideBar}>
@@ -56,7 +61,11 @@ export default function ChatWindowLeftContent() {
         </div>
         <div className={styles.chatWindowActionContainer}>
           <IoSettingsSharp className={styles.chatWindowAction} size={25} />
-          <RiLogoutBoxFill className={styles.chatWindowAction} size={25} />
+          <RiLogoutBoxFill
+            className={styles.chatWindowAction}
+            size={25}
+            onClick={handleLogout}
+          />
         </div>
       </div>
       <div className={styles.chatWindowLeftFunctionBar}>
