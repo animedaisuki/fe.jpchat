@@ -13,7 +13,7 @@ export default function ActiveFriendsList(props) {
     <div className={styles.activeFriendListContainer}>
       <div className={styles.activeFriendListHoverContainer}>
         <div className={styles.activeFriendListAvatarNameGroup}>
-          <Avatar user={friend.user} />
+          <Avatar friend={friend} />
           <p className={styles.activeFriendListUsername}>
             {friend?.user.username}
           </p>
