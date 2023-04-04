@@ -4,7 +4,7 @@ const FriendsOfUserContext = createContext(null);
 const FriendsOfUserDispatchContext = createContext(() => {});
 
 const FriendsOfUserProvider = ({ children }) => {
-  const [friends, setFriends] = useState();
+  const [friends, setFriends] = useState([]);
   return (
     <FriendsOfUserContext.Provider value={friends}>
       <FriendsOfUserDispatchContext.Provider value={setFriends}>

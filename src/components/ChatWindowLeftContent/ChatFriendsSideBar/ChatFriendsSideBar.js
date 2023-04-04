@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./ChatFriendsSideBar.module.scss";
 import { FaUserFriends } from "react-icons/fa";
 import { BiPlus } from "react-icons/bi";
@@ -7,15 +7,13 @@ import { UserContext } from "../../../context/UserInfoProvider";
 import { getConversation } from "../../../api/conversation/conversation";
 import { v4 as uuid } from "uuid";
 import { NavLink } from "react-router-dom";
-import {
-  ConversationContext,
-  ConversationDispatchContext,
-} from "../../../context/ConversationProvider";
+import { ConversationDispatchContext } from "../../../context/ConversationProvider";
+import { FriendsOfUserContext } from "../../../context/FriendsOfUserProvider";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
-  const conversations = useContext(ConversationContext);
   const setConversations = useContext(ConversationDispatchContext);
+  const friends = useContext(FriendsOfUserContext);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -23,7 +21,7 @@ export default function ChatFriendsSideBar() {
       setConversations(result.data);
     };
     fetchConversations();
-  }, [user]);
+  }, [setConversations, user]);
 
   return (
     <div className={styles.chatWindowLeftFunctionBarFriendsContainer}>
@@ -54,8 +52,8 @@ export default function ChatFriendsSideBar() {
           <BiPlus className={styles.chatWindowLeftFunctionBarDMSplitIcon} />
         </div>
       </div>
-      {conversations?.map((conversation) => (
-        <ChatFriendView key={uuid()} conversation={conversation} />
+      {friends?.map((friend) => (
+        <ChatFriendView key={uuid()} friend={friend} />
       ))}
     </div>
   );
