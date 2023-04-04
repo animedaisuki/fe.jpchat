@@ -4,19 +4,22 @@ import { Outlet } from "react-router-dom";
 import ChatWindowLeftContent from "../../components/ChatWindowLeftContent/ChatWindowLeftContent";
 import { SocketInfoProvider } from "../../context/SocketRefProvider";
 import { ConversationProvider } from "../../context/ConversationProvider";
+import { FriendsOfUserProvider } from "../../context/FriendsOfUserProvider";
 
 export default function ChatPage() {
   return (
-    <ConversationProvider>
-      <SocketInfoProvider>
-        <div className={styles.chatPageContainer}>
-          <div className={styles.chatWindowContainer}>
-            <ChatWindowLeftContent />
-            {/*<div className={styles.chatWindowRightContent}></div>*/}
-            <Outlet />
+    <SocketInfoProvider>
+      <ConversationProvider>
+        <FriendsOfUserProvider>
+          <div className={styles.chatPageContainer}>
+            <div className={styles.chatWindowContainer}>
+              <ChatWindowLeftContent />
+              {/*<div className={styles.chatWindowRightContent}></div>*/}
+              <Outlet />
+            </div>
           </div>
-        </div>
-      </SocketInfoProvider>
-    </ConversationProvider>
+        </FriendsOfUserProvider>
+      </ConversationProvider>
+    </SocketInfoProvider>
   );
 }

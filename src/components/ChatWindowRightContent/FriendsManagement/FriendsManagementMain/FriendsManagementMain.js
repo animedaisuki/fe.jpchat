@@ -1,30 +1,25 @@
 import React, { useContext } from "react";
 import styles from "./FriendsManagementMain.module.scss";
 import { FiSearch } from "react-icons/fi";
-import { ConversationContext } from "../../../../context/ConversationProvider";
-import { UserContext } from "../../../../context/UserInfoProvider";
 import ActiveFriendsList from "./ActiveFriendsList/ActiveFriendsList";
 import { v4 as uuid } from "uuid";
+import { FriendsOfUserContext } from "../../../../context/FriendsOfUserProvider";
 
 export default function FriendsManagementMain(props) {
-  const conversations = useContext(ConversationContext);
-  const user = useContext(UserContext);
-
   const { statusState } = props;
+  const friends = useContext(FriendsOfUserContext);
 
-  const friends = [];
-
-  if (
-    statusState.currentStatus === "ONLINE" ||
-    statusState.currentStatus === "ALL"
-  ) {
-    conversations?.forEach((conversation) => {
-      const friend = conversation.members.find(
-        (member) => member._id !== user.id
-      );
-      friends.push({ user: friend, conversationId: conversation._id });
-    });
-  }
+  // if (
+  //   statusState.currentStatus === "ONLINE" ||
+  //   statusState.currentStatus === "ALL"
+  // ) {
+  //   conversations?.forEach((conversation) => {
+  //     const friend = conversation.members.find(
+  //       (member) => member._id !== user.id
+  //     );
+  //     friends.push({ user: friend, conversationId: conversation._id });
+  //   });
+  // }
 
   return (
     <div className={styles.friendManagementMainContainer}>
@@ -52,7 +47,7 @@ export default function FriendsManagementMain(props) {
       <div className={styles.activeFriendsOuterContainer}>
         {(statusState.currentStatus === "ONLINE" ||
           statusState.currentStatus === "ALL") &&
-          friends.map((friend) => (
+          friends?.map((friend) => (
             <ActiveFriendsList key={uuid()} friend={friend} />
           ))}
       </div>
@@ -61,7 +56,8 @@ export default function FriendsManagementMain(props) {
           <div className={styles.addFriendTitleAndDescContainer}>
             <h3 className={styles.addFriendTitle}>ADD FRIEND</h3>
             <p className={styles.addFriendDesc}>
-              You can add a friend with their Discord Tag. It's cAsE-sEnSitIvE!
+              You can add a friend with their Amahane Username. It's
+              cAsE-sEnSitIvE!
             </p>
           </div>
 
