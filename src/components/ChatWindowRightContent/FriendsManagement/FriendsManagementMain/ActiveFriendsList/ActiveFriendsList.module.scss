@@ -1,0 +1,51 @@
+.activeFriendListContainer {
+  width: 100%;
+  border-top: 0.5px solid #3c3e44;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .activeFriendListHoverContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 13px;
+    border-radius: 5px;
+    .activeFriendListAvatarNameGroup {
+      display: flex;
+      align-items: center;
+      .activeFriendListUsername {
+        margin-left: 10px;
+        color: #6e7278;
+      }
+    }
+
+    .activeFriendListChatNavButton {
+      background-color: #2b2d31;
+      border: none;
+      border-radius: 100%;
+      height: 42px;
+      width: 42px;
+      cursor: pointer;
+      position: relative;
+      .activeFriendListChatNavButtonIconContainer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        color: #b5bac1;
+      }
+    }
+    .activeFriendListChatNavButton:hover {
+      .activeFriendListChatNavButtonIconContainer {
+        color: #dadde0;
+      }
+    }
+  }
+  .activeFriendListHoverContainer:hover {
+    background-color: #393c41;
+    .activeFriendListChatNavButton {
+      background-color: #1e1f22;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.friendsManagementContainer {
+  width: 100%;
+  overflow: hidden;
+  .friendsManagementHeading {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    max-height: 52px;
+    border-bottom: 2px solid #1e1f22;
+    cursor: default;
+    .friendsManagementHeadingLeftContent {
+      display: flex;
+      align-items: center;
+      color: #eff0f2;
+      .friendsManagementHeadingIconContainer {
+        margin: 10px 0 10px 20px;
+        display: flex;
+        align-items: center;
+      }
+      .friendsManagementHeadingFakeButton {
+        background: none;
+        border: none;
+        color: #eff0f2;
+        margin: 0 20px 0 10px;
+      }
+    }
+    .friendsManagementHeadingStatusButtons {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      .friendsManagementHeadingStatusButton {
+        background: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 25px;
+        color: #eff0f2;
+        padding: 5px;
+      }
+      .friendsManagementHeadingStatusButton:hover {
+        background-color: #43444b;
+      }
+      .active {
+        background-color: #43444b;
+      }
+      .friendsManagementHeadingAddFriendButton {
+        padding: 5px;
+        background-image: linear-gradient(to right top, #5665f1, #0679c5);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
