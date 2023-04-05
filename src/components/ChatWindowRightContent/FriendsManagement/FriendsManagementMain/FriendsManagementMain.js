@@ -19,9 +19,11 @@ export default function FriendsManagementMain(props) {
   const onlineFriends = friends?.filter((friend) => friend.isOnline === true);
 
   const [receiverUsername, setReceiverUsername] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   const handeRequestFriend = async () => {
     const token = localStorage.getItem("access_token");
+    setIsFetching(true);
     const result = await addFriend(token, { receiverUsername });
     if (!result.error) {
       const newConversation = result.data.populatedNewConversation;
@@ -32,6 +34,7 @@ export default function FriendsManagementMain(props) {
         newConversation,
       });
     }
+    setIsFetching(false);
   };
 
   return (
@@ -93,8 +96,11 @@ export default function FriendsManagementMain(props) {
               placeholder="Enter a Username"
             />
             <button
-              className={styles.addFriendButton}
+              className={`${styles.addFriendButton} ${
+                isFetching ? styles.disabled : undefined
+              }`}
               onClick={handeRequestFriend}
+              disabled={isFetching}
             >
               Send Friend Request
             </button>
