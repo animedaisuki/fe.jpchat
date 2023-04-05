@@ -102,6 +102,9 @@
         background-image: linear-gradient(to right top, #5565f0, #0479c4);
         color: white;
       }
+      .addFriendButton.disabled {
+        cursor: not-allowed;
+      }
     }
   }
 }
