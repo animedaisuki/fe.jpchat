@@ -8,6 +8,7 @@ import { FriendsOfUserContext } from "../../../../context/FriendsOfUserProvider"
 export default function FriendsManagementMain(props) {
   const { statusState } = props;
   const friends = useContext(FriendsOfUserContext);
+  const onlineFriends = friends?.filter((friend) => friend.isOnline === true);
 
   // if (
   //   statusState.currentStatus === "ONLINE" ||
@@ -38,15 +39,24 @@ export default function FriendsManagementMain(props) {
           <div className={styles.friendManagementOverviewContainer}>
             <div className={styles.friendsManagementOverviewDescContainer}>
               <h5 className={styles.friendsManagementOverviewDesc}>
-                {statusState?.currentStatus} - {friends?.length}
+                {statusState?.currentStatus} -{" "}
+                {statusState.currentStatus === "ALL" && friends?.length}
+                {statusState.currentStatus === "ONLINE" &&
+                  onlineFriends?.length}
+                {(statusState.currentStatus === "PENDING" ||
+                  statusState.currentStatus === "BLOCKED") &&
+                  "0"}
               </h5>
             </div>
           </div>
         </>
       )}
       <div className={styles.activeFriendsOuterContainer}>
-        {(statusState.currentStatus === "ONLINE" ||
-          statusState.currentStatus === "ALL") &&
+        {statusState.currentStatus === "ONLINE" &&
+          onlineFriends?.map((friend) => (
+            <ActiveFriendsList key={uuid()} friend={friend} />
+          ))}
+        {statusState.currentStatus === "ALL" &&
           friends?.map((friend) => (
             <ActiveFriendsList key={uuid()} friend={friend} />
           ))}
