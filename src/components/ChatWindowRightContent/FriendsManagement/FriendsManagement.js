@@ -1,14 +1,9 @@
 import React, { useContext, useReducer } from "react";
 import styles from "./FriendsManagement.module.scss";
 import { FaUserFriends } from "react-icons/fa";
-import { ConversationContext } from "../../../context/ConversationProvider";
-import { UserContext } from "../../../context/UserInfoProvider";
 import FriendsManagementMain from "./FriendsManagementMain/FriendsManagementMain";
 
 export default function FriendsManagement() {
-  // const conversations = useContext(ConversationContext);
-  // const user = useContext(UserContext);
-
   const initStatusState = { currentStatus: "ONLINE" };
   const StatusReducer = (statusState, action) => {
     switch (action.type) {
