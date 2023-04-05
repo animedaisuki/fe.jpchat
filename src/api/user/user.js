@@ -15,10 +15,11 @@ export const findUserById = async () => {
   }
 };
 
-export const addFriend = async (data) => {
+export const addFriend = async (token, data) => {
   try {
+    const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
     const path = `${config.apiAddress}/conversations/add`;
-    const result = await axios.post(path, data);
+    const result = await axios.post(path, data, headerConfig);
     return result;
   } catch (error) {
     const result = {
