@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useReducer } from "react";
 import styles from "./FriendsManagement.module.scss";
 import { FaUserFriends } from "react-icons/fa";
 import FriendsManagementMain from "./FriendsManagementMain/FriendsManagementMain";
