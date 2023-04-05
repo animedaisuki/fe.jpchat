@@ -11,7 +11,10 @@ import {
 import { io } from "socket.io-client";
 import config from "../../config/config";
 import { SocketContext } from "../../context/SocketRefProvider";
-import { ConversationContext } from "../../context/ConversationProvider";
+import {
+  ConversationContext,
+  ConversationDispatchContext,
+} from "../../context/ConversationProvider";
 import {
   FriendsOfUserContext,
   FriendsOfUserDispatchContext,
@@ -22,12 +25,15 @@ export default function ChatWindowLeftContent() {
   const setUserInfo = useContext(UserDispatchContext);
   const socket = useContext(SocketContext);
   const conversations = useContext(ConversationContext);
+  const setConversations = useContext(ConversationDispatchContext);
   const setFriends = useContext(FriendsOfUserDispatchContext);
   const friends = useContext(FriendsOfUserContext);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
   const [onlineUsers, setOnlineUsers] = useState(null);
+
+  const [arrivalConversation, setArrivalConversation] = useState(null);
 
   useEffect(() => {
     if (!userInfo || !token) {
@@ -84,6 +90,21 @@ export default function ChatWindowLeftContent() {
       });
     }
   }, [socket, userInfo]);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current?.on("getArrivalConversation", (data) => {
+        const { newConversation } = data;
+        setArrivalConversation(newConversation);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (arrivalConversation) {
+      setConversations((prevState) => [...prevState, arrivalConversation]);
+    }
+  }, [arrivalConversation]);
 
   useEffect(() => {
     // console.log(onlineUsers);
