@@ -1,4 +1,3 @@
-import happySticker from "../assets/mafumafuStickers/16873560@2x.png";
 import hiddeSticker from "../assets/mafumafuStickers/16873539@2x.png";
 import stareSticker from "../assets/mafumafuStickers/16873538@2x.png";
 import angrySticker from "../assets/mafumafuStickers/16873541@2x.png";
@@ -13,9 +12,20 @@ import shySticker from "../assets/mafumafuStickers/16873567@2x.png";
 import sorrySticker from "../assets/mafumafuStickers/16873569@2x.png";
 import dameSticker from "../assets/mafumafuStickers/16873572@2x.png";
 import okSticker from "../assets/mafumafuStickers/16873571@2x.png";
+import kneeAnimatedSticker from "../assets/mafumafuStickers/1997494721@2x.gif";
+import happyAnimatedSticker from "../assets/mafumafuStickers/1997494541@2x.gif";
+import strongHappyAnimatedSticker from "../assets/mafumafuStickers/1997494731@2x.gif";
+import surpriseAnimatedSticker from "../assets/mafumafuStickers/1997494701@2x.gif";
+import komenAnimatedSticker from "../assets/mafumafuStickers/1997494711@2x.gif";
+import okaeriAnimatedSticker from "../assets/mafumafuStickers/1997494771@2x.gif";
 
 export const stickers = [
-  { unicode: "stk{0000}", png: happySticker },
+  { unicode: "stk{0015}", png: kneeAnimatedSticker },
+  { unicode: "stk{0017}", png: happyAnimatedSticker },
+  { unicode: "stk{0018}", png: strongHappyAnimatedSticker },
+  { unicode: "stk{0019}", png: surpriseAnimatedSticker },
+  { unicode: "stk{0020}", png: komenAnimatedSticker },
+  { unicode: "stk{0021}", png: okaeriAnimatedSticker },
   {
     unicode: "stk{0001}",
     png: hiddeSticker,
@@ -41,7 +51,7 @@ export const stickers = [
     png: lieSticker,
   },
   { unicode: "stk{0013}", png: shySticker },
-  { unicode: "stk{0014}", png: sorrySticker },
+  { unicode: "stk{0016}", png: sorrySticker },
 ];
 
 // const emojis = [
