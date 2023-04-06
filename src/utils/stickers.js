@@ -15,33 +15,33 @@ import dameSticker from "../assets/mafumafuStickers/16873572@2x.png";
 import okSticker from "../assets/mafumafuStickers/16873571@2x.png";
 
 export const stickers = [
-  { unicode: "u{1F600}", png: happySticker },
+  { unicode: "stk{0000}", png: happySticker },
   {
-    unicode: "u{1F910}",
+    unicode: "stk{0001}",
     png: hiddeSticker,
   },
-  { unicode: "u{1F612}", png: stareSticker },
-  { unicode: "u{1F623}", png: angrySticker },
+  { unicode: "stk{0002}", png: stareSticker },
+  { unicode: "stk{0003}", png: angrySticker },
   {
-    unicode: "u{1F622}",
+    unicode: "stk{0004}",
     png: crySticker,
   },
-  { unicode: "u{1F62D}", png: strongCrySticker },
+  { unicode: "stk{0005}", png: strongCrySticker },
   {
-    unicode: "u{1F635}",
+    unicode: "stk{0006}",
     png: questionSticker,
   },
-  { unicode: "u{1F970}", png: loveSticker },
-  { unicode: "u{1F60D}", png: StrongLoveSticker },
-  { unicode: "u{2705}", png: dameSticker },
-  { unicode: "u{274E}", png: okSticker },
-  { unicode: "u{1F636}", png: fuSticker },
+  { unicode: "stk{0007}", png: loveSticker },
+  { unicode: "stk{0008}", png: StrongLoveSticker },
+  { unicode: "stk{0009}", png: dameSticker },
+  { unicode: "stk{0010}", png: okSticker },
+  { unicode: "stk{0011}", png: fuSticker },
   {
-    unicode: "u{1F971}",
+    unicode: "stk{0012}",
     png: lieSticker,
   },
-  { unicode: "u{1F648}", png: shySticker },
-  { unicode: "u{1F63F}", png: sorrySticker },
+  { unicode: "stk{0013}", png: shySticker },
+  { unicode: "stk{0014}", png: sorrySticker },
 ];
 
 // const emojis = [

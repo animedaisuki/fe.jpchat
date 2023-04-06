@@ -19,7 +19,7 @@ export default function ChatMessage(props) {
   };
 
   const replaceEmojisWithStickers = (text, stickers) => {
-    const emojiRegex = /u\{([0-9A-Fa-f]+)\}/g;
+    const emojiRegex = /stk\{(\d{4})\}/g;
     let newText = text;
     let match;
     // console.log(newText);
