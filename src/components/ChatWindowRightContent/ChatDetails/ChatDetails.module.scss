@@ -116,11 +116,15 @@
             .stickerSelectionWindowButton {
               background: none;
               border: none;
+              border-radius: 10px;
               cursor: pointer;
               .stickerSelectionWindowImg {
                 height: 90px;
                 width: 100px;
               }
+            }
+            .stickerSelectionWindowButton:hover {
+              background-color: #41434a;
             }
           }
         }
