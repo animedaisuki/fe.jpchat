@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import styles from "./ChatMessage.module.scss";
 import parse from "html-react-parser";
+import { EmojioneV4 } from "react-emoji-render";
 
 export default function ChatMessage(props) {
   const { message, stickers } = props;
@@ -11,7 +12,7 @@ export default function ChatMessage(props) {
     );
     if (foundSticker) {
       // console.log("Sticker found:", foundSticker);
-      return `<img src="${foundSticker.png}" style="width:100%;height:100%;" alt="${foundSticker.unicode}" />`;
+      return `<img src="${foundSticker.png}" style="width:100%;height:100%;" alt="${foundSticker.unicode}"/>`;
     } else {
       // console.log("Sticker not found:", unicode);
       return unicode;
@@ -40,8 +41,6 @@ export default function ChatMessage(props) {
   //使用 html-react-parser 将返回的字符串解析为 React 组件
   const parsedElements = parse(messageWithStickers);
 
-  // const emojiArray = toArray(messageWithStickers);
-
   return (
     <div className={styles.chatDetailsChatArea}>
       <div className={styles.chatDetailsChatAreaAvatarContainer}>
@@ -62,13 +61,15 @@ export default function ChatMessage(props) {
             01-03-2023
           </p>
         </div>
-        <div className={styles.chatDetailsChatAreaChatBox}>
-          {/*<EmojioneV4 text={message.text} size={32} />*/}
-          {/*{message.text}*/}
-          {/*<EmojioneV4 text={messageWithStickers} size={32} />*/}
-          {/*<div dangerouslySetInnerHTML={{ __html: messageWithStickers }} />*/}
-          {parsedElements}
-        </div>
+        {message.isSticker ? (
+          <div className={styles.chatDetailsChatAreaChatBoxForStickers}>
+            {parsedElements}
+          </div>
+        ) : (
+          <div className={styles.chatDetailsChatAreaChatBox}>
+            <EmojioneV4 text={message.text} size={32} />{" "}
+          </div>
+        )}
       </div>
     </div>
   );

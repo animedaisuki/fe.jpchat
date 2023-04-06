@@ -50,6 +50,7 @@ export default function ChatDetails() {
 
   useEffect(() => {
     if (arrivalMessages) {
+      console.log(arrivalMessages);
       setMessages((prevState) => [...prevState, arrivalMessages]);
     }
   }, [arrivalMessages]);
@@ -82,12 +83,14 @@ export default function ChatDetails() {
           senderDetail: user,
           conversation: conversationId,
           text: inputValue,
+          isSticker: false,
         };
         //socket event
         socket.current.emit("sendMessage", {
           senderId: user,
           receiverId: currentFriend._id,
           text: inputValue,
+          isSticker: false,
         });
         const result = await sendMessage(messageData);
         //setMessages
@@ -105,12 +108,14 @@ export default function ChatDetails() {
       senderDetail: user,
       conversation: conversationId,
       text: unicode,
+      isSticker: true,
     };
     //socket event
     socket.current.emit("sendMessage", {
       senderId: user,
       receiverId: currentFriend._id,
       text: unicode,
+      isSticker: true,
     });
     const result = await sendMessage(messageData);
     //setMessages
