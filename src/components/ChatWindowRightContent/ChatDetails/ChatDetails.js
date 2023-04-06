@@ -10,9 +10,13 @@ import { getMessage, sendMessage } from "../../../api/message/message";
 import { UserContext } from "../../../context/UserInfoProvider";
 import { SocketContext } from "../../../context/SocketRefProvider";
 import { emojify } from "react-emoji";
-import { stickers } from "../../../utils/stickers";
+import { stickers, emojis } from "../../../utils/stickers";
+
+let counter = 0;
 
 export default function ChatDetails() {
+  const randomIndex = Math.floor(Math.random() * emojis.length);
+
   const { conversationId } = useParams();
   const user = useContext(UserContext);
   const currentFriend = useContext(CurrentFriendContext);
@@ -21,6 +25,7 @@ export default function ChatDetails() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [messages, setMessages] = useState([]);
   const [arrivalMessages, setArrivalMessages] = useState(null);
+  const [currentEmoji, setCurrentEmoji] = useState(emojis[randomIndex]);
   const scrollRef = useRef();
 
   const socket = useContext(SocketContext);
@@ -37,8 +42,6 @@ export default function ChatDetails() {
       clearTimeout();
     };
   }, [isVisible]);
-
-  const toggleEmoji = ":smile:";
 
   useEffect(() => {
     if (socket.current) {
@@ -98,6 +101,11 @@ export default function ChatDetails() {
         setInputValue("");
       }
     }
+  };
+
+  const handleMouseEnter = () => {
+    counter = (counter + 1) % emojis.length;
+    setCurrentEmoji(emojis[counter]);
   };
 
   const handleSendSticker = async (unicode) => {
@@ -169,8 +177,9 @@ export default function ChatDetails() {
             onClick={() => {
               setIsVisible((prevState) => !prevState);
             }}
+            onMouseEnter={handleMouseEnter}
           >
-            {emojify(toggleEmoji)}
+            {emojify(currentEmoji)}
           </button>
           {isAnimating && (
             <div className={styles.stickerSelectionWindow}>
