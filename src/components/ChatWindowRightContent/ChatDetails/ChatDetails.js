@@ -50,7 +50,6 @@ export default function ChatDetails() {
 
   useEffect(() => {
     if (arrivalMessages) {
-      console.log(arrivalMessages);
       setMessages((prevState) => [...prevState, arrivalMessages]);
     }
   }, [arrivalMessages]);
