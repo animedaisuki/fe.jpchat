@@ -67,23 +67,27 @@
         animation: color-transition-reverse 0.5s forwards;
       }
       .toggleEmojiButton:hover {
-        filter: grayscale(0);
+        filter: none;
         animation: color-transition 0.5s forwards;
       }
       @keyframes color-transition {
         from {
           filter: grayscale(100%);
+          scale: (1);
         }
         to {
-          filter: grayscale(0);
+          filter: none;
+          scale: (1.2);
         }
       }
       @keyframes color-transition-reverse {
         from {
-          filter: grayscale(0);
+          filter: none;
+          scale: (1.2);
         }
         to {
           filter: grayscale(100%);
+          scale: (1);
         }
       }
 

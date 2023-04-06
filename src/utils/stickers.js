@@ -18,6 +18,7 @@ import strongHappyAnimatedSticker from "../assets/mafumafuStickers/1997494731@2x
 import surpriseAnimatedSticker from "../assets/mafumafuStickers/1997494701@2x.gif";
 import komenAnimatedSticker from "../assets/mafumafuStickers/1997494711@2x.gif";
 import okaeriAnimatedSticker from "../assets/mafumafuStickers/1997494771@2x.gif";
+import tadaimaSticker from "../assets/mafumafuStickers/16873575@2x.png";
 
 export const stickers = [
   { unicode: "stk{0015}", png: kneeAnimatedSticker },
@@ -26,6 +27,10 @@ export const stickers = [
   { unicode: "stk{0019}", png: surpriseAnimatedSticker },
   { unicode: "stk{0020}", png: komenAnimatedSticker },
   { unicode: "stk{0021}", png: okaeriAnimatedSticker },
+  {
+    unicode: "stk{0000}",
+    png: tadaimaSticker,
+  },
   {
     unicode: "stk{0001}",
     png: hiddeSticker,
@@ -52,6 +57,18 @@ export const stickers = [
   },
   { unicode: "stk{0013}", png: shySticker },
   { unicode: "stk{0016}", png: sorrySticker },
+];
+
+export const emojis = [
+  ":smile:",
+  ":joy:",
+  ":sunglasses:",
+  ":grinning:",
+  ":wink:",
+  ":disappointed:",
+  ":worried:",
+  ":confused:",
+  "d:",
 ];
 
 // const emojis = [
