@@ -3,7 +3,6 @@ import styles from "./AIChatMessage.module.scss";
 
 export default function AIChatMessage(props) {
   const { message } = props;
-  console.log(message?.senderId?.avatar);
 
   return (
     <div className={styles.chatDetailsChatArea}>
