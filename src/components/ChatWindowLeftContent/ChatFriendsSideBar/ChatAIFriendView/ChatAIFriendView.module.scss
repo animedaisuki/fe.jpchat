@@ -1,0 +1,60 @@
+.chatFriendOuterContainer {
+  .chatFriendContainer {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    width: 100%;
+    margin: 0 15px 8px 5px;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    overflow: hidden;
+
+    //now use avatar component
+    //.chatFriendAvatarContainer {
+    //  background-image: linear-gradient(#e66465, #9198e5);
+    //  border-radius: 100%;
+    //  min-width: 50px;
+    //  height: 50px;
+    //  display: flex;
+    //  overflow: hidden;
+    //  transition: 0.3s;
+    //  .chatFriendImg {
+    //    width: 50px;
+    //    height: 50px;
+    //  }
+    //}
+
+    .chatFriendAvatarContainer:hover {
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .chatFriendNameContainer {
+      width: 100px;
+      color: #6e7278;
+      margin-left: 8px;
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+    }
+  }
+  .chatFriendContainer:hover {
+    background-color: #404249;
+    .chatFriendNameContainer {
+      color: white;
+    }
+  }
+  a.active .chatFriendContainer {
+    background-color: #404249;
+    .chatFriendNameContainer {
+      color: #eff0f2;
+    }
+  }
+}
+
+.chatFriendOuterContainer a {
+  text-decoration: none;
+}

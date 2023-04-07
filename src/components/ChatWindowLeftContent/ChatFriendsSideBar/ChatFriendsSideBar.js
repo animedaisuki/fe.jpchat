@@ -9,11 +9,17 @@ import { v4 as uuid } from "uuid";
 import { NavLink } from "react-router-dom";
 import { ConversationDispatchContext } from "../../../context/ConversationProvider";
 import { FriendsOfUserContext } from "../../../context/FriendsOfUserProvider";
+import { ChatGptConversationDispatchContext } from "../../../context/ChatGptConversationProvider";
+import { fetchAIConversation } from "../../../api/chatGpt/chatGpt";
+import { AIFriendOfUserContext } from "../../../context/AIFriendOfUserProvider";
+import ChatAIFriendView from "./ChatAIFriendView/ChatAIFriendView";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
   const setConversations = useContext(ConversationDispatchContext);
+  const setChatGptConversation = useContext(ChatGptConversationDispatchContext);
   const friends = useContext(FriendsOfUserContext);
+  const AIFriends = useContext(AIFriendOfUserContext);
 
   useEffect(() => {
     const fetchConversations = async () => {
@@ -22,6 +28,17 @@ export default function ChatFriendsSideBar() {
     };
     fetchConversations();
   }, [setConversations, user]);
+
+  useEffect(() => {
+    const fetchConversationForChatGpt = async () => {
+      const token = localStorage.getItem("access_token");
+      const result = await fetchAIConversation(token, user?.id);
+      if (result.data) {
+        setChatGptConversation(result.data);
+      }
+    };
+    fetchConversationForChatGpt();
+  }, [setChatGptConversation, user]);
 
   return (
     <div className={styles.chatWindowLeftFunctionBarFriendsContainer}>
@@ -52,6 +69,9 @@ export default function ChatFriendsSideBar() {
           <BiPlus className={styles.chatWindowLeftFunctionBarDMSplitIcon} />
         </div>
       </div>
+      {AIFriends?.map((AIFriend) => (
+        <ChatAIFriendView key={uuid()} friend={AIFriend} />
+      ))}
       {friends?.map((friend) => (
         <ChatFriendView key={uuid()} friend={friend} />
       ))}
