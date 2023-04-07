@@ -41,10 +41,6 @@ export default function AIChatDetails() {
   }, [conversationId]);
 
   useEffect(() => {
-    console.log(messages);
-  }, [messages]);
-
-  useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
