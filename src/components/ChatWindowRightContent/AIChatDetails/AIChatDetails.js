@@ -54,7 +54,6 @@ export default function AIChatDetails() {
     if (e.key === "Enter") {
       //如果输入框不为空
       if (e.target.value.trim() !== "") {
-        console.log(123);
         setIsDisabled(true);
         setInputValue("");
         //提交内容
