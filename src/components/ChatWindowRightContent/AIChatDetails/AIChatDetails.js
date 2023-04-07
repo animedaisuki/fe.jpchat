@@ -50,24 +50,35 @@ export default function AIChatDetails() {
     }
   };
 
-  // const handleKeyPress = async (e) => {
-  //   if (e.key === "Enter") {
-  //     //如果输入框不为空
-  //     if (e.target.value.trim() !== "") {
-  //       //提交内容
-  //       const messageData = {
-  //         senderId: user,
-  //         senderDetail: user,
-  //         conversationId: conversationId,
-  //         text: inputValue,
-  //       };
-  //     }
-  //   }
-  // };
+  const handleKeyPress = async (e) => {
+    if (e.key === "Enter") {
+      //如果输入框不为空
+      if (e.target.value.trim() !== "") {
+        console.log(123);
+        setIsDisabled(true);
+        setInputValue("");
+        //提交内容
+        const messageData = {
+          senderId: user,
+          senderDetail: user,
+          conversationId: conversationId,
+          text: inputValue,
+        };
+        setMessages([...messages, messageData]);
+        const token = localStorage.getItem("access_token");
+        const result = await sendMessageToAI(token, messageData);
+        if (!result.error) {
+          setArrivalMessages(result.data);
+        }
+        setIsDisabled(false);
+      }
+    }
+  };
 
   const handleSendMessage = async () => {
     if (inputValue.trim() !== "") {
       setIsDisabled(true);
+      setInputValue("");
       const messageData = {
         senderId: user,
         senderDetail: user,
@@ -114,6 +125,10 @@ export default function AIChatDetails() {
             onChange={(e) => {
               handleChatInputChange(e);
             }}
+            onKeyPress={(e) => {
+              handleKeyPress(e);
+            }}
+            disabled={isDisabled}
             type="text"
             placeholder={`Message @${currentAIFriend?.username}`}
           />
@@ -123,6 +138,7 @@ export default function AIChatDetails() {
               isDisabled ? styles.disabled : undefined
             }`}
             onClick={handleSendMessage}
+            disabled={isDisabled}
           >
             <div className={styles.sendMessageIconContainer}>
               <FaTelegramPlane size={20} />
