@@ -79,6 +79,8 @@ export default function ChatDetails() {
     if (e.key === "Enter") {
       //如果输入框不为空
       if (e.target.value.trim() !== "") {
+        //清空输入框，在这次submit中输入框的清空不会生效
+        setInputValue("");
         //提交内容
         const messageData = {
           senderId: user.id,
@@ -97,8 +99,6 @@ export default function ChatDetails() {
         const result = await sendMessage(messageData);
         //setMessages
         setMessages([...messages, result.data]);
-        //清空输入框
-        setInputValue("");
       }
     }
   };
