@@ -1,0 +1,44 @@
+.chatDetailsChatArea {
+  margin-left: 10px;
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  .chatDetailsChatAreaAvatarContainer {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    background-image: linear-gradient(#e66465, #9198e5);
+    border-radius: 100%;
+    overflow: hidden;
+    .chatDetailsChatAreaAvatar {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .chatDetailsChatAreaDateAndBoxContainer {
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    color: #9fa3a9;
+    .chatDetailsChatAreaChatBoxUsername {
+      font-weight: 500;
+    }
+    .chatDetailsChatAreaChatBoxForStickers {
+      padding-top: 15px;
+      height: auto;
+      max-width: 250px;
+    }
+    .chatDetailsChatAreaChatBox {
+      background-color: #202225;
+      color: white;
+      margin-top: 5px;
+      padding: 10px;
+      border-radius: 10px;
+      width: fit-content;
+    }
+  }
+}

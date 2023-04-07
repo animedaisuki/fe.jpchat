@@ -1,0 +1,23 @@
+.chatDetailsFriendInfoArea {
+  color: #eff0f2;
+  cursor: default;
+  .chatDetailsFriendAvatar {
+    height: 107px;
+    width: 107px;
+    background-image: linear-gradient(#e66465, #9198e5);
+    border-radius: 100%;
+    scale: 85%;
+  }
+  .chatDetailsFriendName {
+    margin-left: 10px;
+    margin-top: -10px;
+  }
+  .chatDetailsFriendDesc {
+    margin-left: 10px;
+    color: #9fa3a9;
+    white-space: nowrap;
+    .chatDetailsFriendDescBold {
+      font-weight: bold;
+    }
+  }
+}
