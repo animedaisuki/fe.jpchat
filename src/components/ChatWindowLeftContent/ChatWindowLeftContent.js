@@ -19,15 +19,23 @@ import {
   FriendsOfUserContext,
   FriendsOfUserDispatchContext,
 } from "../../context/FriendsOfUserProvider";
+import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
+import {
+  AIFriendOfUserContext,
+  AIFriendOfUserDispatchContext,
+} from "../../context/AIFriendOfUserProvider";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
   const setUserInfo = useContext(UserDispatchContext);
   const socket = useContext(SocketContext);
   const conversations = useContext(ConversationContext);
+  const chatGptConversation = useContext(ChatGptConversationContext);
   const setConversations = useContext(ConversationDispatchContext);
   const setFriends = useContext(FriendsOfUserDispatchContext);
   const friends = useContext(FriendsOfUserContext);
+  const setAIFriend = useContext(AIFriendOfUserDispatchContext);
+  const AIFriend = useContext(AIFriendOfUserContext);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
@@ -57,6 +65,26 @@ export default function ChatWindowLeftContent() {
     });
   }, [userInfo, conversations, setFriends]);
 
+  useEffect(() => {
+    let AIFriendsArr = [];
+    //TODO:OPTIMIZE THIS CODE
+    chatGptConversation?.forEach((conversation) => {
+      const friend = conversation?.members.find(
+        (member) => member._id !== userInfo?.id
+      );
+      AIFriendsArr.push({
+        user: friend,
+        conversationId: conversation._id,
+        isOnline: true,
+      });
+      setAIFriend(AIFriendsArr);
+    });
+  }, [userInfo, chatGptConversation, setAIFriend]);
+
+  // useEffect(() => {
+  //   console.log(AIFriend);
+  // }, [AIFriend]);
+
   //set friend issue, need to log out after every refresh
   // useEffect(() => {
   //   const onBeforeUnload = () => {
@@ -73,12 +101,6 @@ export default function ChatWindowLeftContent() {
     if (!socket.current && userInfo) {
       socket.current = io(config.socketServerAddress);
     }
-
-    // console.log(socket.current);
-
-    // return () => {
-    //   socket.current?.disconnect();
-    // };
   }, [socket, userInfo]);
 
   useEffect(() => {
@@ -125,10 +147,6 @@ export default function ChatWindowLeftContent() {
       }
     }
   }, [friends, onlineUsers, setFriends]);
-
-  // useEffect(() => {
-  //   console.log(friends);
-  // }, [friends]);
 
   const handleLogout = () => {
     localStorage.clear();
