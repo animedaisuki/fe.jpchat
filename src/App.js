@@ -10,6 +10,7 @@ import ChatDetails from "./components/ChatWindowRightContent/ChatDetails/ChatDet
 import { CurrentFriendInfoProvider } from "./context/CurrentFriendInfoProvider";
 import FriendsManagement from "./components/ChatWindowRightContent/FriendsManagement/FriendsManagement";
 import AIChatDetails from "./components/ChatWindowRightContent/AIChatDetails/AIChatDetails";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/chat/friends" element={<FriendsManagement />} />
             <Route path="/chat/settings" element="" />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </CurrentFriendInfoProvider>
     </UserInfoProvider>

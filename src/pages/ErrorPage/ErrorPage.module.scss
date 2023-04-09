@@ -1,0 +1,22 @@
+@import "../../styles/variables";
+
+.errorPageContainer {
+  @include container-style();
+  .errorContainer {
+    @include form-style(400px, 430px);
+    align-items: center;
+    .cryAnimationImg {
+      height: 215px;
+      width: 255px;
+    }
+    .errorPageTitle {
+      margin-top: 25px;
+      font-size: 60px;
+      color: $title-color;
+    }
+    .errorPageDesc {
+      padding-top: 10px;
+      color: $desc-color;
+    }
+  }
+}

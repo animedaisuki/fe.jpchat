@@ -1,25 +1,11 @@
+@import "../../styles/variables";
+
 .loginContainer {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  //background-image: url("https://theme.zdassets.com/theme_assets/678183/b7e9dce75f9edb23504e13b4699e208f204e5015.png");
-  background-image: url("https://amahane.s3.ap-northeast-1.amazonaws.com/loginPage/loginPageBg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  @include container-style();
 
   .loginForm {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: #313338;
-    padding: 30px 40px 40px 40px;
-    border-radius: 10px;
-    width: 350px;
-    height: 440px;
-    align-self: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    @include form-style(350px, 440px);
+
     animation: loginFormGrow 0.2s ease-in forwards;
     .loginHeading {
       color: #f0f1f3;

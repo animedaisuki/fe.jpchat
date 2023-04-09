@@ -1,5 +1,7 @@
 $title-color: #dbdcde;
 $desc-color: #83878d;
+$login-form-color: #313338;
+
 @mixin input-style($width, $height) {
   width: $width;
   height: $height;
@@ -8,4 +10,28 @@ $desc-color: #83878d;
   border-radius: 5px;
   color: white;
   padding: 5px;
+}
+
+@mixin container-style() {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-image: url("https://amahane.s3.ap-northeast-1.amazonaws.com/loginPage/loginPageBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin form-style($width, $height) {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: $login-form-color;
+  padding: 30px 40px 40px 40px;
+  border-radius: 10px;
+  width: $width;
+  height: $height;
+  align-self: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
