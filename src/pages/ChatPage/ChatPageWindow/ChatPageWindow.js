@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./ChatPageWindow.module.scss";
 import ChatWindowLeftContent from "../../../components/ChatWindowLeftContent/ChatWindowLeftContent";
 import { Outlet } from "react-router-dom";
@@ -7,7 +7,30 @@ import { IoCall } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 
 export default function ChatPageWindow() {
-  const { call } = useContext(VideoChatContext);
+  const { myVideo, setStream, call, answerCall } = useContext(VideoChatContext);
+
+  useEffect(() => {
+    const requestDeviceAccess = async () => {
+      if (call?.isReceivingCall) {
+        try {
+          const currentStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true,
+          });
+          myVideo.current.srcObject = currentStream;
+          setStream(currentStream);
+        } catch (error) {
+          //TODO:如果用户禁止了摄像头或者麦克风权限应该怎么做
+          console.log(error);
+        }
+      }
+    };
+    requestDeviceAccess();
+  }, [call?.isReceivingCall, setStream]);
+
+  const handleCallAcceptButtonClick = () => {
+    answerCall();
+  };
 
   return (
     <div className={styles.chatWindowContainer}>
@@ -22,13 +45,18 @@ export default function ChatPageWindow() {
             />
             <div className={styles.ring}></div>
           </div>
-          <h2 className={styles.senderName}>{call.sender.username}</h2>
+          <h3 className={styles.senderName}>{call.sender.username}</h3>
           <div className={styles.callButtonsContainer}>
             <button className={styles.callDeclineButton}>
-              <ImCross size={30} />
+              <ImCross size={25} />
             </button>
-            <button className={styles.callAcceptButton}>
-              <IoCall size={30} />
+            <button
+              className={styles.callAcceptButton}
+              onClick={() => {
+                handleCallAcceptButtonClick();
+              }}
+            >
+              <IoCall size={25} />
             </button>
           </div>
         </div>

@@ -20,10 +20,7 @@ import {
   FriendsOfUserDispatchContext,
 } from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
-import {
-  AIFriendOfUserContext,
-  AIFriendOfUserDispatchContext,
-} from "../../context/AIFriendOfUserProvider";
+import { AIFriendOfUserDispatchContext } from "../../context/AIFriendOfUserProvider";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
@@ -35,7 +32,6 @@ export default function ChatWindowLeftContent() {
   const setFriends = useContext(FriendsOfUserDispatchContext);
   const friends = useContext(FriendsOfUserContext);
   const setAIFriend = useContext(AIFriendOfUserDispatchContext);
-  const AIFriend = useContext(AIFriendOfUserContext);
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 

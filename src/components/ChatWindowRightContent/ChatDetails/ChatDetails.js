@@ -30,14 +30,16 @@ export default function ChatDetails() {
   const [currentEmoji, setCurrentEmoji] = useState(emojis[randomIndex]);
   const {
     myVideo,
-    receiverVideo,
+    friendVideo,
     stream,
     setStream,
     call,
     setCall,
-    callUser,
     isCalling,
     setIsCalling,
+    callAccepted,
+    setCallAccepted,
+    callUser,
   } = useContext(VideoChatContext);
   const scrollRef = useRef();
 
@@ -186,6 +188,7 @@ export default function ChatDetails() {
         )}
       </div>
       <video ref={myVideo} autoPlay={true} />
+      <video ref={friendVideo} autoPlay={true} />
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
         {messages?.map((message) => (

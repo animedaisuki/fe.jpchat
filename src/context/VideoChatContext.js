@@ -16,11 +16,14 @@ const VideoChatProvider = ({ children }) => {
   const user = useContext(UserContext);
 
   const myVideo = useRef();
-  const receiverVideo = useRef();
+  const friendVideo = useRef();
+  const connectionRef = useRef();
 
   const [stream, setStream] = useState(null);
   const [call, setCall] = useState(null);
   const [isCalling, setIsCalling] = useState(false);
+  const [callAccepted, setCallAccepted] = useState(false);
+  const [callEnded, setCallEnded] = useState(false);
 
   useEffect(() => {
     if (socket.current) {
@@ -38,34 +41,69 @@ const VideoChatProvider = ({ children }) => {
 
   const callUser = async (receiverId) => {
     const peer = new Peer({ initiator: true, trickle: false, stream });
-    peer.on("signal", (data) => {
+    peer.on("signal", (signalData) => {
       socket.current?.emit("callUser", {
         sender: user,
         senderId: user.id,
         receiverId,
-        signalData: data,
+        signalData,
       });
     });
 
     peer.on("stream", (currentStream) => {
-      receiverVideo.current.srcObject = currentStream;
+      friendVideo.current.srcObject = currentStream;
     });
 
-    //TODO:Call Accepted
+    socket.current?.on("callAccepted", (signalData) => {
+      setCallAccepted(true);
+      setCall({ ...call, isReceivingCall: false });
+      setIsCalling(false);
+      peer.signal(signalData);
+    });
+
+    connectionRef.current = peer;
+  };
+
+  const answerCall = async () => {
+    setCallAccepted(true);
+
+    const peer = new Peer({ initiator: false, trickle: false, stream });
+
+    peer.on("signal", (signalData) => {
+      const data = { signalData, senderId: call.senderId };
+      socket.current?.emit("answerCall", data);
+    });
+
+    peer.on("stream", (currentStream) => {
+      friendVideo.current.srcObject = currentStream;
+    });
+
+    peer.signal(call.signalData);
+
+    connectionRef.current = peer;
+  };
+
+  const leaveCall = () => {
+    setCallEnded(true);
+    connectionRef.current = null;
   };
 
   return (
     <VideoChatContext.Provider
       value={{
         myVideo,
-        receiverVideo,
+        friendVideo,
         stream,
         setStream,
         call,
         setCall,
         isCalling,
         setIsCalling,
+        callAccepted,
+        setCallAccepted,
         callUser,
+        answerCall,
+        leaveCall,
       }}
     >
       {children}
