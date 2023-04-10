@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./ChatPage.module.scss";
-import { Outlet } from "react-router-dom";
-import ChatWindowLeftContent from "../../components/ChatWindowLeftContent/ChatWindowLeftContent";
 import { SocketInfoProvider } from "../../context/SocketRefProvider";
 import { ConversationProvider } from "../../context/ConversationProvider";
 import { FriendsOfUserProvider } from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationProvider } from "../../context/ChatGptConversationProvider";
 import { AIFriendsOfUserProvider } from "../../context/AIFriendOfUserProvider";
 import { VideoChatProvider } from "../../context/VideoChatContext";
+import ChatPageWindow from "./ChatPageWindow/ChatPageWindow";
 
 export default function ChatPage() {
   return (
@@ -18,11 +17,7 @@ export default function ChatPage() {
             <AIFriendsOfUserProvider>
               <VideoChatProvider>
                 <div className={styles.chatPageContainer}>
-                  <div className={styles.chatWindowContainer}>
-                    <ChatWindowLeftContent />
-                    {/*<div className={styles.chatWindowRightContent}></div>*/}
-                    <Outlet />
-                  </div>
+                  <ChatPageWindow />
                 </div>
               </VideoChatProvider>
             </AIFriendsOfUserProvider>

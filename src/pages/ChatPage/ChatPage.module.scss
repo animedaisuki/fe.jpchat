@@ -7,36 +7,4 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  .chatWindowContainer {
-    display: flex;
-    height: 85vh;
-    width: 60vw;
-    border-radius: 10px;
-    background: #313338;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
-    animation: chatWindowGrow 0.2s ease-in forwards;
-
-    .chatWindowRightContent {
-    }
-  }
-
-  @keyframes chatWindowGrow {
-    0% {
-      transform: scale(0);
-    }
-    33% {
-      transform: scale(0.33);
-    }
-    50% {
-      transform: scale(0.5);
-    }
-    66% {
-      transform: scale(0.66);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 }

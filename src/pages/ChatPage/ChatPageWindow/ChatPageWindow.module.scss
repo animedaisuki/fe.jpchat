@@ -1,0 +1,113 @@
+@import "../../../styles/variables";
+
+.chatWindowContainer {
+  display: flex;
+  height: 85vh;
+  width: 60vw;
+  border-radius: 10px;
+  background: #313338;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+  animation: chatWindowGrow 0.2s ease-in forwards;
+  position: relative;
+
+  .receivingCallWindow {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #18191d;
+    padding: 50px;
+    height: 380px;
+    width: 280px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20%, -50%);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.16);
+    .senderAvatarContainer {
+      position: relative;
+      .senderAvatar {
+        //让z-index起作用
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        background-image: linear-gradient(#e66465, #9198e5);
+        z-index: 3;
+      }
+      .ring {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        top: 0;
+        background-image: radial-gradient(
+          circle at center,
+          #42b681 40%,
+          rgba(24, 25, 29, 0) 70%
+        );
+        animation: pulsing 2s infinite;
+        border-radius: 100%;
+        z-index: 1;
+      }
+      @keyframes pulsing {
+        0% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+    }
+    .senderName {
+      color: $desc-color;
+      margin-top: 15px;
+    }
+    .callButtonsContainer {
+      display: flex;
+      width: 90%;
+      justify-content: space-between;
+    }
+    @mixin call-button-style($color) {
+      background: $color;
+      padding: 15px;
+      margin-top: 70px;
+      color: $title-color;
+      border: none;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .callDeclineButton {
+      @include call-button-style(#ef4943);
+    }
+    .callAcceptButton {
+      @include call-button-style(#42b681);
+    }
+  }
+}
+
+@keyframes chatWindowGrow {
+  0% {
+    transform: scale(0);
+  }
+  33% {
+    transform: scale(0.33);
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  66% {
+    transform: scale(0.66);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
