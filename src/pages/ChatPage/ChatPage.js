@@ -7,6 +7,7 @@ import { ConversationProvider } from "../../context/ConversationProvider";
 import { FriendsOfUserProvider } from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationProvider } from "../../context/ChatGptConversationProvider";
 import { AIFriendsOfUserProvider } from "../../context/AIFriendOfUserProvider";
+import { VideoChatProvider } from "../../context/VideoChatContext";
 
 export default function ChatPage() {
   return (
@@ -15,13 +16,15 @@ export default function ChatPage() {
         <FriendsOfUserProvider>
           <ChatGptConversationProvider>
             <AIFriendsOfUserProvider>
-              <div className={styles.chatPageContainer}>
-                <div className={styles.chatWindowContainer}>
-                  <ChatWindowLeftContent />
-                  {/*<div className={styles.chatWindowRightContent}></div>*/}
-                  <Outlet />
+              <VideoChatProvider>
+                <div className={styles.chatPageContainer}>
+                  <div className={styles.chatWindowContainer}>
+                    <ChatWindowLeftContent />
+                    {/*<div className={styles.chatWindowRightContent}></div>*/}
+                    <Outlet />
+                  </div>
                 </div>
-              </div>
+              </VideoChatProvider>
             </AIFriendsOfUserProvider>
           </ChatGptConversationProvider>
         </FriendsOfUserProvider>
