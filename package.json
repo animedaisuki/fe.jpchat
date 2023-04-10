@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
     "sass": "^1.59.3",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.6.1",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
