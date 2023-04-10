@@ -11,6 +11,8 @@ import { UserContext } from "../../../context/UserInfoProvider";
 import { SocketContext } from "../../../context/SocketRefProvider";
 import { emojify } from "react-emoji";
 import { stickers, emojis } from "../../../utils/stickers";
+import { IoCall } from "react-icons/io5";
+import { VideoChatContext } from "../../../context/VideoChatContext";
 
 let counter = 0;
 
@@ -26,6 +28,17 @@ export default function ChatDetails() {
   const [messages, setMessages] = useState([]);
   const [arrivalMessages, setArrivalMessages] = useState(null);
   const [currentEmoji, setCurrentEmoji] = useState(emojis[randomIndex]);
+  const {
+    myVideo,
+    receiverVideo,
+    stream,
+    setStream,
+    call,
+    setCall,
+    callUser,
+    isCalling,
+    setIsCalling,
+  } = useContext(VideoChatContext);
   const scrollRef = useRef();
 
   const socket = useContext(SocketContext);
@@ -92,7 +105,7 @@ export default function ChatDetails() {
         //socket event
         socket.current.emit("sendMessage", {
           senderId: user,
-          receiverId: currentFriend._id,
+          receiverId: currentFriend.detail._id,
           text: inputValue,
           isSticker: false,
         });
@@ -120,7 +133,7 @@ export default function ChatDetails() {
     //socket event
     socket.current.emit("sendMessage", {
       senderId: user,
-      receiverId: currentFriend._id,
+      receiverId: currentFriend.detail._id,
       text: unicode,
       isSticker: true,
     });
@@ -129,16 +142,50 @@ export default function ChatDetails() {
     setMessages([...messages, result.data]);
   };
 
+  const onCallButtonClick = async () => {
+    try {
+      const currentStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
+      myVideo.current.srcObject = currentStream;
+      console.log(myVideo);
+      setStream(currentStream);
+      setIsCalling(true);
+    } catch (error) {
+      //TODO:如果用户禁止了摄像头或者麦克风权限应该怎么做
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    //这里依赖项目不能放friendId,不然每切换一次用户就会重新打电话
+    if (stream && isCalling) {
+      callUser(currentFriend?.detail?._id);
+    }
+  }, [stream, isCalling, callUser]);
+
   return (
     <div className={styles.chatDetailsContainer}>
       <div className={styles.chatDetailsHeading}>
         <div className={styles.chatOverviewContainer}>
           <BsFillChatDotsFill size={20} />
           <p className={styles.chatOverviewUsername}>
-            {currentFriend?.username}
+            {currentFriend?.detail?.username}
           </p>
         </div>
+        {currentFriend?.isOnline && (
+          <button
+            className={styles.chatOverviewCallButton}
+            onClick={() => {
+              onCallButtonClick();
+            }}
+          >
+            <IoCall size={20} />
+          </button>
+        )}
       </div>
+      <video ref={myVideo} autoPlay={true} />
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
         {messages?.map((message) => (
@@ -148,17 +195,6 @@ export default function ChatDetails() {
         ))}
       </div>
       <div className={styles.sendMessageInputContainer}>
-        {/*<div>*/}
-        {/*  {emojis.map((emoji, index) => (*/}
-        {/*    <button*/}
-        {/*      key={index}*/}
-        {/*      onClick={() => {}}*/}
-        {/*      style={{ margin: "5px", cursor: "pointer" }}*/}
-        {/*    >*/}
-        {/*      {emojify(emoji)}*/}
-        {/*    </button>*/}
-        {/*  ))}*/}
-        {/*</div>*/}
         <div className={styles.sendMessageInputInnerContainer}>
           <input
             className={styles.sendMessageInput}
@@ -170,7 +206,7 @@ export default function ChatDetails() {
               handleKeyPress(e);
             }}
             type="text"
-            placeholder={`Message @${currentFriend?.username}`}
+            placeholder={`Message @${currentFriend?.detail?.username}`}
           />
           <button
             className={styles.toggleEmojiButton}
