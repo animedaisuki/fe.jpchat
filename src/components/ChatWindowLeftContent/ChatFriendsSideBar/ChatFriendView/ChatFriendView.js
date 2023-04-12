@@ -17,7 +17,10 @@ export default function ChatFriendView(props) {
         <button
           className={styles.chatFriendContainer}
           onClick={() => {
-            setCurrentFriend(friend.user);
+            setCurrentFriend({
+              detail: friend?.user,
+              isOnline: friend?.isOnline,
+            });
           }}
         >
           <Avatar friend={friend} />

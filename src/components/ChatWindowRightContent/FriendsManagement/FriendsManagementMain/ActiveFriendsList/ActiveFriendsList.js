@@ -22,7 +22,10 @@ export default function ActiveFriendsList(props) {
           <button
             className={styles.activeFriendListChatNavButton}
             onClick={() => {
-              setCurrentFriend(friend.user);
+              setCurrentFriend({
+                detail: friend?.user,
+                isOnline: friend?.isOnline,
+              });
             }}
           >
             <div className={styles.activeFriendListChatNavButtonIconContainer}>
