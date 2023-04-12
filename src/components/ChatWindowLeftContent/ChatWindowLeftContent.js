@@ -20,10 +20,8 @@ import {
   FriendsOfUserDispatchContext,
 } from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
-import {
-  AIFriendOfUserContext,
-  AIFriendOfUserDispatchContext,
-} from "../../context/AIFriendOfUserProvider";
+import { AIFriendOfUserDispatchContext } from "../../context/AIFriendOfUserProvider";
+import { VideoChatContext } from "../../context/VideoChatContext";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
@@ -35,7 +33,8 @@ export default function ChatWindowLeftContent() {
   const setFriends = useContext(FriendsOfUserDispatchContext);
   const friends = useContext(FriendsOfUserContext);
   const setAIFriend = useContext(AIFriendOfUserDispatchContext);
-  const AIFriend = useContext(AIFriendOfUserContext);
+  const { logout } = useContext(VideoChatContext);
+
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
@@ -80,10 +79,6 @@ export default function ChatWindowLeftContent() {
       setAIFriend(AIFriendsArr);
     });
   }, [userInfo, chatGptConversation, setAIFriend]);
-
-  // useEffect(() => {
-  //   console.log(AIFriend);
-  // }, [AIFriend]);
 
   //set friend issue, need to log out after every refresh
   // useEffect(() => {
@@ -137,7 +132,7 @@ export default function ChatWindowLeftContent() {
       const updatedFriends = friends?.map((friend) => {
         const isOnline = !!onlineUsers[friend.user._id];
         if (isOnline) {
-          console.log("a friend connected");
+          // console.log("a friend connected");
         }
         return { ...friend, isOnline };
       });
@@ -152,6 +147,7 @@ export default function ChatWindowLeftContent() {
     localStorage.clear();
     socket.current?.disconnect();
     setUserInfo(null);
+    logout();
     navigate("/login");
   };
 

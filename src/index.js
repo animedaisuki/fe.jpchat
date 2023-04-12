@@ -5,6 +5,12 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import loadOhMyLive2DConfig from "./config/live2d";
+import * as process from "process";
+
+//解决视频挂断或者掉线以后的process undefined问题
+window.global = window;
+window.process = process;
+window.Buffer = [];
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 loadOhMyLive2DConfig();

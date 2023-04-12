@@ -8,14 +8,16 @@ export default function FriendInfo() {
     <div className={styles.chatDetailsFriendInfoArea}>
       <img
         className={styles.chatDetailsFriendAvatar}
-        src={currentFriend.avatar}
-        alt={currentFriend.username}
+        src={currentFriend?.detail?.avatar}
+        alt={currentFriend?.detail?.username}
       />
-      <h1 className={styles.chatDetailsFriendName}>{currentFriend.username}</h1>
+      <h1 className={styles.chatDetailsFriendName}>
+        {currentFriend?.detail?.username}
+      </h1>
       <p className={styles.chatDetailsFriendDesc}>
         This is the beginning of your DM with{" "}
         <span className={styles.chatDetailsFriendDescBold}>
-          {currentFriend.username}
+          {currentFriend?.detail?.username}
         </span>
       </p>
     </div>
