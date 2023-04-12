@@ -82,6 +82,7 @@ export default function ChatPageWindow() {
               }`}
               ref={myVideo}
               autoPlay={true}
+              muted
             />
             <button
               className={styles.leaveCallButton}
