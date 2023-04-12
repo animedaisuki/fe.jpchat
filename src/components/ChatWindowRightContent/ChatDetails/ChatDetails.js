@@ -13,6 +13,7 @@ import { emojify } from "react-emoji";
 import { stickers, emojis } from "../../../utils/stickers";
 import { IoCall } from "react-icons/io5";
 import { VideoChatContext } from "../../../context/VideoChatContext";
+import { FriendIsCallingContext } from "../../../context/FriendIsCallingProvider";
 
 let counter = 0;
 
@@ -33,14 +34,21 @@ export default function ChatDetails() {
     friendVideo,
     stream,
     setStream,
+    setCloseStream,
     call,
     setCall,
     isCalling,
     setIsCalling,
     callAccepted,
     setCallAccepted,
+    disableCallBtn,
     callUser,
   } = useContext(VideoChatContext);
+
+  const { friendIsCalling, setFriendIsCalling } = useContext(
+    FriendIsCallingContext
+  );
+
   const scrollRef = useRef();
 
   const socket = useContext(SocketContext);
@@ -146,14 +154,15 @@ export default function ChatDetails() {
 
   const onCallButtonClick = async () => {
     try {
-      const currentStream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-      myVideo.current.srcObject = currentStream;
-      console.log(myVideo);
-      setStream(currentStream);
-      setIsCalling(true);
+      setCloseStream(false);
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then((currentStream) => {
+          setStream(currentStream);
+          // myVideo.current.srcObject = currentStream;
+          setIsCalling(true);
+          setFriendIsCalling(currentFriend);
+        });
     } catch (error) {
       //TODO:如果用户禁止了摄像头或者麦克风权限应该怎么做
       console.log(error);
@@ -162,10 +171,13 @@ export default function ChatDetails() {
 
   useEffect(() => {
     //这里依赖项目不能放friendId,不然每切换一次用户就会重新打电话
-    if (stream && isCalling) {
+    if (stream && isCalling && myVideo.current) {
+      myVideo.current.srcObject = stream;
       callUser(currentFriend?.detail?._id);
+      //防止打多次电话
+      setIsCalling(false);
     }
-  }, [stream, isCalling, callUser]);
+  }, [stream, isCalling, currentFriend?.detail?._id, callUser, myVideo]);
 
   return (
     <div className={styles.chatDetailsContainer}>
@@ -178,17 +190,18 @@ export default function ChatDetails() {
         </div>
         {currentFriend?.isOnline && (
           <button
-            className={styles.chatOverviewCallButton}
+            className={`${styles.chatOverviewCallButton} ${
+              disableCallBtn ? styles.disable : undefined
+            }`}
             onClick={() => {
               onCallButtonClick();
             }}
+            disabled={disableCallBtn}
           >
             <IoCall size={20} />
           </button>
         )}
       </div>
-      <video ref={myVideo} autoPlay={true} />
-      <video ref={friendVideo} autoPlay={true} />
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <FriendInfo />
         {messages?.map((message) => (

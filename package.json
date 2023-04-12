@@ -13,6 +13,7 @@
     "live2d-widget": "^3.1.4",
     "oh-my-live2d": "^0.2.2",
     "prettier": "^2.8.4",
+    "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-emoji": "^0.5.0",
@@ -25,6 +26,7 @@
     "sass": "^1.59.3",
     "simple-peer": "^9.11.1",
     "socket.io-client": "^4.6.1",
+    "use-sound": "^4.0.1",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },

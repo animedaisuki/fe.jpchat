@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 100%;
   overflow-x: hidden;
+  position: relative;
   .chatDetailsHeading {
     display: flex;
     align-items: center;
@@ -29,7 +30,11 @@
       margin-right: 20px;
       cursor: pointer;
     }
+    .chatOverviewCallButton.disable {
+      cursor: not-allowed;
+    }
   }
+
   .chatDetailsInfoAndChatContainer {
     margin: 10px 0 0 20px;
     overflow-x: hidden;

@@ -1,5 +1,32 @@
 @import "../../../styles/variables";
 
+@mixin ring-style($height, $width, $index) {
+  position: absolute;
+  height: $height;
+  width: $width;
+  top: 0;
+  background-image: radial-gradient(
+    circle at center,
+    #42b681 40%,
+    rgba(24, 25, 29, 0) 70%
+  );
+  animation: pulsing 2s infinite;
+  border-radius: 100%;
+  z-index: $index;
+}
+
+@mixin call-button-style($color) {
+  background: $color;
+  padding: 15px;
+  margin-top: 70px;
+  color: $title-color;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .chatWindowContainer {
   display: flex;
   height: 85vh;
@@ -10,6 +37,74 @@
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
   animation: chatWindowGrow 0.2s ease-in forwards;
   position: relative;
+
+  .videoChatContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    right: -250px;
+    z-index: 1;
+    .videoContentContainer {
+      position: relative;
+      .videoChatVideo {
+        max-height: 210px;
+        width: 210px;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        display: none;
+      }
+      .videoChatVideo.show {
+        display: block;
+      }
+      .leaveCallButton {
+        position: absolute;
+        background-color: #ef4943;
+        color: $title-color;
+        bottom: 15px;
+        left: 10px;
+        width: 45px;
+        height: 45px;
+        padding: 5px;
+        border-radius: 100%;
+        border: none;
+        cursor: pointer;
+      }
+    }
+    .videoWaitingContentContainer {
+      height: 160px;
+      width: 210px;
+      margin-bottom: 10px;
+      border-radius: 20px;
+      background-color: #1e1f22;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .videoWaitingContentImg {
+        height: 80px;
+        width: 80px;
+        background-image: linear-gradient(#e66465, #9198e5);
+        border-radius: 100%;
+        z-index: 2;
+      }
+      .videoWaitingRing {
+        position: absolute;
+        height: 90px;
+        width: 90px;
+        top: 22%;
+        //transform: translateX(500%);
+        background-image: radial-gradient(
+          circle at center,
+          #42b681 40%,
+          rgba(24, 25, 29, 0) 70%
+        );
+        border-radius: 100%;
+        z-index: 1;
+        animation: pulsing 2s infinite;
+      }
+    }
+  }
 
   .receivingCallWindow {
     position: absolute;
@@ -25,6 +120,9 @@
     left: 50%;
     transform: translate(-20%, -50%);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.16);
+    z-index: 5;
+    animation: receivingCallWindowGrow 0.5s
+      cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     .senderAvatarContainer {
       position: relative;
       .senderAvatar {
@@ -37,18 +135,7 @@
         z-index: 3;
       }
       .ring {
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        top: 0;
-        background-image: radial-gradient(
-          circle at center,
-          #42b681 40%,
-          rgba(24, 25, 29, 0) 70%
-        );
-        animation: pulsing 2s infinite;
-        border-radius: 100%;
-        z-index: 1;
+        @include ring-style(80px, 80px, 1);
       }
       @keyframes pulsing {
         0% {
@@ -74,23 +161,27 @@
       width: 90%;
       justify-content: space-between;
     }
-    @mixin call-button-style($color) {
-      background: $color;
-      padding: 15px;
-      margin-top: 70px;
-      color: $title-color;
-      border: none;
-      border-radius: 100%;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    .callDeclineButton {
-      @include call-button-style(#ef4943);
-    }
-    .callAcceptButton {
-      @include call-button-style(#42b681);
-    }
+  }
+  .callDeclineButton {
+    @include call-button-style(#ef4943);
+  }
+  .callAcceptButton {
+    @include call-button-style(#42b681);
+  }
+}
+
+@keyframes receivingCallWindowGrow {
+  0% {
+    transform: translate(-20%, -50%) scale(0);
+  }
+  40% {
+    transform: translate(-20%, -50%) scale(1.25);
+  }
+  60% {
+    transform: translate(-20%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-20%, -50%) scale(1);
   }
 }
 
