@@ -143,7 +143,7 @@ export default function ChatDetails() {
     //socket event
     socket.current.emit("sendMessage", {
       senderId: user,
-      receiverId: currentFriend.detail._id,
+      receiverId: currentFriend?.detail?._id,
       text: unicode,
       isSticker: true,
     });
