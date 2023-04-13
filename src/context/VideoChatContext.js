@@ -30,6 +30,7 @@ const VideoChatProvider = ({ children }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [playMusic, setPlayMusic] = useState(false);
   const [disableCallBtn, setDisableCallBtn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [play, { stop }] = useSound(Ring, { loop: true });
 
@@ -71,6 +72,32 @@ const VideoChatProvider = ({ children }) => {
         setCloseStream(true);
         setDisableCallBtn(false);
         // window.location.reload();
+      });
+
+      socket.current.on("callIsBusy", () => {
+        console.log("对方忙线中");
+        setErrorMessage("Your friend is busy, please try again later");
+        clearTimeout();
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 2000);
+        setCall(null);
+        setCallAccepted(false);
+        setCallEnded(true);
+        // 关闭摄像头和麦克风
+        if (myVideo.current) {
+          myVideo.current.srcObject = null;
+        }
+        if (stream) {
+          stream.getTracks().forEach((track) => {
+            if (track.readyState === "live") {
+              track.stop();
+            }
+          });
+        }
+        setStream(null);
+        setPlayMusic(false);
+        setDisableCallBtn(false);
       });
     }
   }, [socket]);
@@ -211,7 +238,7 @@ const VideoChatProvider = ({ children }) => {
         setCallEnded(false);
         setIsCalling(false);
         //TODO:有可能这里的peer是旧的peer？
-        console.log(peer);
+        // console.log(peer);
         peer.signal(signalData);
       });
       connectionRef.current = peer;
@@ -274,7 +301,7 @@ const VideoChatProvider = ({ children }) => {
       peer.signal(call.signalData);
 
       //TODO:第二次接听以后channelName为null
-      console.log(peer);
+      // console.log(peer);
       connectionRef.current = peer;
 
       setPlayMusic(false);
@@ -406,6 +433,7 @@ const VideoChatProvider = ({ children }) => {
         callEnded,
         showVideo,
         disableCallBtn,
+        errorMessage,
         callUser,
         answerCall,
         declineCall,
