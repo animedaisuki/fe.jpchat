@@ -7,6 +7,7 @@ import { IoCall } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { FriendIsCallingContext } from "../../../context/FriendIsCallingProvider";
 import { ImPhoneHangUp } from "react-icons/im";
+import WindowError from "../../../components/WindowError/WindowError";
 
 export default function ChatPageWindow() {
   const {
@@ -23,13 +24,10 @@ export default function ChatPageWindow() {
     answerCall,
     declineCall,
     leaveCall,
+    errorMessage,
   } = useContext(VideoChatContext);
 
   const { friendIsCalling } = useContext(FriendIsCallingContext);
-
-  // useEffect(() => {
-  //   console.log(friendIsCalling);
-  // }, [friendIsCalling]);
 
   //收到来电时
   useEffect(() => {
@@ -147,6 +145,11 @@ export default function ChatPageWindow() {
               <IoCall size={25} />
             </button>
           </div>
+        </div>
+      )}
+      {errorMessage && (
+        <div className={styles.errorMessageWindow}>
+          <WindowError errorMessage={errorMessage} />
         </div>
       )}
       {/*<div className={styles.chatWindowRightContent}></div>*/}

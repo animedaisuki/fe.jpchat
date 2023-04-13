@@ -168,6 +168,13 @@
   .callAcceptButton {
     @include call-button-style(#42b681);
   }
+
+  .errorMessageWindow {
+    position: absolute;
+    top: 20px;
+    right: 40%;
+    z-index: 3;
+  }
 }
 
 @keyframes receivingCallWindowGrow {
