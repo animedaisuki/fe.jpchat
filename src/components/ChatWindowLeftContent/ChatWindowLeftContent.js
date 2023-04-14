@@ -15,13 +15,10 @@ import {
   ConversationContext,
   ConversationDispatchContext,
 } from "../../context/ConversationProvider";
-import {
-  FriendsOfUserContext,
-  FriendsOfUserDispatchContext,
-} from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
-import { AIFriendOfUserDispatchContext } from "../../context/AIFriendOfUserProvider";
 import { VideoChatContext } from "../../context/VideoChatContext";
+import { useDispatch, useSelector } from "react-redux";
+import { friendsOfUserActions } from "../../store/modules/friendsOfUserSlice";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
@@ -30,13 +27,12 @@ export default function ChatWindowLeftContent() {
   const conversations = useContext(ConversationContext);
   const chatGptConversation = useContext(ChatGptConversationContext);
   const setConversations = useContext(ConversationDispatchContext);
-  const setFriends = useContext(FriendsOfUserDispatchContext);
-  const friends = useContext(FriendsOfUserContext);
-  const setAIFriend = useContext(AIFriendOfUserDispatchContext);
+  const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const { logout } = useContext(VideoChatContext);
 
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [onlineUsers, setOnlineUsers] = useState(null);
 
@@ -60,9 +56,9 @@ export default function ChatWindowLeftContent() {
         conversationId: conversation._id,
         isOnline: false,
       });
-      setFriends(friendsArr);
     });
-  }, [userInfo, conversations, setFriends]);
+    dispatch(friendsOfUserActions.setFriendsOfUser(friendsArr));
+  }, [userInfo, conversations, dispatch]);
 
   useEffect(() => {
     let AIFriendsArr = [];
@@ -76,9 +72,9 @@ export default function ChatWindowLeftContent() {
         conversationId: conversation._id,
         isOnline: true,
       });
-      setAIFriend(AIFriendsArr);
     });
-  }, [userInfo, chatGptConversation, setAIFriend]);
+    dispatch(friendsOfUserActions.setAIFriendsOfUser(AIFriendsArr));
+  }, [userInfo, chatGptConversation, dispatch]);
 
   //set friend issue, need to log out after every refresh
   // useEffect(() => {
@@ -125,7 +121,7 @@ export default function ChatWindowLeftContent() {
 
   useEffect(() => {
     // console.log(onlineUsers);
-    //之前的问题出在直接去更改state
+    // 之前的问题出在直接去更改state
     // 现在是没有在friends状态改变后重新执行
     // TODO:OPTIMIZE THIS CODE
     if (friends && onlineUsers) {
@@ -138,10 +134,10 @@ export default function ChatWindowLeftContent() {
       });
       // 防止无限循环
       if (JSON.stringify(updatedFriends) !== JSON.stringify(friends)) {
-        setFriends(updatedFriends);
+        dispatch(friendsOfUserActions.setFriendsOfUser(updatedFriends));
       }
     }
-  }, [friends, onlineUsers, setFriends]);
+  }, [friends, onlineUsers, dispatch]);
 
   const handleLogout = () => {
     localStorage.clear();

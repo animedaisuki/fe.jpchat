@@ -12,6 +12,9 @@ const friendIsCallingSlice = createSlice({
       // 而不是一个复杂类型
       return action.payload;
     },
+    clearFriendIsCalling() {
+      return null;
+    },
   },
 });
 

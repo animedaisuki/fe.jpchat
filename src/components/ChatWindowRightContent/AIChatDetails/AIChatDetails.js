@@ -7,10 +7,10 @@ import AIChatMessage from "./AIChatMessage/AIChatMessage";
 import { v4 as uuid } from "uuid";
 import { UserContext } from "../../../context/UserInfoProvider";
 import { stickers } from "../../../utils/stickers";
-import { AIFriendOfUserContext } from "../../../context/AIFriendOfUserProvider";
 import { FaTelegramPlane } from "react-icons/fa";
 import { sendMessageToAI } from "../../../api/chatGpt/chatGpt";
 import { fetchAIMessagesByConversationId } from "../../../api/chatGpt/chatGpt";
+import { useSelector } from "react-redux";
 
 export default function AIChatDetails() {
   const { conversationId } = useParams();
@@ -21,7 +21,7 @@ export default function AIChatDetails() {
   const [isDisabled, setIsDisabled] = useState(false);
   const scrollRef = useRef();
 
-  const AIFriends = useContext(AIFriendOfUserContext);
+  const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
   const [currentAIFriend, setCurrentAIFriend] = useState(null);
 
   useEffect(() => {
