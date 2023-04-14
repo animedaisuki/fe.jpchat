@@ -8,23 +8,27 @@ import { AIFriendsOfUserProvider } from "../../context/AIFriendOfUserProvider";
 import { VideoChatProvider } from "../../context/VideoChatContext";
 import ChatPageWindow from "./ChatPageWindow/ChatPageWindow";
 import { FriendIsCallingProvider } from "../../context/FriendIsCallingProvider";
+import { Provider } from "react-redux";
+import store from "../../store";
 
 export default function ChatPage() {
   return (
     <SocketInfoProvider>
       <ConversationProvider>
         <FriendsOfUserProvider>
-          <ChatGptConversationProvider>
-            <AIFriendsOfUserProvider>
-              <VideoChatProvider>
-                <FriendIsCallingProvider>
-                  <div className={styles.chatPageContainer}>
-                    <ChatPageWindow />
-                  </div>
-                </FriendIsCallingProvider>
-              </VideoChatProvider>
-            </AIFriendsOfUserProvider>
-          </ChatGptConversationProvider>
+          <Provider store={store}>
+            <ChatGptConversationProvider>
+              <AIFriendsOfUserProvider>
+                <VideoChatProvider>
+                  <FriendIsCallingProvider>
+                    <div className={styles.chatPageContainer}>
+                      <ChatPageWindow />
+                    </div>
+                  </FriendIsCallingProvider>
+                </VideoChatProvider>
+              </AIFriendsOfUserProvider>
+            </ChatGptConversationProvider>
+          </Provider>
         </FriendsOfUserProvider>
       </ConversationProvider>
     </SocketInfoProvider>

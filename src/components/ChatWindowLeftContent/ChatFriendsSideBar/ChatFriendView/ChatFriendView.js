@@ -1,12 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./ChatFriendView.module.scss";
 import { NavLink } from "react-router-dom";
-import { CurrentFriendDispatchContext } from "../../../../context/CurrentFriendInfoProvider";
 import Avatar from "../../../Avatar/Avatar";
+import { useDispatch } from "react-redux";
+import { currentFriendActions } from "../../../../store/modules/currentFriendSlice";
 
 export default function ChatFriendView(props) {
-  const setCurrentFriend = useContext(CurrentFriendDispatchContext);
+  const dispatch = useDispatch();
+
   const { friend } = props;
+  const currentFriend = {
+    detail: friend?.user,
+    isOnline: friend?.isOnline,
+  };
+
+  const handleConversationButtonClick = () => {
+    dispatch(currentFriendActions.setCurrentFriend(currentFriend));
+  };
 
   return (
     <div className={styles.chatFriendOuterContainer}>
@@ -17,10 +27,7 @@ export default function ChatFriendView(props) {
         <button
           className={styles.chatFriendContainer}
           onClick={() => {
-            setCurrentFriend({
-              detail: friend?.user,
-              isOnline: friend?.isOnline,
-            });
+            handleConversationButtonClick();
           }}
         >
           <Avatar friend={friend} />
