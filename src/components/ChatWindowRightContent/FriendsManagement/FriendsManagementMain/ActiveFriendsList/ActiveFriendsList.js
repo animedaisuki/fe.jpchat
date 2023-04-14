@@ -1,13 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./ActiveFriendsList.module.scss";
 import Avatar from "../../../../Avatar/Avatar";
 import { HiChatBubbleLeft } from "react-icons/hi2";
-import { CurrentFriendDispatchContext } from "../../../../../context/CurrentFriendInfoProvider";
+import { useDispatch } from "react-redux";
+import { currentFriendActions } from "../../../../../store/modules/currentFriendSlice";
 
 export default function ActiveFriendsList(props) {
-  const setCurrentFriend = useContext(CurrentFriendDispatchContext);
+  const dispatch = useDispatch();
   const { friend } = props;
+
+  const currentFriend = {
+    detail: friend?.user,
+    isOnline: friend?.isOnline,
+  };
+
+  const handleConversationButtonClick = () => {
+    dispatch(currentFriendActions.setCurrentFriend(currentFriend));
+  };
 
   return (
     <div className={styles.activeFriendListContainer}>
@@ -22,10 +32,7 @@ export default function ActiveFriendsList(props) {
           <button
             className={styles.activeFriendListChatNavButton}
             onClick={() => {
-              setCurrentFriend({
-                detail: friend?.user,
-                isOnline: friend?.isOnline,
-              });
+              handleConversationButtonClick();
             }}
           >
             <div className={styles.activeFriendListChatNavButtonIconContainer}>
