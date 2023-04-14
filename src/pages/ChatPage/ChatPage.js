@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./ChatPage.module.scss";
 import { SocketInfoProvider } from "../../context/SocketRefProvider";
 import { ConversationProvider } from "../../context/ConversationProvider";
-import { FriendsOfUserProvider } from "../../context/FriendsOfUserProvider";
 import { ChatGptConversationProvider } from "../../context/ChatGptConversationProvider";
-import { AIFriendsOfUserProvider } from "../../context/AIFriendOfUserProvider";
 import { VideoChatProvider } from "../../context/VideoChatContext";
 import ChatPageWindow from "./ChatPageWindow/ChatPageWindow";
 import { Provider } from "react-redux";
@@ -14,19 +12,15 @@ export default function ChatPage() {
   return (
     <SocketInfoProvider>
       <ConversationProvider>
-        <FriendsOfUserProvider>
-          <Provider store={store}>
-            <ChatGptConversationProvider>
-              <AIFriendsOfUserProvider>
-                <VideoChatProvider>
-                  <div className={styles.chatPageContainer}>
-                    <ChatPageWindow />
-                  </div>
-                </VideoChatProvider>
-              </AIFriendsOfUserProvider>
-            </ChatGptConversationProvider>
-          </Provider>
-        </FriendsOfUserProvider>
+        <Provider store={store}>
+          <ChatGptConversationProvider>
+            <VideoChatProvider>
+              <div className={styles.chatPageContainer}>
+                <ChatPageWindow />
+              </div>
+            </VideoChatProvider>
+          </ChatGptConversationProvider>
+        </Provider>
       </ConversationProvider>
     </SocketInfoProvider>
   );

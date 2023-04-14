@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./FriendsManagementMain.module.scss";
 import { FiSearch } from "react-icons/fi";
 import ActiveFriendsList from "./ActiveFriendsList/ActiveFriendsList";
 import { v4 as uuid } from "uuid";
 import { addFriend } from "../../../../api/user/user";
 import { ConversationDispatchContext } from "../../../../context/ConversationProvider";
-import { FriendsOfUserContext } from "../../../../context/FriendsOfUserProvider";
 import { SocketContext } from "../../../../context/SocketRefProvider";
 import { UserContext } from "../../../../context/UserInfoProvider";
+import { useSelector } from "react-redux";
 
 export default function FriendsManagementMain(props) {
   const { statusState } = props;
   const user = useContext(UserContext);
-  const friends = useContext(FriendsOfUserContext);
+  const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const setConversations = useContext(ConversationDispatchContext);
   const socket = useContext(SocketContext);
 
