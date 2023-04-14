@@ -16,7 +16,10 @@ export default function ActiveFriendsList(props) {
   };
 
   const handleConversationButtonClick = () => {
-    dispatch(currentFriendActions.setCurrentFriend(currentFriend));
+    //hard code, when the friend is not AI
+    if (friend?.user?._id !== "642f6590587a99d158680216") {
+      dispatch(currentFriendActions.setCurrentFriend(currentFriend));
+    }
   };
 
   return (
@@ -28,7 +31,14 @@ export default function ActiveFriendsList(props) {
             {friend?.user.username}
           </p>
         </div>
-        <NavLink to={`/chat/${friend?.conversationId}/${friend?.user._id}`}>
+        <NavLink
+          to={
+            // hard code
+            friend?.user?._id !== "642f6590587a99d158680216"
+              ? `/chat/${friend?.conversationId}/${friend?.user._id}`
+              : `/chat/chtholly/${friend?.conversationId}/${friend?.user._id}`
+          }
+        >
           <button
             className={styles.activeFriendListChatNavButton}
             onClick={() => {
