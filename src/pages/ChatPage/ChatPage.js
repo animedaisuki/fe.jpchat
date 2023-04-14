@@ -3,7 +3,6 @@ import styles from "./ChatPage.module.scss";
 import { SocketInfoProvider } from "../../context/SocketRefProvider";
 import { ConversationProvider } from "../../context/ConversationProvider";
 import { ChatGptConversationProvider } from "../../context/ChatGptConversationProvider";
-import { AIFriendsOfUserProvider } from "../../context/AIFriendOfUserProvider";
 import { VideoChatProvider } from "../../context/VideoChatContext";
 import ChatPageWindow from "./ChatPageWindow/ChatPageWindow";
 import { Provider } from "react-redux";
@@ -15,13 +14,11 @@ export default function ChatPage() {
       <ConversationProvider>
         <Provider store={store}>
           <ChatGptConversationProvider>
-            <AIFriendsOfUserProvider>
-              <VideoChatProvider>
-                <div className={styles.chatPageContainer}>
-                  <ChatPageWindow />
-                </div>
-              </VideoChatProvider>
-            </AIFriendsOfUserProvider>
+            <VideoChatProvider>
+              <div className={styles.chatPageContainer}>
+                <ChatPageWindow />
+              </div>
+            </VideoChatProvider>
           </ChatGptConversationProvider>
         </Provider>
       </ConversationProvider>

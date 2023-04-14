@@ -10,7 +10,6 @@ import { NavLink } from "react-router-dom";
 import { ConversationDispatchContext } from "../../../context/ConversationProvider";
 import { ChatGptConversationDispatchContext } from "../../../context/ChatGptConversationProvider";
 import { fetchAIConversation } from "../../../api/chatGpt/chatGpt";
-import { AIFriendOfUserContext } from "../../../context/AIFriendOfUserProvider";
 import ChatAIFriendView from "./ChatAIFriendView/ChatAIFriendView";
 import { useSelector } from "react-redux";
 
@@ -18,8 +17,8 @@ export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
   const setConversations = useContext(ConversationDispatchContext);
   const setChatGptConversation = useContext(ChatGptConversationDispatchContext);
-  const friends = useSelector((state) => state.friendsOfUser);
-  const AIFriends = useContext(AIFriendOfUserContext);
+  const friends = useSelector((state) => state.friendsOfUser.normalFriends);
+  const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
 
   useEffect(() => {
     const fetchConversations = async () => {

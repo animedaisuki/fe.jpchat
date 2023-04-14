@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = { normalFriends: [], AIFriends: [] };
 
 const friendsOfUserSlice = createSlice({
   name: "friends of user",
   initialState,
   reducers: {
     setFriendsOfUser(state, action) {
-      return action.payload;
+      state.normalFriends = action.payload;
+    },
+    setAIFriendsOfUser(state, action) {
+      state.AIFriends = action.payload;
     },
   },
 });

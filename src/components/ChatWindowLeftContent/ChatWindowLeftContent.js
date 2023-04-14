@@ -16,7 +16,6 @@ import {
   ConversationDispatchContext,
 } from "../../context/ConversationProvider";
 import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
-import { AIFriendOfUserDispatchContext } from "../../context/AIFriendOfUserProvider";
 import { VideoChatContext } from "../../context/VideoChatContext";
 import { useDispatch, useSelector } from "react-redux";
 import { friendsOfUserActions } from "../../store/modules/friendsOfUserSlice";
@@ -28,8 +27,7 @@ export default function ChatWindowLeftContent() {
   const conversations = useContext(ConversationContext);
   const chatGptConversation = useContext(ChatGptConversationContext);
   const setConversations = useContext(ConversationDispatchContext);
-  const friends = useSelector((state) => state.friendsOfUser);
-  const setAIFriend = useContext(AIFriendOfUserDispatchContext);
+  const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const { logout } = useContext(VideoChatContext);
 
   const token = localStorage.getItem("access_token");
@@ -74,9 +72,9 @@ export default function ChatWindowLeftContent() {
         conversationId: conversation._id,
         isOnline: true,
       });
-      setAIFriend(AIFriendsArr);
     });
-  }, [userInfo, chatGptConversation, setAIFriend]);
+    dispatch(friendsOfUserActions.setAIFriendsOfUser(AIFriendsArr));
+  }, [userInfo, chatGptConversation, dispatch]);
 
   //set friend issue, need to log out after every refresh
   // useEffect(() => {

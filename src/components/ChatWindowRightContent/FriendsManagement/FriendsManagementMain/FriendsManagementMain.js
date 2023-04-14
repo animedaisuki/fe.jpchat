@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 export default function FriendsManagementMain(props) {
   const { statusState } = props;
   const user = useContext(UserContext);
-  const friends = useSelector((state) => state.friendsOfUser);
+  const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const setConversations = useContext(ConversationDispatchContext);
   const socket = useContext(SocketContext);
 
