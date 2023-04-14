@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ChatDetails.module.scss";
-import { CurrentFriendContext } from "../../../context/CurrentFriendInfoProvider";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import FriendInfo from "./FriendInfo/FriendInfo";
 import ChatMessage from "./ChatMessage/ChatMessage";
@@ -13,7 +12,8 @@ import { emojify } from "react-emoji";
 import { stickers, emojis } from "../../../utils/stickers";
 import { IoCall } from "react-icons/io5";
 import { VideoChatContext } from "../../../context/VideoChatContext";
-import { FriendIsCallingContext } from "../../../context/FriendIsCallingProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { friendIsCallingActions } from "../../../store/modules/friendIsCallingSlice";
 
 let counter = 0;
 
@@ -22,7 +22,7 @@ export default function ChatDetails() {
 
   const { conversationId } = useParams();
   const user = useContext(UserContext);
-  const currentFriend = useContext(CurrentFriendContext);
+  const currentFriend = useSelector((state) => state.currentFriend);
   const [inputValue, setInputValue] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -45,9 +45,7 @@ export default function ChatDetails() {
     callUser,
   } = useContext(VideoChatContext);
 
-  const { friendIsCalling, setFriendIsCalling } = useContext(
-    FriendIsCallingContext
-  );
+  const dispatch = useDispatch();
 
   const scrollRef = useRef();
 
@@ -115,7 +113,7 @@ export default function ChatDetails() {
         //socket event
         socket.current.emit("sendMessage", {
           senderId: user,
-          receiverId: currentFriend.detail._id,
+          receiverId: currentFriend?.detail?._id,
           text: inputValue,
           isSticker: false,
         });
@@ -161,7 +159,7 @@ export default function ChatDetails() {
           setStream(currentStream);
           // myVideo.current.srcObject = currentStream;
           setIsCalling(true);
-          setFriendIsCalling(currentFriend);
+          dispatch(friendIsCallingActions.setFriendIsCalling(currentFriend));
         });
     } catch (error) {
       //TODO:如果用户禁止了摄像头或者麦克风权限应该怎么做

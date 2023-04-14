@@ -7,7 +7,6 @@ import Homepage from "./pages/HomePage/Homepage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ChatDetails from "./components/ChatWindowRightContent/ChatDetails/ChatDetails";
-import { CurrentFriendInfoProvider } from "./context/CurrentFriendInfoProvider";
 import FriendsManagement from "./components/ChatWindowRightContent/FriendsManagement/FriendsManagement";
 import AIChatDetails from "./components/ChatWindowRightContent/AIChatDetails/AIChatDetails";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
@@ -15,26 +14,24 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 function App() {
   return (
     <UserInfoProvider>
-      <CurrentFriendInfoProvider>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/chat" element={<ChatPage />}>
-            <Route
-              path="/chat/:conversationId/:friendId"
-              element={<ChatDetails />}
-            />
-            <Route
-              path="/chat/chtholly/:conversationId/:friendId"
-              element={<AIChatDetails />}
-            />
-            <Route path="/chat/friends" element={<FriendsManagement />} />
-            <Route path="/chat/settings" element="" />
-          </Route>
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </CurrentFriendInfoProvider>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/chat" element={<ChatPage />}>
+          <Route
+            path="/chat/:conversationId/:friendId"
+            element={<ChatDetails />}
+          />
+          <Route
+            path="/chat/chtholly/:conversationId/:friendId"
+            element={<AIChatDetails />}
+          />
+          <Route path="/chat/friends" element={<FriendsManagement />} />
+          <Route path="/chat/settings" element="" />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </UserInfoProvider>
   );
 }

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { CurrentFriendContext } from "../../../../context/CurrentFriendInfoProvider";
+import React from "react";
 import styles from "./FriendInfo.module.scss";
+import { useSelector } from "react-redux";
 
 export default function FriendInfo() {
-  const currentFriend = useContext(CurrentFriendContext);
+  const currentFriend = useSelector((state) => state.currentFriend);
   return (
     <div className={styles.chatDetailsFriendInfoArea}>
       <img

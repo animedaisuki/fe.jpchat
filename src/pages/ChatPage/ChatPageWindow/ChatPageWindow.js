@@ -5,9 +5,9 @@ import { Outlet } from "react-router-dom";
 import { VideoChatContext } from "../../../context/VideoChatContext";
 import { IoCall } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
-import { FriendIsCallingContext } from "../../../context/FriendIsCallingProvider";
 import { ImPhoneHangUp } from "react-icons/im";
 import WindowError from "../../../components/WindowError/WindowError";
+import { useSelector } from "react-redux";
 
 export default function ChatPageWindow() {
   const {
@@ -27,7 +27,7 @@ export default function ChatPageWindow() {
     errorMessage,
   } = useContext(VideoChatContext);
 
-  const { friendIsCalling } = useContext(FriendIsCallingContext);
+  const friendIsCalling = useSelector((state) => state.friendIsCalling);
 
   //收到来电时
   useEffect(() => {

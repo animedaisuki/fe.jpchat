@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.4.4",
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +21,7 @@
     "react-emoji-render": "^2.0.1",
     "react-icons": "^4.8.0",
     "react-onclickoutside": "^6.12.2",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "react-transition-group": "^4.4.5",
