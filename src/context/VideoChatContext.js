@@ -66,7 +66,10 @@ const VideoChatProvider = ({ children }) => {
         // }
         setIsCalling(false);
         setShowVideo(false);
-        myVideo.current.srcObject = null;
+
+        if (myVideo.current) {
+          myVideo.current.srcObject = null;
+        }
 
         if (friendVideo.current) {
           friendVideo.current.srcObject = null;
@@ -100,7 +103,7 @@ const VideoChatProvider = ({ children }) => {
             }
           });
         }
-        setStream(null);
+        setCloseStream(true);
         setPlayMusic(false);
         setDisableCallBtn(false);
         dispatch(friendIsCallingActions.clearFriendIsCalling());
@@ -186,7 +189,9 @@ const VideoChatProvider = ({ children }) => {
       });
       // setCloseStream(false);
       setStream(null);
-      myVideo.current.srcObject = null;
+      if (myVideo.current) {
+        myVideo.current.srcObject = null;
+      }
       setDisableCallBtn(false);
     }
   }, [closeStream, stream]);
