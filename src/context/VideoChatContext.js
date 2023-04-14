@@ -10,12 +10,15 @@ import Peer from "simple-peer";
 import { UserContext } from "./UserInfoProvider";
 import useSound from "use-sound";
 import Ring from "../assets/Sound/ミカヅキ.mp3";
+import { useDispatch } from "react-redux";
+import { friendIsCallingActions } from "../store/modules/friendIsCallingSlice";
 
 const VideoChatContext = createContext(null);
 
 const VideoChatProvider = ({ children }) => {
   const socket = useContext(SocketContext);
   const user = useContext(UserContext);
+  const dispatch = useDispatch();
 
   const myVideo = useRef();
   const friendVideo = useRef();
@@ -71,6 +74,8 @@ const VideoChatProvider = ({ children }) => {
 
         setCloseStream(true);
         setDisableCallBtn(false);
+
+        dispatch(friendIsCallingActions.clearFriendIsCalling());
         // window.location.reload();
       });
 
@@ -98,9 +103,10 @@ const VideoChatProvider = ({ children }) => {
         setStream(null);
         setPlayMusic(false);
         setDisableCallBtn(false);
+        dispatch(friendIsCallingActions.clearFriendIsCalling());
       });
     }
-  }, [socket]);
+  }, [socket, dispatch]);
 
   useEffect(() => {
     socket.current.on("callEnded", () => {
@@ -143,9 +149,11 @@ const VideoChatProvider = ({ children }) => {
         setPlayMusic(false);
         setDisableCallBtn(false);
         setCall(null);
+
+        dispatch(friendIsCallingActions.clearFriendIsCalling());
       }
     });
-  }, [callAccepted, callEnded, socket, stream]);
+  }, [callAccepted, callEnded, socket, stream, dispatch]);
 
   useEffect(() => {
     socket.current.on("callLeaved", () => {
