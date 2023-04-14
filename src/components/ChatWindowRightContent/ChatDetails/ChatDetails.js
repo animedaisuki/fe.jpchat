@@ -12,8 +12,8 @@ import { emojify } from "react-emoji";
 import { stickers, emojis } from "../../../utils/stickers";
 import { IoCall } from "react-icons/io5";
 import { VideoChatContext } from "../../../context/VideoChatContext";
-import { FriendIsCallingContext } from "../../../context/FriendIsCallingProvider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { friendIsCallingActions } from "../../../store/modules/friendIsCallingSlice";
 
 let counter = 0;
 
@@ -45,7 +45,7 @@ export default function ChatDetails() {
     callUser,
   } = useContext(VideoChatContext);
 
-  const { setFriendIsCalling } = useContext(FriendIsCallingContext);
+  const dispatch = useDispatch();
 
   const scrollRef = useRef();
 
@@ -159,7 +159,7 @@ export default function ChatDetails() {
           setStream(currentStream);
           // myVideo.current.srcObject = currentStream;
           setIsCalling(true);
-          setFriendIsCalling(currentFriend);
+          dispatch(friendIsCallingActions.setFriendIsCalling(currentFriend));
         });
     } catch (error) {
       //TODO:如果用户禁止了摄像头或者麦克风权限应该怎么做
