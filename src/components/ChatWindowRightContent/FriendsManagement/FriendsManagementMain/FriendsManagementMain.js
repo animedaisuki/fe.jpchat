@@ -14,6 +14,7 @@ export default function FriendsManagementMain(props) {
   const user = useContext(UserContext);
   const dispatch = useDispatch();
   const friends = useSelector((state) => state.friendsOfUser.normalFriends);
+  const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
 
   const socket = useContext(SocketContext);
 
@@ -57,9 +58,10 @@ export default function FriendsManagementMain(props) {
             <div className={styles.friendsManagementOverviewDescContainer}>
               <h5 className={styles.friendsManagementOverviewDesc}>
                 {statusState?.currentStatus} -{" "}
-                {statusState.currentStatus === "ALL" && friends?.length}
+                {statusState.currentStatus === "ALL" &&
+                  friends?.length + AIFriends?.length}
                 {statusState.currentStatus === "ONLINE" &&
-                  onlineFriends?.length}
+                  onlineFriends?.length + AIFriends?.length}
                 {(statusState.currentStatus === "PENDING" ||
                   statusState.currentStatus === "BLOCKED") &&
                   "0"}
@@ -69,14 +71,26 @@ export default function FriendsManagementMain(props) {
         </>
       )}
       <div className={styles.activeFriendsOuterContainer}>
-        {statusState.currentStatus === "ONLINE" &&
-          onlineFriends?.map((friend) => (
-            <ActiveFriendsList key={uuid()} friend={friend} />
-          ))}
-        {statusState.currentStatus === "ALL" &&
-          friends?.map((friend) => (
-            <ActiveFriendsList key={uuid()} friend={friend} />
-          ))}
+        {statusState.currentStatus === "ONLINE" && (
+          <div>
+            {AIFriends.map((friend) => (
+              <ActiveFriendsList key={uuid()} friend={friend} />
+            ))}
+            {onlineFriends?.map((friend) => (
+              <ActiveFriendsList key={uuid()} friend={friend} />
+            ))}
+          </div>
+        )}
+        {statusState.currentStatus === "ALL" && (
+          <div>
+            {AIFriends.map((friend) => (
+              <ActiveFriendsList key={uuid()} friend={friend} />
+            ))}
+            {friends?.map((friend) => (
+              <ActiveFriendsList key={uuid()} friend={friend} />
+            ))}
+          </div>
+        )}
       </div>
       {statusState.currentStatus === "ADD FRIEND" && (
         <div className={styles.addFriendContainer}>
