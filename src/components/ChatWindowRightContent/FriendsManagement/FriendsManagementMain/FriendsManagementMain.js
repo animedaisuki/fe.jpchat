@@ -4,16 +4,17 @@ import { FiSearch } from "react-icons/fi";
 import ActiveFriendsList from "./ActiveFriendsList/ActiveFriendsList";
 import { v4 as uuid } from "uuid";
 import { addFriend } from "../../../../api/user/user";
-import { ConversationDispatchContext } from "../../../../context/ConversationProvider";
 import { SocketContext } from "../../../../context/SocketRefProvider";
 import { UserContext } from "../../../../context/UserInfoProvider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { conversationActions } from "../../../../store/modules/conversationSlice";
 
 export default function FriendsManagementMain(props) {
   const { statusState } = props;
   const user = useContext(UserContext);
+  const dispatch = useDispatch();
   const friends = useSelector((state) => state.friendsOfUser.normalFriends);
-  const setConversations = useContext(ConversationDispatchContext);
+
   const socket = useContext(SocketContext);
 
   const onlineFriends = friends?.filter((friend) => friend.isOnline === true);
@@ -27,7 +28,8 @@ export default function FriendsManagementMain(props) {
     const result = await addFriend(token, { receiverUsername });
     if (!result.error) {
       const newConversation = result.data.populatedNewConversation;
-      setConversations((prevState) => [...prevState, newConversation]);
+      // setConversations((prevState) => [...prevState, newConversation]);
+      dispatch(conversationActions.addNewConversation(newConversation));
       socket.current?.emit("addConversation", {
         senderId: user._id,
         receiverId: result.data.receiverId,
