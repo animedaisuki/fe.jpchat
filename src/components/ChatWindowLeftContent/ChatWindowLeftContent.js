@@ -11,22 +11,21 @@ import {
 import { io } from "socket.io-client";
 import config from "../../config/config";
 import { SocketContext } from "../../context/SocketRefProvider";
-import {
-  ConversationContext,
-  ConversationDispatchContext,
-} from "../../context/ConversationProvider";
-import { ChatGptConversationContext } from "../../context/ChatGptConversationProvider";
 import { VideoChatContext } from "../../context/VideoChatContext";
 import { useDispatch, useSelector } from "react-redux";
 import { friendsOfUserActions } from "../../store/modules/friendsOfUserSlice";
+import { conversationActions } from "../../store/modules/conversationSlice";
 
 export default function ChatWindowLeftContent() {
   const userInfo = useContext(UserContext);
   const setUserInfo = useContext(UserDispatchContext);
   const socket = useContext(SocketContext);
-  const conversations = useContext(ConversationContext);
-  const chatGptConversation = useContext(ChatGptConversationContext);
-  const setConversations = useContext(ConversationDispatchContext);
+  const conversations = useSelector(
+    (state) => state.conversation.normalConversations
+  );
+  const chatGptConversation = useSelector(
+    (state) => state.conversation.AIConversations
+  );
   const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const { logout } = useContext(VideoChatContext);
 
@@ -115,9 +114,9 @@ export default function ChatWindowLeftContent() {
 
   useEffect(() => {
     if (arrivalConversation) {
-      setConversations((prevState) => [...prevState, arrivalConversation]);
+      dispatch(conversationActions.addNewConversation(arrivalConversation));
     }
-  }, [arrivalConversation]);
+  }, [arrivalConversation, dispatch]);
 
   useEffect(() => {
     // console.log(onlineUsers);

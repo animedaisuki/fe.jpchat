@@ -7,37 +7,35 @@ import { UserContext } from "../../../context/UserInfoProvider";
 import { getConversation } from "../../../api/conversation/conversation";
 import { v4 as uuid } from "uuid";
 import { NavLink } from "react-router-dom";
-import { ConversationDispatchContext } from "../../../context/ConversationProvider";
-import { ChatGptConversationDispatchContext } from "../../../context/ChatGptConversationProvider";
 import { fetchAIConversation } from "../../../api/chatGpt/chatGpt";
 import ChatAIFriendView from "./ChatAIFriendView/ChatAIFriendView";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { conversationActions } from "../../../store/modules/conversationSlice";
 
 export default function ChatFriendsSideBar() {
   const user = useContext(UserContext);
-  const setConversations = useContext(ConversationDispatchContext);
-  const setChatGptConversation = useContext(ChatGptConversationDispatchContext);
   const friends = useSelector((state) => state.friendsOfUser.normalFriends);
   const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchConversations = async () => {
       const result = await getConversation(user?.id);
-      setConversations(result.data);
+      dispatch(conversationActions.setConversations(result.data));
     };
     fetchConversations();
-  }, [setConversations, user]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     const fetchConversationForChatGpt = async () => {
       const token = localStorage.getItem("access_token");
       const result = await fetchAIConversation(token, user?.id);
       if (result.data) {
-        setChatGptConversation(result.data);
+        dispatch(conversationActions.setAIConversations(result.data));
       }
     };
     fetchConversationForChatGpt();
-  }, [setChatGptConversation, user]);
+  }, [dispatch, user]);
 
   return (
     <div className={styles.chatWindowLeftFunctionBarFriendsContainer}>
