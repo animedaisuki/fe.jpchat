@@ -26,7 +26,7 @@ export default function AIChatDetails() {
   const [AIIsTyping, setAIIsTyping] = useState(false);
   const [messageAdded, setMessageAdded] = useState(false);
   const [text, setText] = useState("");
-  const [messageQueen, setMessageQueen] = useState([]);
+  const [messageQueue, setMessageQueue] = useState([]);
 
   const [isDisabled, setIsDisabled] = useState(false);
   const scrollRef = useRef();
@@ -52,7 +52,7 @@ export default function AIChatDetails() {
     eventSourceRef.current.onmessage = (event) => {
       const message = JSON.parse(event.data);
       //防止速度过快导致信息丢失
-      setMessageQueen((prevState) => [...prevState, message]);
+      setMessageQueue((prevState) => [...prevState, message]);
     };
     // eventSource.onerror = (error) => {
     //   console.error("EventSource error:", error);
@@ -65,8 +65,8 @@ export default function AIChatDetails() {
   }, [conversationId, inputValue]);
 
   useEffect(() => {
-    if (messageQueen.length > 0) {
-      const message = messageQueen[0];
+    if (messageQueue.length > 0) {
+      const message = messageQueue[0];
       if (message.type === "end") {
         console.log("All messages received, end of stream.");
         setTimeout(() => {
@@ -90,20 +90,20 @@ export default function AIChatDetails() {
           setText((prevState) => prevState + message?.text);
         }
       }
-      setMessageQueen((prevState) => prevState.slice(1));
+      setMessageQueue((prevState) => prevState.slice(1));
       // setTimeout(() => {}, 50);
     }
-  }, [AIIsTyping, messageQueen]);
+  }, [AIIsTyping, messageQueue]);
 
   useEffect(() => {
-    if (text !== "") {
+    if (text !== "" && !messageAdded) {
       setArrivalMsg({
         conversationId,
         text,
         senderId: currentAIFriend,
       });
     }
-  }, [conversationId, currentAIFriend, text]);
+  }, [conversationId, currentAIFriend, text, messageAdded]);
 
   useEffect(() => {
     if (AIIsTyping && arrivalMsg?.text !== "" && !messageAdded && arrivalMsg) {
