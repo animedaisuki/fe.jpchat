@@ -53,20 +53,6 @@ export default function AIChatDetails() {
       const message = JSON.parse(event.data);
       //防止速度过快导致信息丢失
       setMessageQueue((prevState) => [...prevState, message]);
-    };
-    // eventSource.onerror = (error) => {
-    //   console.error("EventSource error:", error);
-    // };
-    return () => {
-      if (eventSourceRef.current) {
-        eventSourceRef.current.close();
-      }
-    };
-  }, [conversationId, inputValue]);
-
-  useEffect(() => {
-    if (messageQueue.length > 0) {
-      const message = messageQueue[0];
       if (message.type === "end") {
         console.log("All messages received, end of stream.");
         setTimeout(() => {
@@ -90,6 +76,43 @@ export default function AIChatDetails() {
           setText((prevState) => prevState + message?.text);
         }
       }
+    };
+    // eventSource.onerror = (error) => {
+    //   console.error("EventSource error:", error);
+    // };
+    return () => {
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+    };
+  }, [conversationId, inputValue]);
+
+  useEffect(() => {
+    if (messageQueue.length > 0) {
+      const message = messageQueue[0];
+      // if (message.type === "end") {
+      //   console.log("All messages received, end of stream.");
+      //   setTimeout(() => {
+      //     setText("");
+      //   }, 2000);
+      //   if (eventSourceRef.current) {
+      //     eventSourceRef.current.close();
+      //   }
+      //   setTimeout(() => {
+      //     setAIIsTyping(false);
+      //   }, 2000);
+      //   setTimeout(() => {
+      //     setMessageAdded(false);
+      //   }, 2000);
+      // } else {
+      //   if (!AIIsTyping) {
+      //     setAIIsTyping(true);
+      //   }
+      //   // console.log("Received message:", message);
+      //   if (message?.text) {
+      //     setText((prevState) => prevState + message?.text);
+      //   }
+      // }
       setMessageQueue((prevState) => prevState.slice(1));
       // setTimeout(() => {}, 50);
     }
