@@ -20,6 +20,7 @@
     "react-emoji": "^0.5.0",
     "react-emoji-render": "^2.0.1",
     "react-icons": "^4.8.0",
+    "react-loader-spinner": "^5.3.4",
     "react-onclickoutside": "^6.12.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
