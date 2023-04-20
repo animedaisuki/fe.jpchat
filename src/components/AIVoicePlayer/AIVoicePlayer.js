@@ -1,11 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { convertTextToAudio } from "../../api/tts/tts";
 import styles from "./AIVoicePlayer.module.scss";
 import { BsSoundwave } from "react-icons/bs";
 import { ThreeDots } from "react-loader-spinner";
+import { UserContext } from "../../context/UserInfoProvider";
 
 const AIVoicePlayer = (props) => {
   const { text } = props;
+  const user = useContext(UserContext);
   const audioRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,6 +16,7 @@ const AIVoicePlayer = (props) => {
     try {
       const response = await convertTextToAudio({
         text,
+        user,
       });
       const audioBlob = new Blob([response.data], { type: "audio/wav" });
       const audioUrl = URL.createObjectURL(audioBlob);
