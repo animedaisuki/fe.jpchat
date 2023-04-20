@@ -1,0 +1,18 @@
+.audio {
+  display: none;
+}
+
+.aiSpeakButton {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: #1e2123;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #9fa3a9;
+}
+
+.aiSpeakButton.disable {
+  cursor: not-allowed;
+}
