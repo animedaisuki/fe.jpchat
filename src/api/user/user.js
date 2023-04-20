@@ -29,3 +29,17 @@ export const addFriend = async (token, data) => {
     return result;
   }
 };
+
+export const changeVoicePreference = async (data) => {
+  try {
+    const path = `${config.apiAddress}/user/voice-preference`;
+    const result = await axios.post(path, data);
+    return result;
+  } catch (error) {
+    const result = {
+      status: error.response.status,
+      error: error.response.data.error,
+    };
+    return result;
+  }
+};

@@ -5,20 +5,29 @@ import { BsFillChatDotsFill } from "react-icons/bs";
 import AIFriendInfo from "./AIFriendInfo/AIFriendInfo";
 import AIChatMessage from "./AIChatMessage/AIChatMessage";
 import { v4 as uuid } from "uuid";
-import { UserContext } from "../../../context/UserInfoProvider";
+import {
+  UserContext,
+  UserDispatchContext,
+} from "../../../context/UserInfoProvider";
 import { stickers } from "../../../utils/stickers";
 import { FaTelegramPlane } from "react-icons/fa";
+import { AiFillSound } from "react-icons/ai";
 import { sendMessageToAI } from "../../../api/chatGpt/chatGpt";
 import { fetchAIMessagesByConversationId } from "../../../api/chatGpt/chatGpt";
 import { useSelector } from "react-redux";
+import { changeVoicePreference } from "../../../api/user/user";
+import { RotatingLines } from "react-loader-spinner";
 
 export default function AIChatDetails() {
   const { conversationId } = useParams();
   const user = useContext(UserContext);
+  const setUser = useContext(UserDispatchContext);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [arrivalMessages, setArrivalMessages] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [voice, setVoice] = useState(null);
+  const [isChangingVoice, setIsChangingVoice] = useState(false);
   const scrollRef = useRef();
 
   const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
@@ -29,6 +38,10 @@ export default function AIChatDetails() {
   useEffect(() => {
     setCurrentAIFriend(AIFriends[0]?.user);
   }, [AIFriends]);
+
+  useEffect(() => {
+    setVoice(user?.voicePreference);
+  }, [user]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -111,6 +124,20 @@ export default function AIChatDetails() {
     }
   }, [arrivalMessages]);
 
+  const toggleVoicePreference = async () => {
+    setIsChangingVoice(true);
+    try {
+      const result = await changeVoicePreference({ userId: user.id });
+      const updatedUserInfo = result.data;
+      setVoice(updatedUserInfo.voicePreference);
+      setUser({ ...user, voicePreference: updatedUserInfo.voicePreference });
+    } catch (error) {
+      //TODO:Show error Window if error occurs
+      console.log(error);
+    }
+    setIsChangingVoice(false);
+  };
+
   return (
     <div className={styles.chatDetailsContainer}>
       <div className={styles.chatDetailsHeading}>
@@ -120,6 +147,21 @@ export default function AIChatDetails() {
             {currentAIFriend?.username}
           </p>
         </div>
+        {isChangingVoice ? (
+          <div className={styles.voicePreferenceButton}>
+            <RotatingLines strokeColor="#eff0f2" height="20" width="20" />
+          </div>
+        ) : (
+          <button
+            className={styles.voicePreferenceButton}
+            onClick={() => {
+              toggleVoicePreference();
+            }}
+          >
+            <AiFillSound size={20} />
+            <p className={styles.voicePreference}>{voice}</p>
+          </button>
+        )}
       </div>
       <audio className={styles.audio} ref={AIAutoSpeakRef} controls />
       <div className={styles.chatDetailsInfoAndChatContainer}>
