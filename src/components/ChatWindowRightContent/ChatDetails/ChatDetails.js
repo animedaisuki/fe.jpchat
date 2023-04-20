@@ -31,16 +31,11 @@ export default function ChatDetails() {
   const [currentEmoji, setCurrentEmoji] = useState(emojis[randomIndex]);
   const {
     myVideo,
-    friendVideo,
     stream,
     setStream,
     setCloseStream,
-    call,
-    setCall,
     isCalling,
     setIsCalling,
-    callAccepted,
-    setCallAccepted,
     disableCallBtn,
     callUser,
   } = useContext(VideoChatContext);
@@ -73,10 +68,13 @@ export default function ChatDetails() {
   }, [socket]);
 
   useEffect(() => {
-    if (arrivalMessages) {
+    if (
+      arrivalMessages &&
+      arrivalMessages?.senderId?.id === currentFriend?.detail?._id
+    ) {
       setMessages((prevState) => [...prevState, arrivalMessages]);
     }
-  }, [arrivalMessages]);
+  }, [arrivalMessages, currentFriend]);
 
   useEffect(() => {
     const fetchMessages = async () => {
