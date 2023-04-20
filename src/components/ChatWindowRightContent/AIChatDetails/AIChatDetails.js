@@ -24,6 +24,8 @@ export default function AIChatDetails() {
   const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
   const [currentAIFriend, setCurrentAIFriend] = useState(null);
 
+  const AIAutoSpeakRef = useRef();
+
   useEffect(() => {
     setCurrentAIFriend(AIFriends[0]?.user);
   }, [AIFriends]);
@@ -96,6 +98,17 @@ export default function AIChatDetails() {
 
   useEffect(() => {
     setMessages((prevState) => [...prevState, arrivalMessages]);
+    if (arrivalMessages?.audioData) {
+      const arrayBuffer = new Uint8Array(arrivalMessages.audioData.data).buffer;
+      const audioBlob = new Blob([arrayBuffer], {
+        type: "audio/wav",
+      });
+      const audioUrl = URL.createObjectURL(audioBlob);
+
+      AIAutoSpeakRef.current.src = audioUrl;
+      AIAutoSpeakRef.current.playbackRate = 1.2;
+      AIAutoSpeakRef.current.play();
+    }
   }, [arrivalMessages]);
 
   return (
@@ -108,6 +121,7 @@ export default function AIChatDetails() {
           </p>
         </div>
       </div>
+      <audio className={styles.audio} ref={AIAutoSpeakRef} controls />
       <div className={styles.chatDetailsInfoAndChatContainer}>
         <AIFriendInfo currentAIFriend={currentAIFriend} />
         {messages?.map((message) => (
