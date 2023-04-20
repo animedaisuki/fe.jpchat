@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./AIChatMessage.module.scss";
+import AIVoicePlayer from "../../../AIVoicePlayer/AIVoicePlayer";
 
 export default function AIChatMessage(props) {
   const { message } = props;
@@ -25,6 +26,11 @@ export default function AIChatMessage(props) {
           </p>
         </div>
         <div className={styles.chatDetailsChatAreaChatBox}>{message?.text}</div>
+        <div className={styles.AIVoicePlayerContainer}>
+          {message?.senderId?.username === "Chtholly" && (
+            <AIVoicePlayer text={message?.text} />
+          )}
+        </div>
       </div>
     </div>
   );
