@@ -246,7 +246,9 @@
     z-index: 0;
     animation: characterAppear 1.5s;
     .oshinokoChar {
-      height: 250vh;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
     }
   }
   @keyframes characterAppear {
@@ -266,7 +268,15 @@
     z-index: 1;
     animation: moveToTop 6s forwards;
     .oshinokoStage {
-      height: 250vh;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+  //防止过高时图片移动到区域外
+  @media (max-aspect-ratio: 13/10) {
+    .oshinokoStageContainer {
+      animation: stageAppear 6s forwards !important;
     }
   }
   @keyframes moveToTop {
@@ -284,6 +294,20 @@
     }
     100% {
       transform: translateY(50%);
+      opacity: 1;
+    }
+  }
+  @keyframes stageAppear {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
       opacity: 1;
     }
   }
