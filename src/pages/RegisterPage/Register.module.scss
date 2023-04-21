@@ -274,7 +274,7 @@
     }
   }
   //防止过高时图片移动到区域外
-  @media (max-aspect-ratio: 13/10) {
+  @media (max-aspect-ratio: 1414/1000) {
     .oshinokoStageContainer {
       animation: stageAppear 6s forwards !important;
     }
