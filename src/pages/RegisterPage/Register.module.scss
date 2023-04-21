@@ -168,7 +168,6 @@
         transform: translateY(0);
       }
     }
-
     .registerCompleteLoadingImg {
       padding-top: 50px;
       animation: loadingImgFadeInOut 2s ease-in-out infinite;
@@ -206,5 +205,94 @@
   .registerCompleteContainerExitActive {
     opacity: 0;
     transition: opacity 500ms;
+  }
+}
+
+.oshinokoContainer {
+  display: flex;
+  background-color: black;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  animation: loadingAppear 0.3s ease-in forwards;
+  .oshinokoBannerContainer {
+    z-index: 3;
+    animation: appearThenDissolve ease-in-out 2.5s forwards;
+    .oshinokoBanner {
+      height: 60vh;
+      max-height: 500px;
+    }
+  }
+  @keyframes appearThenDissolve {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .oshinokoCharContainer {
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+    animation: characterAppear 1.5s;
+    .oshinokoChar {
+      height: 250vh;
+    }
+  }
+  @keyframes characterAppear {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .oshinokoStageContainer {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    animation: moveToTop 6s forwards;
+    .oshinokoStage {
+      height: 250vh;
+    }
+  }
+  @keyframes moveToTop {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    40% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(50%);
+      opacity: 1;
+    }
+  }
+}
+@keyframes loadingAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
