@@ -277,6 +277,18 @@
   @media (max-aspect-ratio: 1414/1000) {
     .oshinokoStageContainer {
       animation: stageAppear 6s forwards !important;
+      .oshinokoStage {
+        height: 100vh;
+        width: auto;
+        object-fit: cover;
+      }
+    }
+    .oshinokoCharContainer {
+      .oshinokoChar {
+        height: 100vh;
+        width: auto;
+        object-fit: cover;
+      }
     }
   }
   @keyframes moveToTop {
