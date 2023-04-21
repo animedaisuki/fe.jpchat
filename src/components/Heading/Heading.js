@@ -37,7 +37,14 @@ export default function Heading() {
                 alt={user.username}
               />
               <div className={styles.headingUserActionContainer}>
-                <button className={styles.headingUserAction}>Account</button>
+                <button
+                  className={styles.headingUserAction}
+                  onClick={() => {
+                    navigate("/chat");
+                  }}
+                >
+                  Chat
+                </button>
                 <button className={styles.headingUserAction} onClick={logout}>
                   Log out
                 </button>
