@@ -30,7 +30,7 @@ export default function RegisterPage() {
   const userInfo = useContext(UserContext);
 
   if (userInfo) {
-    navigate("/");
+    navigate("/chat");
   }
 
   const resetCaptcha = () => {
