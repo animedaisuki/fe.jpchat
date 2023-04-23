@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/chat");
     }
   }, [userInfo]);
 
