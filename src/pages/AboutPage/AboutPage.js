@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./About.module.scss";
 import backgroundImage from "../../assets/AboutPage/about-bg.png";
 import photoFrame from "../../assets/AboutPage/photo_frame.png";
@@ -15,10 +15,6 @@ export default function AboutPage() {
     const position = mainContainerRef.current.scrollTop;
     setScrollPosition(position);
   };
-
-  useEffect(() => {
-    console.log(scrollPosition);
-  }, [scrollPosition]);
 
   return (
     <div
@@ -69,17 +65,18 @@ export default function AboutPage() {
           <div className={styles.registerContainer}>
             <h3 className={styles.registerTitle}>Meet Your Own Cat Girl!</h3>
             <button className={styles.registerButton}>
-              <img
-                className={styles.registerButtonImg}
-                src={register}
-                alt={"register"}
-              />
               <Link to="/register">
+                <img
+                  className={styles.registerButtonImg}
+                  src={register}
+                  alt={"register"}
+                />
                 <p className={styles.registerText}>Register</p>
               </Link>
             </button>
           </div>
         </div>
+        <div className={styles.test}></div>
       </div>
     </div>
   );
