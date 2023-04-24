@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Pacifico&family=Sawarabi+Mincho&display=swap");
+
+.aboutContainer {
+  height: 100vh;
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+
+  .overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #338590;
+    opacity: 0.95;
+    z-index: 0;
+    animation: overlayFadeIn 0.2s forwards;
+  }
+  .overlay.hidden {
+    opacity: 0;
+    animation: overlayFadeOut 0.2s forwards;
+  }
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.95;
+    }
+  }
+  @keyframes overlayFadeOut {
+    from {
+      opacity: 0.95;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .globalIconContainer {
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 5;
+    .globalIcon {
+      width: 80%;
+    }
+  }
+  .globalIconContainer.hidden {
+    display: none;
+  }
+
+  .aboutTitleContainer {
+    width: 100%;
+    text-align: center;
+    padding-top: 230px;
+    position: fixed;
+    .aboutTitle {
+      font-family: "Pacifico", serif;
+      font-size: 95px;
+      color: white;
+      text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+    }
+  }
+  .aboutTitleContainer.hidden {
+    display: none;
+  }
+
+  .aboutMainContainer {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    overflow-y: scroll;
+    .aboutMainRelativeContainer {
+      position: relative;
+      .photoFrameContainer {
+        position: relative;
+        top: 0;
+        height: 1500px;
+        max-width: 100vw;
+        overflow: hidden;
+        z-index: 4;
+        .photoFrame {
+          position: absolute;
+          max-width: 100vw;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100%; // 设置图片元素的宽度为100%
+          height: 100%; // 设置图片元素的高度为100%
+          background-size: cover; // 设置图片尺寸以填满元素的宽度，保持图片的纵横比
+          background-position: left;
+          background-repeat: no-repeat;
+          z-index: 4;
+        }
+        //.photoFrameImg {
+        //  height: 100%;
+        //  width: auto;
+        //}
+      }
+      .live2dImgContainer {
+        position: absolute;
+        left: 200px;
+        top: 735px;
+        z-index: 3;
+        overflow-x: hidden;
+        .live2dImg {
+          width: 1000px;
+          height: 550px;
+        }
+      }
+      .registerContainer {
+        position: absolute;
+        width: 500px;
+        bottom: 75px;
+        left: 670px;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
+        text-align: center;
+        .registerTitle {
+          color: rgb(42, 101, 112);
+          font-weight: bolder;
+        }
+        .registerButton {
+          position: relative;
+          margin-top: 20px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          .registerButtonImg {
+            width: 250px;
+          }
+          .registerText {
+            color: white;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 40%);
+          }
+        }
+      }
+    }
+  }
+}
