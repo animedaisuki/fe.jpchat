@@ -3,6 +3,7 @@ import styles from "./About.module.scss";
 import backgroundImage from "../../assets/AboutPage/about-bg.png";
 import photoFrame from "../../assets/AboutPage/photo_frame.png";
 import globalIcon from "../../assets/AboutPage/global-icon.png";
+import catGirlImg from "../../assets/AboutPage/pio-smile.png";
 import thumbnail from "../../assets/AboutPage/thumbnail.png";
 import register from "../../assets/AboutPage/about-button.png";
 import { Link } from "react-router-dom";
@@ -62,6 +63,14 @@ export default function AboutPage() {
               alt="live2d poster"
             />
           </div>
+          <div className={styles.catGirlImgContainer}>
+            <img
+              className={styles.catGirlImg}
+              src={catGirlImg}
+              alt="cat girl"
+            />
+            <h1 className={styles.catGirlName}>Chtholly</h1>
+          </div>
           <div className={styles.registerContainer}>
             <h3 className={styles.registerTitle}>Meet Your Own Cat Girl!</h3>
             <button className={styles.registerButton}>
@@ -76,7 +85,17 @@ export default function AboutPage() {
             </button>
           </div>
         </div>
-        <div className={styles.test}></div>
+        <div className={styles.bannerContainer}>
+          <video
+            className={styles.bannerVideo}
+            src="https://amahane.s3.ap-northeast-1.amazonaws.com/aboutUsPage/about-us-banner.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <h1 className={styles.bannerTitle}>About Amahane Chat</h1>
+        </div>
       </div>
     </div>
   );

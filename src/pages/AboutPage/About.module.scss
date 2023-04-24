@@ -85,27 +85,41 @@
           top: 0;
           width: 100%; // 设置图片元素的宽度为100%
           height: 100%; // 设置图片元素的高度为100%
-          min-width: 1550px;
-          max-width: 1550px;
+          min-width: 1550px; //图片最大宽度
+          max-width: 1550px; //图片最小宽度
           background-size: cover; // 设置图片尺寸以填满元素的宽度，保持图片的纵横比
-          background-position: left;
+          background-position: center;
           background-repeat: no-repeat;
           z-index: 4;
         }
-        //.photoFrameImg {
-        //  height: 100%;
-        //  width: auto;
-        //}
       }
       .live2dImgContainer {
         position: absolute;
-        left: 310px;
+        left: 320px;
         top: 740px;
         z-index: 3;
         overflow-x: hidden;
         .live2dImg {
-          width: 910px;
+          width: 920px;
           height: 515px;
+        }
+      }
+      .catGirlImgContainer {
+        position: absolute;
+        bottom: 225px;
+        left: 350px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        .catGirlImg {
+          width: 90px;
+          height: 90px;
+        }
+        .catGirlName {
+          margin-left: 40px;
+          font-family: "Pacifico", serif;
+          color: rgb(42, 101, 112);
+          text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
         }
       }
       .registerContainer {
@@ -143,8 +157,26 @@
       }
     }
   }
-  .test {
-    margin-top: 50px;
+  .bannerContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .bannerVideo {
+      border-radius: 100%;
+    }
+    .bannerTitle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: "Pacifico", serif;
+      font-size: 70px;
+      color: white;
+      text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+      white-space: nowrap;
+    }
   }
 }
 
