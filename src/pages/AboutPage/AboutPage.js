@@ -8,6 +8,7 @@ import thumbnail from "../../assets/AboutPage/thumbnail.png";
 import register from "../../assets/AboutPage/about-button.png";
 import aqua from "../../assets/AboutPage/aqua.png";
 import ruby from "../../assets/AboutPage/ruby.png";
+import toho from "../../assets/AboutPage/toho.png";
 import castle from "../../assets/AboutPage/castle.png";
 import xirsys from "../../assets/AboutPage/xirsys.png";
 import chatgpt from "../../assets/AboutPage/chatgpt.png";
@@ -28,7 +29,7 @@ export default function AboutPage() {
     {
       id: uuid(),
       charImg: aqua,
-      bannerImg: castle,
+      bannerImg: toho,
       icon: xirsys,
       position: "left",
       title: "Real-Time Chat Services",
