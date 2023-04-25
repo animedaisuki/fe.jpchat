@@ -8,8 +8,8 @@
   height: 700px;
   filter: drop-shadow(15px 15px 15px #333);
   cursor: pointer;
-  animation: hoverCardReverse 0.3s forwards;
-
+  //animation: hoverCardReverse 0.3s forwards;
+  transition: 0.3s;
   z-index: 0;
   .characterImg {
     position: absolute;
@@ -37,7 +37,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover; //要生效必须设置高度和宽度
-      animation: scaleImgReverse 0.3s forwards;
+      //animation: scaleImgReverse 0.3s forwards;
+      transition: 0.3s;
     }
   }
   .cardTextArea {
@@ -59,12 +60,17 @@
 
 .cardContainer:hover {
   filter: drop-shadow(25px 25px 20px #333);
-  animation: hoverCard 0.3s forwards;
+  //animation: hoverCard 0.3s forwards;
+  transform: translateY(-3px);
+  transition: 0.3s;
   .cardBannerImg {
-    animation: scaleImg 0.3s forwards;
+    //animation: scaleImg 0.3s forwards;
+    transform: scale(1.01);
+    transition: 0.3s;
   }
 }
 
+//不用keyframes的原因是在于它会导致加载页面和滚动时触发动画效果
 @keyframes hoverCard {
   from {
     background: #f9fff9;
