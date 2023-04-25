@@ -1,0 +1,59 @@
+.cardContainer {
+  background: #f9fff9;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 700px;
+  filter: drop-shadow(15px 15px 15px #333);
+  cursor: pointer;
+  z-index: 0;
+  .characterImg {
+    position: absolute;
+    top: -80px;
+    right: -45px;
+    height: 27%;
+    filter: drop-shadow(15px 15px 15px #333);
+  }
+  .characterImg.left {
+    left: -38px;
+  }
+  .characterImg.center {
+    right: 50%;
+    transform: translateX(50%);
+  }
+  .cardBannerImg {
+    width: 100%;
+    height: 45%;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .cardTextArea {
+    margin: 40px 20px 20px 20px;
+    width: 90%;
+    text-align: left;
+    color: rgb(42, 101, 112);
+    position: relative;
+    .iconImg {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: -65px;
+      border-radius: 10px;
+      border: 5px solid rgb(42, 101, 112);
+    }
+  }
+}
+@media (max-width: 1100px) {
+  .cardContainer {
+    height: auto;
+    .characterImg {
+      height: 25% !important;
+      right: -65px !important;
+    }
+    .characterImg.left {
+      left: -35px !important;
+    }
+  }
+}

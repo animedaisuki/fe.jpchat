@@ -10,12 +10,14 @@ import ChatDetails from "./components/ChatWindowRightContent/ChatDetails/ChatDet
 import FriendsManagement from "./components/ChatWindowRightContent/FriendsManagement/FriendsManagement";
 import AIChatDetails from "./components/ChatWindowRightContent/AIChatDetails/AIChatDetails";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 function App() {
   return (
     <UserInfoProvider>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/chat" element={<ChatPage />}>
