@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Pacifico&family=Sawarabi+Mincho&display=swap");
+
+.aboutContainer {
+  height: 100vh;
+  background-position: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+
+  .overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #338590;
+    opacity: 0.95;
+    z-index: 0;
+    animation: overlayFadeIn 0.2s forwards;
+  }
+  .overlay.hidden {
+    opacity: 0;
+    animation: overlayFadeOut 0.2s forwards;
+  }
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.95;
+    }
+  }
+  @keyframes overlayFadeOut {
+    from {
+      opacity: 0.95;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .globalIconContainer {
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 5;
+    .globalIcon {
+      width: 80%;
+    }
+  }
+  .globalIconContainer.hidden {
+    display: none;
+  }
+
+  .aboutTitleContainer {
+    width: 100%;
+    text-align: center;
+    padding-top: 230px;
+    position: fixed;
+    .aboutTitle {
+      font-family: "Pacifico", serif;
+      font-size: 95px;
+      color: white;
+      text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+    }
+  }
+  .aboutTitleContainer.hidden {
+    display: none;
+  }
+
+  .aboutMainContainer {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    .aboutMainRelativeContainer {
+      position: relative;
+      .photoFrameContainer {
+        position: relative;
+        top: -100px;
+        height: 1700px;
+        z-index: 4;
+        .photoFrame {
+          position: absolute;
+          top: 0;
+          width: 100%; // 设置图片元素的宽度为100%
+          height: 100%; // 设置图片元素的高度为100%
+          min-width: 1550px; //图片最大宽度
+          max-width: 1550px; //图片最小宽度
+          background-size: cover; // 设置图片尺寸以填满元素的宽度，保持图片的纵横比
+          background-position: center;
+          background-repeat: no-repeat;
+          z-index: 4;
+        }
+      }
+      .live2dImgContainer {
+        position: absolute;
+        left: 320px;
+        top: 740px;
+        z-index: 3;
+        overflow-x: hidden;
+        .live2dImg {
+          width: 920px;
+          height: 515px;
+        }
+      }
+      .catGirlImgContainer {
+        position: absolute;
+        bottom: 225px;
+        left: 350px;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        .catGirlImg {
+          width: 90px;
+          height: 90px;
+        }
+        .catGirlName {
+          margin-left: 40px;
+          font-family: "Pacifico", serif;
+          color: rgb(42, 101, 112);
+          text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+        }
+      }
+      .registerContainer {
+        position: absolute;
+        width: 500px;
+        bottom: 230px;
+        left: 700px;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        justify-content: center;
+        text-align: center;
+        .registerTitle {
+          color: rgb(42, 101, 112);
+          font-weight: bolder;
+        }
+        .registerButton {
+          position: relative;
+          margin-top: 20px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          .registerButtonImg {
+            width: 250px;
+          }
+          .registerText {
+            color: white;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%, 40%);
+          }
+        }
+      }
+    }
+  }
+  .bannerContainer {
+    margin-top: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .bannerVideo {
+      border-radius: 100%;
+    }
+    .bannerTitle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: "Pacifico", serif;
+      font-size: 70px;
+      color: white;
+      text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+      white-space: nowrap;
+    }
+  }
+  .catGirlDetailContainer {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .gridContainer {
+      width: 85%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 35px;
+      text-align: center;
+      position: relative;
+    }
+    @media (max-width: 1100px) {
+      .gridContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 95px;
+      }
+    }
+  }
+}
+
+.aboutContainer::-webkit-scrollbar {
+  width: 0;
+}
+.aboutContainer:hover::-webkit-scrollbar {
+  width: 0;
+}

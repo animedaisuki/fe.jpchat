@@ -22,10 +22,18 @@ export default function Heading() {
         alt="logo"
       />
       <div className={styles.headingOptions}>
-        <p className={styles.headingOption}>Home</p>
-        <p className={styles.headingOption}>News</p>
-        <p className={styles.headingOption}>About</p>
-        <p className={styles.headingOption}>More</p>
+        <Link className={styles.headingLink} to="/">
+          <p className={styles.headingOption}>Home</p>
+        </Link>
+        <Link className={styles.headingLink}>
+          <p className={styles.headingOption}>News</p>
+        </Link>
+        <Link className={styles.headingLink} to="/about">
+          <p className={styles.headingOption}>About</p>
+        </Link>
+        <Link className={styles.headingLink}>
+          <p className={styles.headingOption}>More</p>
+        </Link>
       </div>
       <div className={styles.homepageLoginContainer}>
         {user ? (

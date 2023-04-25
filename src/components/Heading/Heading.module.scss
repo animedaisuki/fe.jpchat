@@ -17,11 +17,14 @@
     display: flex;
     margin-left: 70px;
     height: 30px;
-    .headingOption {
-      font-size: 20px;
-      margin-right: 30px;
-      color: #cccc;
-      cursor: pointer;
+    .headingLink {
+      text-decoration: none;
+      .headingOption {
+        font-size: 20px;
+        margin-right: 30px;
+        color: #cccc;
+        cursor: pointer;
+      }
     }
   }
 
