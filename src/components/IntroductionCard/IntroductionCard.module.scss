@@ -14,10 +14,12 @@
   .characterImg {
     position: absolute;
     top: -80px;
-    right: -45px;
     height: 27%;
     filter: drop-shadow(15px 15px 15px #333);
     z-index: 2;
+  }
+  .characterImg.right {
+    right: -45px;
   }
   .characterImg.left {
     left: -38px;
@@ -115,10 +117,10 @@
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 767px) {
   .cardContainer {
     height: auto;
-    .characterImg {
+    .characterImg.right {
       height: 25% !important;
       right: -65px !important;
     }
