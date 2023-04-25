@@ -9,6 +9,7 @@
   filter: drop-shadow(15px 15px 15px #333);
   cursor: pointer;
   //animation: hoverCardReverse 0.3s forwards;
+  transform: translateY(0);
   transition: 0.3s;
   z-index: 0;
   .characterImg {
