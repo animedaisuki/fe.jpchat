@@ -4,9 +4,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   height: 700px;
   filter: drop-shadow(15px 15px 15px #333);
   cursor: pointer;
+  animation: hoverCardReverse 0.3s forwards;
+
   z-index: 0;
   .characterImg {
     position: absolute;
@@ -14,6 +17,7 @@
     right: -45px;
     height: 27%;
     filter: drop-shadow(15px 15px 15px #333);
+    z-index: 2;
   }
   .characterImg.left {
     left: -38px;
@@ -22,12 +26,19 @@
     right: 50%;
     transform: translateX(50%);
   }
-  .cardBannerImg {
+  .cardBannerImgContainer {
     width: 100%;
     height: 45%;
-    object-fit: cover;
+    overflow: hidden;
+    background: #2b799a;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    .cardBannerImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; //要生效必须设置高度和宽度
+      animation: scaleImgReverse 0.3s forwards;
+    }
   }
   .cardTextArea {
     margin: 40px 20px 20px 20px;
@@ -45,6 +56,59 @@
     }
   }
 }
+
+.cardContainer:hover {
+  filter: drop-shadow(25px 25px 20px #333);
+  animation: hoverCard 0.3s forwards;
+  .cardBannerImg {
+    animation: scaleImg 0.3s forwards;
+  }
+}
+
+@keyframes hoverCard {
+  from {
+    background: #f9fff9;
+    filter: drop-shadow(15px 15px 15px #333);
+    transform: translateY(0);
+  }
+  to {
+    background: #e0e6e0;
+    filter: drop-shadow(25px 25px 20px #333);
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes hoverCardReverse {
+  from {
+    background: #e0e6e0;
+    filter: drop-shadow(25px 25px 20px #333);
+    transform: translateY(-3px);
+  }
+  to {
+    background: #f9fff9;
+    filter: drop-shadow(15px 15px 15px #333);
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleImg {
+  from {
+    scale: 100%;
+  }
+  to {
+    scale: 101%;
+  }
+}
+
+@keyframes scaleImgReverse {
+  from {
+    scale: 101%;
+  }
+  to {
+    scale: 100%;
+  }
+}
+
 @media (max-width: 1100px) {
   .cardContainer {
     height: auto;
@@ -53,7 +117,7 @@
       right: -65px !important;
     }
     .characterImg.left {
-      left: -35px !important;
+      left: -45px !important;
     }
   }
 }
