@@ -40,6 +40,7 @@
       height: 100%;
       object-fit: cover; //要生效必须设置高度和宽度
       //animation: scaleImgReverse 0.3s forwards;
+      transform: scale(1);
       transition: 0.3s;
     }
   }
