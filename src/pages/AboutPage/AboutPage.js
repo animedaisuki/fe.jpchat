@@ -94,38 +94,35 @@ export default function AboutPage() {
       <div className={styles.aboutMainContainer}>
         <div className={styles.aboutMainRelativeContainer}>
           <div className={styles.photoFrameContainer}>
-            <div
-              className={styles.photoFrame}
-              style={{ backgroundImage: `url(${photoFrame})` }}
-            ></div>
-          </div>
-          <div className={styles.live2dImgContainer}>
-            <img
-              className={styles.live2dImg}
-              src={thumbnail}
-              alt="live2d poster"
-            />
-          </div>
-          <div className={styles.catGirlImgContainer}>
-            <img
-              className={styles.catGirlImg}
-              src={catGirlImg}
-              alt="cat girl"
-            />
-            <h1 className={styles.catGirlName}>Chtholly</h1>
-          </div>
-          <div className={styles.registerContainer}>
-            <h3 className={styles.registerTitle}>Meet Your Own Cat Girl!</h3>
-            <button className={styles.registerButton}>
-              <Link to="/register">
-                <img
-                  className={styles.registerButtonImg}
-                  src={register}
-                  alt={"register"}
-                />
-                <p className={styles.registerText}>Register</p>
-              </Link>
-            </button>
+            <img className={styles.photoFrame} src={photoFrame} alt="frame" />
+            <div className={styles.live2dImgContainer}>
+              <img
+                className={styles.live2dImg}
+                src={thumbnail}
+                alt="live2d poster"
+              />
+            </div>
+            <div className={styles.catGirlImgContainer}>
+              <img
+                className={styles.catGirlImg}
+                src={catGirlImg}
+                alt="cat girl"
+              />
+              <h1 className={styles.catGirlName}>Chtholly</h1>
+            </div>
+            <div className={styles.registerContainer}>
+              <h3 className={styles.registerTitle}>Meet Your Own Cat Girl!</h3>
+              <button className={styles.registerButton}>
+                <Link to="/register">
+                  <img
+                    className={styles.registerButtonImg}
+                    src={register}
+                    alt={"register"}
+                  />
+                  <p className={styles.registerText}>Register</p>
+                </Link>
+              </button>
+            </div>
           </div>
         </div>
         <div className={styles.bannerContainer}>

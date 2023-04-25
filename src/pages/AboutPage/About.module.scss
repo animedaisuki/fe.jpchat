@@ -40,13 +40,14 @@
   }
 
   .globalIconContainer {
-    left: 20px;
-    top: 10px;
+    left: 3%;
+    top: 1%;
     cursor: pointer;
     position: fixed;
     z-index: 5;
+    width: 5%;
     .globalIcon {
-      width: 80%;
+      width: 100%;
     }
   }
   .globalIconContainer.hidden {
@@ -60,7 +61,7 @@
     position: fixed;
     .aboutTitle {
       font-family: "Pacifico", serif;
-      font-size: 95px;
+      font-size: 7vw;
       color: white;
       text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
     }
@@ -78,100 +79,101 @@
       .photoFrameContainer {
         position: relative;
         top: -100px;
-        height: 1700px;
+        height: auto;
         z-index: 4;
         .photoFrame {
-          position: absolute;
           top: 0;
           width: 100%; // 设置图片元素的宽度为100%
-          height: 100%; // 设置图片元素的高度为100%
-          min-width: 1550px; //图片最大宽度
-          max-width: 1550px; //图片最小宽度
-          background-size: cover; // 设置图片尺寸以填满元素的宽度，保持图片的纵横比
-          background-position: center;
-          background-repeat: no-repeat;
           z-index: 4;
         }
-      }
-      .live2dImgContainer {
-        position: absolute;
-        left: 320px;
-        top: 740px;
-        z-index: 3;
-        overflow-x: hidden;
-        .live2dImg {
-          width: 920px;
-          height: 515px;
-        }
-      }
-      .catGirlImgContainer {
-        position: absolute;
-        bottom: 225px;
-        left: 350px;
-        z-index: 5;
-        display: flex;
-        align-items: center;
-        .catGirlImg {
-          width: 90px;
-          height: 90px;
-        }
-        .catGirlName {
-          margin-left: 40px;
-          font-family: "Pacifico", serif;
-          color: rgb(42, 101, 112);
-          text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
-        }
-      }
-      .registerContainer {
-        position: absolute;
-        width: 500px;
-        bottom: 230px;
-        left: 700px;
-        z-index: 5;
-        display: flex;
-        flex-direction: column;
-        align-self: center;
-        justify-content: center;
-        text-align: center;
-        .registerTitle {
-          color: rgb(42, 101, 112);
-          font-weight: bolder;
-        }
-        .registerButton {
-          position: relative;
-          margin-top: 20px;
-          background: none;
-          border: none;
-          cursor: pointer;
-          .registerButtonImg {
-            width: 250px;
+        .live2dImgContainer {
+          position: absolute;
+          width: 100%;
+          left: 16%;
+          top: 47%;
+          z-index: -1;
+          overflow-x: hidden;
+          .live2dImg {
+            width: 68%;
+            height: 68%;
           }
-          .registerText {
-            color: white;
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform: translate(-50%, 40%);
+        }
+        .catGirlImgContainer {
+          position: absolute;
+          bottom: 9%;
+          left: 23%;
+          height: auto;
+          width: 100%;
+          z-index: 5;
+          display: flex;
+          align-items: center;
+          .catGirlImg {
+            width: 6%;
+            height: 6%;
+          }
+          .catGirlName {
+            margin-left: 3.5vw;
+            font-size: 2vw;
+            font-family: "Pacifico", serif;
+            color: rgb(42, 101, 112);
+            text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
+          }
+        }
+        .registerContainer {
+          position: absolute;
+          width: 100%;
+          bottom: 8%;
+          left: 12%;
+          z-index: 5;
+          display: flex;
+          flex-direction: column;
+          align-self: center;
+          justify-content: center;
+          text-align: center;
+          .registerTitle {
+            font-size: 1.5vw;
+            color: rgb(42, 101, 112);
+            font-weight: bolder;
+          }
+          .registerButton {
+            position: relative;
+            margin-top: 0.5vh;
+            width: auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+            .registerButtonImg {
+              width: 20%;
+            }
+            .registerText {
+              font-size: 1vw;
+              color: white;
+              position: absolute;
+              bottom: 50%;
+              left: 50%;
+              transform: translate(-50%, 40%);
+            }
           }
         }
       }
     }
   }
   .bannerContainer {
-    margin-top: 20px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     position: relative;
     .bannerVideo {
       border-radius: 100%;
+      height: 100%;
+      width: 155%;
     }
     .bannerTitle {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       font-family: "Pacifico", serif;
-      font-size: 70px;
+      font-size: 5vw;
       color: white;
       text-shadow: 0 0 10px #84bfab, 0 0 10px #84bfab;
       white-space: nowrap;
