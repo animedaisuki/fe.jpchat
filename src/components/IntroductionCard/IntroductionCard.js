@@ -17,7 +17,7 @@ export default function introductionCard(props) {
       <img
         className={`${styles.characterImg} 
         ${position === "left" && styles.left} 
-        ${position === "center" && styles.center}`}
+        ${position === "right" && styles.right}`}
         src={charImg}
         alt="character"
       />
