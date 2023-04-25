@@ -159,7 +159,6 @@
   }
   .bannerContainer {
     margin-top: 20px;
-    margin-bottom: 20px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -178,6 +177,27 @@
       white-space: nowrap;
     }
   }
+  .catGirlDetailContainer {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .gridContainer {
+      width: 85%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 35px;
+      text-align: center;
+      position: relative;
+    }
+    @media (max-width: 1100px) {
+      .gridContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 95px;
+      }
+    }
+  }
 }
 
 .aboutContainer::-webkit-scrollbar {
@@ -186,13 +206,3 @@
 .aboutContainer:hover::-webkit-scrollbar {
   width: 0;
 }
-
-//@media (max-width: 1300px) {
-//  .live2dImgContainer {
-//    left: 200px !important;
-//  }
-//  .registerContainer {
-//    left: 570px !important;
-//    bottom: 120px !important;
-//  }
-//}
