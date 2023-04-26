@@ -71,6 +71,19 @@
         padding: 10px;
         color: white;
       }
+      .aiIsThinkingContainer {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        color: rgb(117, 117, 117);
+        top: 50%;
+        margin-left: 10px;
+        font-size: 13px;
+        transform: translateY(-52%);
+        .aiIsThinkingAnimationContainer {
+          margin-left: 5px;
+        }
+      }
       .sendMessageButton {
         position: absolute;
         background: none;
