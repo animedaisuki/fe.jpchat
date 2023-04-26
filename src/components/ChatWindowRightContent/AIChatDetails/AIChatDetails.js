@@ -16,7 +16,7 @@ import { sendMessageToAI } from "../../../api/chatGpt/chatGpt";
 import { fetchAIMessagesByConversationId } from "../../../api/chatGpt/chatGpt";
 import { useSelector } from "react-redux";
 import { changeVoicePreference } from "../../../api/user/user";
-import { RotatingLines } from "react-loader-spinner";
+import { RotatingLines, ThreeDots } from "react-loader-spinner";
 
 export default function AIChatDetails() {
   const { conversationId } = useParams();
@@ -25,7 +25,7 @@ export default function AIChatDetails() {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState([]);
   const [arrivalMessages, setArrivalMessages] = useState(null);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [AIIsThinking, setAIIsThinking] = useState(false);
   const [voice, setVoice] = useState(null);
   const [isChangingVoice, setIsChangingVoice] = useState(false);
   const scrollRef = useRef();
@@ -69,7 +69,7 @@ export default function AIChatDetails() {
     if (e.key === "Enter") {
       //如果输入框不为空
       if (e.target.value.trim() !== "") {
-        setIsDisabled(true);
+        setAIIsThinking(true);
         setInputValue("");
         //提交内容
         const messageData = {
@@ -84,14 +84,14 @@ export default function AIChatDetails() {
         if (!result.error) {
           setArrivalMessages(result.data);
         }
-        setIsDisabled(false);
+        setAIIsThinking(false);
       }
     }
   };
 
   const handleSendMessage = async () => {
     if (inputValue.trim() !== "") {
-      setIsDisabled(true);
+      setAIIsThinking(true);
       setInputValue("");
       const messageData = {
         senderId: user,
@@ -105,7 +105,7 @@ export default function AIChatDetails() {
       if (!result.error) {
         setArrivalMessages(result.data);
       }
-      setIsDisabled(false);
+      setAIIsThinking(false);
     }
   };
 
@@ -183,17 +183,26 @@ export default function AIChatDetails() {
             onKeyPress={(e) => {
               handleKeyPress(e);
             }}
-            disabled={isDisabled}
+            disabled={AIIsThinking}
             type="text"
-            placeholder={`Message @${currentAIFriend?.username}`}
+            placeholder={
+              AIIsThinking ? "" : `Message @${currentAIFriend?.username}`
+            }
           />
-
+          {AIIsThinking && (
+            <div className={styles.aiIsThinkingContainer}>
+              <p>Chtholly is Thinking</p>
+              <div className={styles.aiIsThinkingAnimationContainer}>
+                <ThreeDots color="#9fa3a9" height="16" width="16" />
+              </div>
+            </div>
+          )}
           <button
             className={`${styles.sendMessageButton} ${
-              isDisabled ? styles.disabled : undefined
+              AIIsThinking ? styles.disabled : undefined
             }`}
             onClick={handleSendMessage}
-            disabled={isDisabled}
+            disabled={AIIsThinking}
           >
             <div className={styles.sendMessageIconContainer}>
               <FaTelegramPlane size={20} />
