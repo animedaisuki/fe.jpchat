@@ -10,13 +10,18 @@ import {
   UserDispatchContext,
 } from "../../../context/UserInfoProvider";
 import { stickers } from "../../../utils/stickers";
-import { FaTelegramPlane } from "react-icons/fa";
+import { FaMicrophone } from "react-icons/fa";
 import { AiFillSound } from "react-icons/ai";
 import { sendMessageToAI } from "../../../api/chatGpt/chatGpt";
 import { fetchAIMessagesByConversationId } from "../../../api/chatGpt/chatGpt";
 import { useSelector } from "react-redux";
 import { changeVoicePreference } from "../../../api/user/user";
 import { RotatingLines, ThreeDots } from "react-loader-spinner";
+import { ScaleLoader } from "react-spinners";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import WindowError from "../../WindowError/WindowError";
 
 export default function AIChatDetails() {
   const { conversationId } = useParams();
@@ -28,12 +33,99 @@ export default function AIChatDetails() {
   const [AIIsThinking, setAIIsThinking] = useState(false);
   const [voice, setVoice] = useState(null);
   const [isChangingVoice, setIsChangingVoice] = useState(false);
+  const [isStartTalking, setIsStartTalking] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const scrollRef = useRef();
 
   const AIFriends = useSelector((state) => state.friendsOfUser.AIFriends);
   const [currentAIFriend, setCurrentAIFriend] = useState(null);
 
   const AIAutoSpeakRef = useRef();
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    isMicrophoneAvailable,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  const handleSpeaking = async () => {
+    if (browserSupportsSpeechRecognition && isMicrophoneAvailable) {
+      if (user.voicePreference === "CN") {
+        SpeechRecognition.startListening({
+          language: "zh-CN",
+          continuous: false,
+        });
+      } else {
+        SpeechRecognition.startListening({
+          language: "ja-JP",
+          continuous: false,
+        });
+      }
+    } else {
+      setErrorMessage(
+        "Please check your browser and allow us accessing your microphone"
+      );
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 2000);
+    }
+  };
+
+  useEffect(() => {
+    if (!listening && isStartTalking) {
+      const fetchAnswerFromAI = async () => {
+        resetTranscript();
+        setIsStartTalking(false);
+        setAIIsThinking(true);
+        const token = localStorage.getItem("access_token");
+        const result = await sendMessageToAI(
+          token,
+          messages[messages.length - 1]
+        );
+        if (!result.error) {
+          setArrivalMessages(result.data);
+        } else {
+          setErrorMessage("Please check your network");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 2000);
+        }
+
+        setAIIsThinking(false);
+      };
+      fetchAnswerFromAI();
+    }
+  }, [listening, isStartTalking, resetTranscript, messages]);
+
+  useEffect(() => {
+    if (!isStartTalking) {
+      if (transcript) {
+        const messageData = {
+          senderId: user,
+          senderDetail: user,
+          conversationId: conversationId,
+          text: transcript,
+        };
+        setMessages([...messages, messageData]);
+        setIsStartTalking(true);
+      }
+    }
+  }, [isStartTalking, transcript, listening, user, conversationId]);
+
+  useEffect(() => {
+    if (transcript && isStartTalking) {
+      setMessages((prevState) => {
+        const updatedMessages = [...prevState];
+        updatedMessages[prevState.length - 1] = {
+          ...updatedMessages[prevState.length - 1],
+          text: transcript,
+        };
+        return updatedMessages;
+      });
+    }
+  }, [transcript, isStartTalking]);
 
   useEffect(() => {
     setCurrentAIFriend(AIFriends[0]?.user);
@@ -89,25 +181,25 @@ export default function AIChatDetails() {
     }
   };
 
-  const handleSendMessage = async () => {
-    if (inputValue.trim() !== "") {
-      setAIIsThinking(true);
-      setInputValue("");
-      const messageData = {
-        senderId: user,
-        senderDetail: user,
-        conversationId: conversationId,
-        text: inputValue,
-      };
-      setMessages([...messages, messageData]);
-      const token = localStorage.getItem("access_token");
-      const result = await sendMessageToAI(token, messageData);
-      if (!result.error) {
-        setArrivalMessages(result.data);
-      }
-      setAIIsThinking(false);
-    }
-  };
+  // const handleSendMessage = async () => {
+  //   if (inputValue.trim() !== "") {
+  //     setAIIsThinking(true);
+  //     setInputValue("");
+  //     const messageData = {
+  //       senderId: user,
+  //       senderDetail: user,
+  //       conversationId: conversationId,
+  //       text: inputValue,
+  //     };
+  //     setMessages([...messages, messageData]);
+  //     const token = localStorage.getItem("access_token");
+  //     const result = await sendMessageToAI(token, messageData);
+  //     if (!result.error) {
+  //       setArrivalMessages(result.data);
+  //     }
+  //     setAIIsThinking(false);
+  //   }
+  // };
 
   useEffect(() => {
     setMessages((prevState) => [...prevState, arrivalMessages]);
@@ -165,6 +257,11 @@ export default function AIChatDetails() {
       </div>
       <audio className={styles.audio} ref={AIAutoSpeakRef} controls />
       <div className={styles.chatDetailsInfoAndChatContainer}>
+        {errorMessage && (
+          <div className={styles.errorMessageContainer}>
+            <WindowError errorMessage={errorMessage} />
+          </div>
+        )}
         <AIFriendInfo currentAIFriend={currentAIFriend} />
         {messages?.map((message) => (
           <div key={uuid()} ref={scrollRef}>
@@ -197,17 +294,23 @@ export default function AIChatDetails() {
               </div>
             </div>
           )}
-          <button
-            className={`${styles.sendMessageButton} ${
-              AIIsThinking ? styles.disabled : undefined
-            }`}
-            onClick={handleSendMessage}
-            disabled={AIIsThinking}
-          >
-            <div className={styles.sendMessageIconContainer}>
-              <FaTelegramPlane size={20} />
+          {listening ? (
+            <div className={styles.speakingStatusIconContainer}>
+              <ScaleLoader height="20px" width="2px" color="#7e8287" />
             </div>
-          </button>
+          ) : (
+            <button
+              className={`${styles.sendMessageButton} ${
+                AIIsThinking ? styles.disabled : undefined
+              }`}
+              onClick={handleSpeaking}
+              disabled={AIIsThinking}
+            >
+              <div className={styles.sendMessageIconContainer}>
+                <FaMicrophone size={20} />
+              </div>
+            </button>
+          )}
         </div>
       </div>
     </div>
