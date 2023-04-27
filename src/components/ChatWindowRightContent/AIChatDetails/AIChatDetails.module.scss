@@ -42,6 +42,13 @@
     margin: 10px 0 0 20px;
     overflow-x: hidden;
     overflow-y: scroll;
+    position: relative;
+    .errorMessageContainer {
+      position: fixed;
+      left: 60%;
+      top: 35px;
+      z-index: 3;
+    }
   }
   .chatDetailsInfoAndChatContainer::-webkit-scrollbar {
     width: 6px;
@@ -83,6 +90,13 @@
         .aiIsThinkingAnimationContainer {
           margin-left: 5px;
         }
+      }
+      .speakingStatusIconContainer {
+        position: absolute;
+        right: 17px;
+        top: 50%;
+        transform: translateY(-43%);
+        cursor: pointer;
       }
       .sendMessageButton {
         position: absolute;
