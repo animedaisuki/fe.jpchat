@@ -106,5 +106,14 @@
         cursor: not-allowed;
       }
     }
+    .decorationImgContainer {
+      margin-top: 110px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .decorationImg {
+        width: 60%;
+      }
+    }
   }
 }
