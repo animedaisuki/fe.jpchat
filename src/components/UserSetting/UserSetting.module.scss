@@ -1,0 +1,31 @@
+.userSettingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  .userSettingHeadingContainer {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #1e1f22;
+    color: #eff0f2;
+    .chatSettingsIconContainer {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 10px 20px;
+    }
+    .settingsFakeButton {
+      margin-left: 10px;
+      border: none;
+      background: none;
+      color: #eff0f2;
+    }
+  }
+
+  .userSettingMainContainer {
+    margin: 20px 20px 0 20px;
+    display: flex;
+    justify-content: center;
+    color: #eff0f2;
+  }
+}
