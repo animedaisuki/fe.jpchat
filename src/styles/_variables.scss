@@ -35,3 +35,12 @@ $login-form-color: #313338;
   align-self: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+@mixin colorful-button($padding, $radius) {
+  padding: $padding;
+  background-image: linear-gradient(to right top, #5665f1, #0679c5);
+  color: white;
+  border: none;
+  border-radius: $radius;
+  cursor: pointer;
+}
