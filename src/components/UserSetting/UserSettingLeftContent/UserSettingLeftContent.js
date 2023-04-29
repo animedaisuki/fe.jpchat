@@ -3,7 +3,7 @@ import styles from "./UserSettingLeftContent.module.scss";
 import { MdEdit } from "react-icons/md";
 
 export default function UserSettingLeftContent(props) {
-  const { color, setColor } = props;
+  const { color, setColor, setAboutMe } = props;
 
   const handleColorBannerChange = (e) => {
     setColor(e.target.value);
@@ -34,7 +34,13 @@ export default function UserSettingLeftContent(props) {
       <div className={styles.aboutMeContainer}>
         <h6>ABOUT ME</h6>
         <div className={styles.aboutMeInputContainer}>
-          <textarea className={styles.aboutMeInput} />
+          <textarea
+            maxLength="50"
+            className={styles.aboutMeInput}
+            onChange={(e) => {
+              setAboutMe(e.target.value);
+            }}
+          />
         </div>
       </div>
     </div>

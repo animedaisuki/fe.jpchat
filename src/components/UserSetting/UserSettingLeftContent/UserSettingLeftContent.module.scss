@@ -1,8 +1,7 @@
 @import "src/styles/variables";
 
 .userSettingLeftContainer {
-  width: 50%;
-  padding-right: 15px;
+  width: 45%;
   .avatarChangeContainer {
     display: flex;
     flex-direction: column;
@@ -66,6 +65,7 @@
         color: #eff0f2;
         font-family: inherit;
         font-size: 12px;
+        padding: 5px;
       }
       .aboutMeInput::-webkit-scrollbar {
         width: 0;

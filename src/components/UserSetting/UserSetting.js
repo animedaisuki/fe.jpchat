@@ -6,6 +6,7 @@ import UserSettingRightContent from "./UserSettingRightContent/UserSettingRightC
 
 export default function UserSetting() {
   const [color, setColor] = useState("#5665f1");
+  const [aboutMe, setAboutMe] = useState("");
 
   return (
     <div className={styles.userSettingContainer}>
@@ -17,8 +18,17 @@ export default function UserSetting() {
       </div>
 
       <div className={styles.userSettingMainContainer}>
-        <UserSettingLeftContent color={color} setColor={setColor} />
-        <UserSettingRightContent color={color} />
+        <UserSettingLeftContent
+          color={color}
+          setColor={setColor}
+          aboutMe={aboutMe}
+          setAboutMe={setAboutMe}
+        />
+        <UserSettingRightContent
+          color={color}
+          aboutMe={aboutMe}
+          setAboutMe={setAboutMe}
+        />
       </div>
     </div>
   );
