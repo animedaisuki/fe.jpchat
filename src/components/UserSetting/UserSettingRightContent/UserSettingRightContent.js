@@ -27,7 +27,6 @@ export default function UserSettingRightContent(props) {
       setSecond(0);
       setMinute((prevState) => prevState + 1);
     }
-    console.log(second);
   }, [second]);
 
   return (
