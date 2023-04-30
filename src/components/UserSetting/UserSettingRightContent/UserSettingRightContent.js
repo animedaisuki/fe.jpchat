@@ -88,6 +88,9 @@ export default function UserSettingRightContent(props) {
                   </p>
                 </div>
               </div>
+              <div className={styles.exampleButtonContainer}>
+                <button className={styles.exampleButton}>Example Button</button>
+              </div>
             </div>
           </div>
         </div>
