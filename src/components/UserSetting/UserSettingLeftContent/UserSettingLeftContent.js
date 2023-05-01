@@ -67,6 +67,7 @@ export default function UserSettingLeftContent(props) {
         <input
           style={{ display: "none" }}
           type="file"
+          name="avatar"
           ref={avatarInputFileRef}
           onChange={(e) => {
             handleAvatarChange(e);

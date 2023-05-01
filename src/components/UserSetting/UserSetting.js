@@ -10,6 +10,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { userSettingDetectionActions } from "../../store/modules/userSettingDetectionSlice";
 import { changePreview } from "../../api/user/user";
+import { uploadAvatar } from "../../api/upload/upload";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function UserSetting() {
   const userInfo = useContext(UserContext);
@@ -18,6 +20,8 @@ export default function UserSetting() {
   const [accentColor, setAccentColor] = useState(userInfo?.accentColor);
   const [aboutMe, setAboutMe] = useState(userInfo?.aboutMe);
   const [previewPic, setPreviewPic] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const avatarInputFileRef = useRef();
 
@@ -55,24 +59,51 @@ export default function UserSetting() {
   };
 
   const handleSaveChanges = async () => {
-    if (isAvatarChanged) {
-      //TODO:Handle avatar change
-    }
+    setIsLoading(true);
+    let avatar;
     const token = localStorage.getItem("access_token");
+    if (isAvatarChanged && avatarInputFileRef.current.value) {
+      const formData = new FormData();
+      formData.append("avatar", avatarInputFileRef.current.files[0]);
+      const result = await uploadAvatar(token, formData);
+      if (!result.error) {
+        avatar = result.data.avatar;
+        setUserInfo({ ...userInfo, avatar: avatar });
+        //TODO:Socket
+        dispatch(userSettingDetectionActions.resetAllDetection());
+      } else {
+        //TODO:Error Handling
+      }
+    }
+
     const data = { primaryColor, accentColor, aboutMe };
     const result = await changePreview(token, data);
     if (!result.error) {
-      setUserInfo({
-        ...userInfo,
-        primaryColor: primaryColor,
-        accentColor: accentColor,
-        aboutMe: aboutMe,
-      });
+      //这里setUserInfo会覆盖掉上面的，且因为是state,所以需要判断
+      if (isAvatarChanged) {
+        if (avatar) {
+          setUserInfo({
+            ...userInfo,
+            avatar: avatar,
+            primaryColor: primaryColor,
+            accentColor: accentColor,
+            aboutMe: aboutMe,
+          });
+        }
+      } else {
+        setUserInfo({
+          ...userInfo,
+          primaryColor: primaryColor,
+          accentColor: accentColor,
+          aboutMe: aboutMe,
+        });
+      }
       //TODO:Socket
       dispatch(userSettingDetectionActions.resetAllDetection());
     } else {
       //TODO:Error Handling
     }
+    setIsLoading(false);
   };
 
   return (
@@ -114,6 +145,7 @@ export default function UserSetting() {
               onClick={() => {
                 handleResetChanges();
               }}
+              disabled={isLoading}
             >
               Reset
             </button>
@@ -122,8 +154,13 @@ export default function UserSetting() {
               onClick={() => {
                 handleSaveChanges();
               }}
+              disabled={isLoading}
             >
-              Save Changes
+              {isLoading ? (
+                <ThreeDots color="#eff0f2" height="12" width="18" />
+              ) : (
+                <div>Save Changes</div>
+              )}
             </button>
           </div>
         </div>

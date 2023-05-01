@@ -77,6 +77,10 @@ $changeNotificationFontColor: #eff0f2;
         border-radius: 3px;
         color: $changeNotificationFontColor;
         cursor: pointer;
+        min-width: 78px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
