@@ -7,16 +7,30 @@ import { UserContext } from "../../../context/UserInfoProvider";
 
 export default function UserSettingLeftContent(props) {
   const {
+    setPreviewPic,
     primaryColor,
     setPrimaryColor,
     accentColor,
     setAccentColor,
+    aboutMe,
     setAboutMe,
+    avatarInputFileRef,
   } = props;
 
   const user = useContext(UserContext);
 
   const dispatch = useDispatch();
+
+  const handleAvatarInputClick = () => {
+    avatarInputFileRef?.current?.click();
+  };
+
+  const handleAvatarChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setPreviewPic(URL.createObjectURL(e.target.files[0]));
+      dispatch(userSettingDetectionActions.detectAvatarChange());
+    }
+  };
 
   const handlePrimaryColorChange = (e) => {
     setPrimaryColor(e.target.value);
@@ -42,10 +56,25 @@ export default function UserSettingLeftContent(props) {
     <div className={styles.userSettingLeftContainer}>
       <div className={styles.avatarChangeContainer}>
         <h6>AVATAR</h6>
-        <button className={styles.avatarChangeButton}>Change Avatar</button>
+        <button
+          className={styles.avatarChangeButton}
+          onClick={() => {
+            handleAvatarInputClick();
+          }}
+        >
+          Change Avatar
+        </button>
+        <input
+          style={{ display: "none" }}
+          type="file"
+          ref={avatarInputFileRef}
+          onChange={(e) => {
+            handleAvatarChange(e);
+          }}
+        />
       </div>
       <div className={styles.bannerChangeContainer}>
-        <h6>BANNER COLOUR</h6>
+        <h6>PROFILE THEME</h6>
         <div className={styles.bannerColorInputOuterContainer}>
           <div className={styles.bannerColorInputContainer}>
             <input
@@ -86,6 +115,7 @@ export default function UserSettingLeftContent(props) {
             onChange={(e) => {
               handleAboutMeChange(e);
             }}
+            value={aboutMe}
           />
         </div>
       </div>

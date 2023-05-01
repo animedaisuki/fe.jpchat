@@ -6,7 +6,7 @@ import monSleep from "../../../assets/UserSettings/mon-sleep.png";
 import monStand from "../../../assets/UserSettings/mon-stand.png";
 
 export default function UserSettingRightContent(props) {
-  const { primaryColor, accentColor, aboutMe } = props;
+  const { previewPic, primaryColor, accentColor, aboutMe } = props;
   const [isHovered, setIsHovered] = useState(false);
   const user = useContext(UserContext);
   const [second, setSecond] = useState(0);
@@ -52,7 +52,7 @@ export default function UserSettingRightContent(props) {
             playsInline
           />
           <div className={styles.avatarContainer}>
-            <Avatar friend={{ user: user }} />
+            <Avatar friend={{ user: user }} previewPic={previewPic} />
           </div>
         </div>
         <div className={styles.userInfoCardOuterContainer}>
