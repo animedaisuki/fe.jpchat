@@ -6,7 +6,7 @@ import monSleep from "../../../assets/UserSettings/mon-sleep.png";
 import monStand from "../../../assets/UserSettings/mon-stand.png";
 
 export default function UserSettingRightContent(props) {
-  const { color, aboutMe } = props;
+  const { primaryColor, accentColor, aboutMe } = props;
   const [isHovered, setIsHovered] = useState(false);
   const user = useContext(UserContext);
   const [second, setSecond] = useState(0);
@@ -32,11 +32,25 @@ export default function UserSettingRightContent(props) {
   return (
     <div className={styles.userSettingRightContainer}>
       <h6 className={styles.userPreviewTitle}>Preview</h6>
-      <div className={styles.previewCardContainer}>
+      <div
+        className={styles.previewCardContainer}
+        style={{
+          backgroundImage: `linear-gradient(${primaryColor}, ${primaryColor} 90px, ${accentColor})`,
+        }}
+      >
+        <div className={styles.overlay}></div>
         <div
           className={styles.previewBanner}
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: primaryColor }}
         >
+          <video
+            className={styles.bannerVideo}
+            src="https://amahane.s3.ap-northeast-1.amazonaws.com/aboutUsPage/about-us-banner.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
           <div className={styles.avatarContainer}>
             <Avatar friend={{ user: user }} />
           </div>

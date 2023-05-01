@@ -5,7 +5,8 @@ import UserSettingLeftContent from "./UserSettingLeftContent/UserSettingLeftCont
 import UserSettingRightContent from "./UserSettingRightContent/UserSettingRightContent";
 
 export default function UserSetting() {
-  const [color, setColor] = useState("#5665f1");
+  const [primaryColor, setPrimaryColor] = useState("#389e38");
+  const [accentColor, setAccentColor] = useState("#1a457f");
   const [aboutMe, setAboutMe] = useState("");
 
   return (
@@ -19,13 +20,16 @@ export default function UserSetting() {
 
       <div className={styles.userSettingMainContainer}>
         <UserSettingLeftContent
-          color={color}
-          setColor={setColor}
+          primaryColor={primaryColor}
+          setPrimaryColor={setPrimaryColor}
+          accentColor={accentColor}
+          setAccentColor={setAccentColor}
           aboutMe={aboutMe}
           setAboutMe={setAboutMe}
         />
         <UserSettingRightContent
-          color={color}
+          primaryColor={primaryColor}
+          accentColor={accentColor}
           aboutMe={aboutMe}
           setAboutMe={setAboutMe}
         />

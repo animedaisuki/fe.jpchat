@@ -24,28 +24,38 @@
     margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #3c3e44;
-    .bannerColorInputContainer {
-      margin-top: 10px;
-      position: relative;
-      width: 38%;
-      .bannerColorInput {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: none;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        height: 60px;
-        width: 100%;
-      }
-      .bannerColorInput::-webkit-color-swatch {
-        border-radius: 5px;
-        border: none;
-      }
-      .editIconContainer {
-        position: absolute;
-        top: 8%;
-        right: 8%;
+    .bannerColorInputOuterContainer {
+      display: flex;
+      .bannerColorInputContainer {
+        margin-top: 10px;
+        position: relative;
+        width: 35%;
+        margin-right: 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .bannerColorInput {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background: none;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          height: 60px;
+          width: 100%;
+        }
+        .bannerColorInput::-webkit-color-swatch {
+          border-radius: 5px;
+          border: none;
+        }
+        .editIconContainer {
+          position: absolute;
+          top: 8%;
+          right: 8%;
+        }
+        .bannerColorDesc {
+          font-size: 10px;
+        }
       }
     }
   }

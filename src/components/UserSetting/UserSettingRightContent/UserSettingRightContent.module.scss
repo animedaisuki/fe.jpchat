@@ -3,15 +3,28 @@
   .userPreviewTitle {
   }
   .previewCardContainer {
-    background-color: #232428;
+    //background-color: #232428;
     border-radius: 10px;
     margin-top: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.16);
     overflow: hidden;
     width: 90%;
+    position: relative;
+    .overlay {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background: hsla(0, 0%, 0%, 0.6);
+      top: 0;
+    }
     .previewBanner {
       height: 60px;
       position: relative;
+      .bannerVideo {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
       .avatarContainer {
         position: absolute;
         bottom: -50%;
@@ -32,6 +45,7 @@
         border-radius: 10px;
         padding: 8px;
         overflow: hidden;
+        z-index: 2;
         .usernameContainer {
           padding-bottom: 5px;
           border-bottom: 1px solid #3c3e44;

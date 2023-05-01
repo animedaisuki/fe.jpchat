@@ -3,10 +3,20 @@ import styles from "./UserSettingLeftContent.module.scss";
 import { MdEdit } from "react-icons/md";
 
 export default function UserSettingLeftContent(props) {
-  const { color, setColor, setAboutMe } = props;
+  const {
+    primaryColor,
+    setPrimaryColor,
+    accentColor,
+    setAccentColor,
+    setAboutMe,
+  } = props;
 
-  const handleColorBannerChange = (e) => {
-    setColor(e.target.value);
+  const handlePrimaryColorChange = (e) => {
+    setPrimaryColor(e.target.value);
+  };
+
+  const handleAccentColorChange = (e) => {
+    setAccentColor(e.target.value);
   };
 
   return (
@@ -17,17 +27,34 @@ export default function UserSettingLeftContent(props) {
       </div>
       <div className={styles.bannerChangeContainer}>
         <h6>BANNER COLOUR</h6>
-        <div className={styles.bannerColorInputContainer}>
-          <input
-            className={styles.bannerColorInput}
-            type="color"
-            value={color}
-            onChange={(e) => {
-              handleColorBannerChange(e);
-            }}
-          />
-          <div className={styles.editIconContainer}>
-            <MdEdit size={15} />
+        <div className={styles.bannerColorInputOuterContainer}>
+          <div className={styles.bannerColorInputContainer}>
+            <input
+              className={styles.bannerColorInput}
+              type="color"
+              value={primaryColor}
+              onChange={(e) => {
+                handlePrimaryColorChange(e);
+              }}
+            />
+            <div className={styles.editIconContainer}>
+              <MdEdit size={15} />
+            </div>
+            <p className={styles.bannerColorDesc}>Primary</p>
+          </div>
+          <div className={styles.bannerColorInputContainer}>
+            <input
+              className={styles.bannerColorInput}
+              type="color"
+              value={accentColor}
+              onChange={(e) => {
+                handleAccentColorChange(e);
+              }}
+            />
+            <div className={styles.editIconContainer}>
+              <MdEdit size={15} />
+            </div>
+            <p className={styles.bannerColorDesc}>Accent</p>
           </div>
         </div>
       </div>
