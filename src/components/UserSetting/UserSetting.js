@@ -3,15 +3,20 @@ import styles from "./UserSetting.module.scss";
 import { IoSettingsSharp } from "react-icons/io5";
 import UserSettingLeftContent from "./UserSettingLeftContent/UserSettingLeftContent";
 import UserSettingRightContent from "./UserSettingRightContent/UserSettingRightContent";
-import { UserContext } from "../../context/UserInfoProvider";
+import {
+  UserContext,
+  UserDispatchContext,
+} from "../../context/UserInfoProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { userSettingDetectionActions } from "../../store/modules/userSettingDetectionSlice";
+import { changePreview } from "../../api/user/user";
 
 export default function UserSetting() {
-  const user = useContext(UserContext);
-  const [primaryColor, setPrimaryColor] = useState(user?.primaryColor);
-  const [accentColor, setAccentColor] = useState(user?.accentColor);
-  const [aboutMe, setAboutMe] = useState(user?.aboutMe);
+  const userInfo = useContext(UserContext);
+  const setUserInfo = useContext(UserDispatchContext);
+  const [primaryColor, setPrimaryColor] = useState(userInfo?.primaryColor);
+  const [accentColor, setAccentColor] = useState(userInfo?.accentColor);
+  const [aboutMe, setAboutMe] = useState(userInfo?.aboutMe);
   const [previewPic, setPreviewPic] = useState(null);
 
   const avatarInputFileRef = useRef();
@@ -19,21 +24,55 @@ export default function UserSetting() {
   const isNeedUpdate = useSelector(
     (state) => state.userSettingDetection.isNeedUpdate
   );
+  const isAvatarChanged = useSelector(
+    (state) => state.userSettingDetection.avatarChanged
+  );
+  // const isPrimaryColorChanged = useSelector(
+  //   (state) => state.userSettingDetection.primaryColorChanged
+  // );
+  // const isAccentColorChanged = useSelector(
+  //   (state) => state.userSettingDetection.accentColorChanged
+  // );
+  // const isAboutMeChanged = useSelector(
+  //   (state) => state.userSettingDetection.aboutMeChanged
+  // );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPrimaryColor(user?.primaryColor);
-    setAccentColor(user?.accentColor);
-    setAboutMe(user?.aboutMe);
-  }, [user]);
+    setPrimaryColor(userInfo?.primaryColor);
+    setAccentColor(userInfo?.accentColor);
+    setAboutMe(userInfo?.aboutMe);
+  }, [userInfo]);
 
   const handleResetChanges = () => {
     avatarInputFileRef.current.value = null;
     setPreviewPic(null);
-    setPrimaryColor(user.primaryColor);
-    setAccentColor(user.accentColor);
-    setAboutMe(user.aboutMe);
+    setPrimaryColor(userInfo.primaryColor);
+    setAccentColor(userInfo.accentColor);
+    setAboutMe(userInfo.aboutMe);
     dispatch(userSettingDetectionActions.resetAllDetection());
+  };
+
+  const handleSaveChanges = async () => {
+    if (isAvatarChanged) {
+      //TODO:Handle avatar change
+    }
+    const token = localStorage.getItem("access_token");
+    const data = { primaryColor, accentColor, aboutMe };
+    const result = await changePreview(token, data);
+    if (!result.error) {
+      setUserInfo({
+        ...userInfo,
+        primaryColor: primaryColor,
+        accentColor: accentColor,
+        aboutMe: aboutMe,
+      });
+      //TODO:Socket
+      dispatch(userSettingDetectionActions.resetAllDetection());
+    } else {
+      //TODO:Error Handling
+    }
   };
 
   return (
@@ -78,7 +117,14 @@ export default function UserSetting() {
             >
               Reset
             </button>
-            <button className={styles.updateButton}>Save Changes</button>
+            <button
+              className={styles.updateButton}
+              onClick={() => {
+                handleSaveChanges();
+              }}
+            >
+              Save Changes
+            </button>
           </div>
         </div>
       )}

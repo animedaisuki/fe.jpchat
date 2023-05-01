@@ -43,3 +43,18 @@ export const changeVoicePreference = async (data) => {
     return result;
   }
 };
+
+export const changePreview = async (token, data) => {
+  try {
+    const headerConfig = { headers: { Authorization: `Bearer ${token}` } };
+    const path = `${config.apiAddress}/user/change-preview`;
+    const result = await axios.post(path, data, headerConfig);
+    return result;
+  } catch (error) {
+    const result = {
+      status: error.response.status,
+      error: error.response.data.error,
+    };
+    return result;
+  }
+};
