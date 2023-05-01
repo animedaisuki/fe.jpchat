@@ -134,37 +134,43 @@ export default function UserSetting() {
           setAboutMe={setAboutMe}
         />
       </div>
-      {isNeedUpdate && (
-        <div className={styles.notificationContainer}>
-          <div className={styles.notificationDesc}>
-            <p>Careful - you have unsaved changes!</p>
-          </div>
-          <div className={styles.updateButtonsContainer}>
-            <button
-              className={styles.resetButton}
-              onClick={() => {
-                handleResetChanges();
-              }}
-              disabled={isLoading}
-            >
-              Reset
-            </button>
-            <button
-              className={styles.updateButton}
-              onClick={() => {
-                handleSaveChanges();
-              }}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <ThreeDots color="#eff0f2" height="12" width="18" />
-              ) : (
-                <div>Save Changes</div>
-              )}
-            </button>
-          </div>
+
+      <div
+        className={`${styles.notificationContainer}
+      ${
+        isNeedUpdate
+          ? styles.notificationContainerMount
+          : styles.notificationContainerUnmount
+      }`}
+      >
+        <div className={styles.notificationDesc}>
+          <p>Careful - you have unsaved changes!</p>
         </div>
-      )}
+        <div className={styles.updateButtonsContainer}>
+          <button
+            className={styles.resetButton}
+            onClick={() => {
+              handleResetChanges();
+            }}
+            disabled={isLoading}
+          >
+            Reset
+          </button>
+          <button
+            className={styles.updateButton}
+            onClick={() => {
+              handleSaveChanges();
+            }}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <ThreeDots color="#eff0f2" height="12" width="18" />
+            ) : (
+              <div>Save Changes</div>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
