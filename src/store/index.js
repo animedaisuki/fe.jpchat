@@ -3,6 +3,7 @@ import currentFriendReducer from "./modules/currentFriendSlice";
 import friendIsCallingReducer from "./modules/friendIsCallingSlice";
 import friendsOfUserReducer from "./modules/friendsOfUserSlice";
 import conversationReducer from "./modules/conversationSlice";
+import userSettingDetectionReducer from "./modules/userSettingDetectionSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     currentFriend: currentFriendReducer,
     friendIsCalling: friendIsCallingReducer,
     friendsOfUser: friendsOfUserReducer,
+    userSettingDetection: userSettingDetectionReducer,
   },
 });
 
