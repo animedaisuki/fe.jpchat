@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./UserSetting.module.scss";
 import { IoSettingsSharp } from "react-icons/io5";
 import UserSettingLeftContent from "./UserSettingLeftContent/UserSettingLeftContent";
 import UserSettingRightContent from "./UserSettingRightContent/UserSettingRightContent";
+import { UserContext } from "../../context/UserInfoProvider";
+import { useSelector } from "react-redux";
 
 export default function UserSetting() {
-  const [primaryColor, setPrimaryColor] = useState("#389e38");
-  const [accentColor, setAccentColor] = useState("#1a457f");
-  const [aboutMe, setAboutMe] = useState("");
+  const user = useContext(UserContext);
+  const [primaryColor, setPrimaryColor] = useState(user?.primaryColor);
+  const [accentColor, setAccentColor] = useState(user?.accentColor);
+  const [aboutMe, setAboutMe] = useState(user?.aboutMe);
+
+  const isNeedUpdate = useSelector(
+    (state) => state.userSettingDetection.isNeedUpdate
+  );
+
+  useEffect(() => {
+    setPrimaryColor(user?.primaryColor);
+    setAccentColor(user?.accentColor);
+    setAboutMe(user?.aboutMe);
+  }, [user]);
 
   return (
     <div className={styles.userSettingContainer}>
@@ -34,6 +47,17 @@ export default function UserSetting() {
           setAboutMe={setAboutMe}
         />
       </div>
+      {!isNeedUpdate && (
+        <div className={styles.notificationContainer}>
+          <div className={styles.notificationDesc}>
+            <p>Careful - you have unsaved changes!</p>
+          </div>
+          <div className={styles.updateButtonsContainer}>
+            <button className={styles.resetButton}>Reset</button>
+            <button className={styles.updateButton}>Save Changes</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

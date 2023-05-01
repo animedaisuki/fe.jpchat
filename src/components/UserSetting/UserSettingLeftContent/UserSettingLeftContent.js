@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./UserSettingLeftContent.module.scss";
 import { MdEdit } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { userSettingDetectionActions } from "../../../store/modules/userSettingDetectionSlice";
+import { UserContext } from "../../../context/UserInfoProvider";
 
 export default function UserSettingLeftContent(props) {
   const {
@@ -11,12 +14,28 @@ export default function UserSettingLeftContent(props) {
     setAboutMe,
   } = props;
 
+  const user = useContext(UserContext);
+
+  const dispatch = useDispatch();
+
   const handlePrimaryColorChange = (e) => {
     setPrimaryColor(e.target.value);
+    dispatch(userSettingDetectionActions.detectPrimaryColorChange());
   };
 
   const handleAccentColorChange = (e) => {
     setAccentColor(e.target.value);
+    dispatch(userSettingDetectionActions.detectAccentColorChange());
+  };
+
+  const handleAboutMeChange = (e) => {
+    setAboutMe(e.target.value);
+    if (user) {
+      dispatch(userSettingDetectionActions.detectAboutMeChange());
+      if (e.target.value === user.aboutMe) {
+        dispatch(userSettingDetectionActions.resetAboutMeDetection());
+      }
+    }
   };
 
   return (
@@ -65,7 +84,7 @@ export default function UserSettingLeftContent(props) {
             maxLength="50"
             className={styles.aboutMeInput}
             onChange={(e) => {
-              setAboutMe(e.target.value);
+              handleAboutMeChange(e);
             }}
           />
         </div>

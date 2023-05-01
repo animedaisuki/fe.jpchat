@@ -60,7 +60,7 @@ export default function UserSettingRightContent(props) {
             <div className={styles.usernameContainer}>
               <h4>{user?.username}</h4>
             </div>
-            {aboutMe.trim() !== "" && (
+            {aboutMe && aboutMe?.trim() !== "" && (
               <div className={styles.aboutMeContainer}>
                 <h6>ABOUT ME</h6>
                 <p className={styles.aboutMeDesc}>{aboutMe}</p>
