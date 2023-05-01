@@ -26,9 +26,18 @@ export default function UserSettingLeftContent(props) {
   };
 
   const handleAvatarChange = (e) => {
+    const allowedMimeTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/gif",
+      "image/jpg",
+      "image/webp",
+    ];
     if (e.target.files && e.target.files[0]) {
-      setPreviewPic(URL.createObjectURL(e.target.files[0]));
-      dispatch(userSettingDetectionActions.detectAvatarChange());
+      if (allowedMimeTypes.includes(e.target.files[0].type)) {
+        setPreviewPic(URL.createObjectURL(e.target.files[0]));
+        dispatch(userSettingDetectionActions.detectAvatarChange());
+      }
     }
   };
 
@@ -72,6 +81,7 @@ export default function UserSettingLeftContent(props) {
           onChange={(e) => {
             handleAvatarChange(e);
           }}
+          accept="image/png, image/jpeg, image/gif, image/jpg, image/webp"
         />
       </div>
       <div className={styles.bannerChangeContainer}>
