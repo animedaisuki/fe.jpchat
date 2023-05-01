@@ -23,6 +23,10 @@ const UserInfoProvider = ({ children }) => {
           navigate("/login");
         } else {
           setUserInfo({ ...result.data, token });
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...result.data, token })
+          );
         }
       }
     };
