@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 .friendsManagementContainer {
   width: 100%;
   overflow: hidden;
@@ -44,12 +46,7 @@
         background-color: #43444b;
       }
       .friendsManagementHeadingAddFriendButton {
-        padding: 5px;
-        background-image: linear-gradient(to right top, #5665f1, #0679c5);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        @include colorful-button(5px, 5px);
       }
     }
   }
