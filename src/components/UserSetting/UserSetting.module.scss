@@ -1,0 +1,112 @@
+$changeNotificationBackgroundColor: #111214;
+$changeNotificationFontColor: #eff0f2;
+
+.userSettingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  .userSettingHeadingContainer {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #1e1f22;
+    color: #eff0f2;
+    .chatSettingsIconContainer {
+      display: flex;
+      align-items: center;
+      margin: 10px 0 10px 20px;
+    }
+    .settingsFakeButton {
+      margin-left: 10px;
+      border: none;
+      background: none;
+      color: #eff0f2;
+    }
+  }
+
+  .userSettingMainContainer {
+    margin: 20px 20px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    color: #eff0f2;
+  }
+
+  .notificationContainer {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    background: #111214;
+    color: #cbced1;
+    border-radius: 5px;
+    height: 45px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    .notificationDesc {
+      font-size: 10px;
+    }
+    .updateButtonsContainer {
+      display: flex;
+      align-items: center;
+
+      .resetButton {
+        font-size: 10px;
+        padding: 5px;
+        background-color: $changeNotificationBackgroundColor;
+        color: $changeNotificationFontColor;
+        border: none;
+        cursor: pointer;
+        margin-right: 5px;
+      }
+      .resetButton:hover {
+        text-decoration: underline;
+      }
+      .updateButton {
+        font-size: 10px;
+        white-space: nowrap;
+        padding: 5px;
+        background-color: #248046;
+        border: none;
+        border-radius: 3px;
+        color: $changeNotificationFontColor;
+        cursor: pointer;
+        min-width: 78px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .notificationContainerMount {
+    animation: notificationAppear 0.3s forwards;
+  }
+  .notificationContainerUnmount {
+    animation: notificationDisappear 0.3s forwards;
+  }
+  @keyframes notificationAppear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-50%, 0);
+    }
+  }
+  @keyframes notificationDisappear {
+    from {
+      opacity: 1;
+      transform: translateY(-50%, 0);
+    }
+    to {
+      opacity: 0;
+      transform: translate(-50%, 10px);
+    }
+  }
+}

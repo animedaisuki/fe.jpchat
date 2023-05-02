@@ -8,6 +8,7 @@ import { SocketContext } from "../../../../context/SocketRefProvider";
 import { UserContext } from "../../../../context/UserInfoProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { conversationActions } from "../../../../store/modules/conversationSlice";
+import animal from "../../../../assets/Chat/animal.png";
 
 export default function FriendsManagementMain(props) {
   const { statusState } = props;
@@ -120,6 +121,10 @@ export default function FriendsManagementMain(props) {
             >
               Send Friend Request
             </button>
+          </div>
+
+          <div className={styles.decorationImgContainer}>
+            <img className={styles.decorationImg} src={animal} alt="animal" />
           </div>
         </div>
       )}

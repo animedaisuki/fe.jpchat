@@ -1,0 +1,88 @@
+@import "src/styles/variables";
+
+.userSettingLeftContainer {
+  width: 35%;
+  .avatarChangeContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #3c3e44;
+    .avatarChangeButton {
+      @include colorful-button(5px, 5px);
+      font-size: 10px;
+      margin-top: 10px;
+      max-width: 38%;
+      overflow: hidden;
+    }
+  }
+
+  .bannerChangeContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #3c3e44;
+    .bannerColorInputOuterContainer {
+      display: flex;
+      .bannerColorInputContainer {
+        margin-top: 10px;
+        position: relative;
+        width: 35%;
+        margin-right: 7px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .bannerColorInput {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          background: none;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          height: 60px;
+          width: 100%;
+        }
+        .bannerColorInput::-webkit-color-swatch {
+          border-radius: 5px;
+          border: none;
+        }
+        .editIconContainer {
+          position: absolute;
+          top: 8%;
+          right: 8%;
+        }
+        .bannerColorDesc {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .aboutMeContainer {
+    margin-top: 20px;
+    .aboutMeInputContainer {
+      width: 60%;
+      margin-top: 10px;
+      .aboutMeInput {
+        max-width: 100%;
+        max-height: 250px;
+        height: 100px;
+        background-color: #1e1f22;
+        border: none;
+        border-radius: 10px;
+        color: #eff0f2;
+        font-family: inherit;
+        font-size: 12px;
+        padding: 5px;
+      }
+      .aboutMeInput::-webkit-scrollbar {
+        width: 0;
+      }
+      .aboutMeInput:hover::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }
+}

@@ -157,7 +157,13 @@ export default function ChatWindowLeftContent() {
           />
         </div>
         <div className={styles.chatWindowActionContainer}>
-          <IoSettingsSharp className={styles.chatWindowAction} size={25} />
+          <IoSettingsSharp
+            className={styles.chatWindowAction}
+            size={25}
+            onClick={() => {
+              navigate("/chat/settings");
+            }}
+          />
           <RiLogoutBoxFill
             className={styles.chatWindowAction}
             size={25}

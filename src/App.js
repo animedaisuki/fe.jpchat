@@ -11,6 +11,7 @@ import FriendsManagement from "./components/ChatWindowRightContent/FriendsManage
 import AIChatDetails from "./components/ChatWindowRightContent/AIChatDetails/AIChatDetails";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import AboutPage from "./pages/AboutPage/AboutPage";
+import UserSetting from "./components/UserSetting/UserSetting";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
             element={<AIChatDetails />}
           />
           <Route path="/chat/friends" element={<FriendsManagement />} />
-          <Route path="/chat/settings" element="" />
+          <Route path="/chat/settings" element={<UserSetting />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
