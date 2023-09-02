@@ -22,7 +22,6 @@ ChatGPT-4
 
 # Installation
 Clone the repository:
-
 bash```
 git clone https://github.com/yourusername/amahanechat.git
 ```
