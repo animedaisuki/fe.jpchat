@@ -25,7 +25,7 @@ The website also incorporates real-time chat services built on WebSocket. Users 
 The Amahane Chat project is split across multiple repositories:
 
 - **Frontend**: [fe.jpchat](https://github.com/animedaisuki/fe.jpchat) (Current repository)
-- **WebSocket Server**: [so.amahanechat](https://github.com/animedaisuki/socket.amahanechat) 
+- **WebSocket Server**: [socket.amahanechat](https://github.com/animedaisuki/socket.amahanechat) 
 - **Backend**: be.jpchat (Private, not publicly accessible at this time)
 
 
