@@ -37,7 +37,6 @@ Create a .env file and add your environment variables.
 Run the project:
 
 ```bash
-Copy code
 npm start
 ```
 
