@@ -7,7 +7,7 @@ Amahane Chat is an immersive chat platform designed for anime and manga enthusia
 The website also incorporates real-time chat services built on WebSocket. Users can effortlessly add friends and engage in conversations. The Video and Voice chat functionalities are provided through WebRTC for a seamless and lag-free experience.
 
 # Features
-AI Cat Girl Companion: Customizable and interactive Live2D powered AI.
+- `AI Cat Girl Companion`: Customizable and interactive Live2D powered AI.
 Real-time Chat: Fast and reliable chat service.
 Multi-language Support: Fluent communication in Chinese and Japanese.
 Video & Voice Chat: Smooth WebRTC integrated video and voice chat.
