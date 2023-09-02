@@ -22,12 +22,12 @@ ChatGPT-4
 
 # Installation
 Clone the repository:
-bash```
+```bash
 git clone https://github.com/yourusername/amahanechat.git
 ```
 
 Install dependencies:
-bash```
+```bash
 cd fe.jpchat
 npm install
 ```
@@ -36,7 +36,7 @@ Create a .env file and add your environment variables.
 
 Run the project:
 
-bash```
+```bash
 Copy code
 npm start
 ```
