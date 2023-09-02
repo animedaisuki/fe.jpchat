@@ -21,6 +21,14 @@ The website also incorporates real-time chat services built on WebSocket. Users 
 - `Azure Cognitive Language Services`
 - `ChatGPT-4`
 
+# Project Structure
+The Amahane Chat project is split across multiple repositories:
+
+- **Frontend**: [fe.jpchat](https://github.com/yourusername/fe.jpchat)
+- **WebSocket Server**: [so.amahanechat](https://github.com/yourusername/so.amahanechat) (Current repository)
+- **Backend**: be.jpchat (Private, not publicly accessible at this time)
+
+
 # Installation
 Clone the repository:
 ```bash
