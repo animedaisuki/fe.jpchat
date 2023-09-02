@@ -8,17 +8,18 @@ The website also incorporates real-time chat services built on WebSocket. Users 
 
 # Features
 - `AI Cat Girl Companion`: Customizable and interactive Live2D powered AI.
-Real-time Chat: Fast and reliable chat service.
-Multi-language Support: Fluent communication in Chinese and Japanese.
-Video & Voice Chat: Smooth WebRTC integrated video and voice chat.
-Customizable Voice: Alter the AI companion's voice to suit your preferences.
-Technologies Used
-React
-Live2D
-WebSocket
-WebRTC
-Azure Cognitive Language Services
-ChatGPT-4
+- `Real-time Chat`: Fast and reliable chat service.
+- `Multi-language Support` : Fluent communication in Chinese and Japanese.
+- `Video & Voice Chat`: Smooth WebRTC integrated video and voice chat.
+- `Customizable Voice`: Alter the AI companion's voice to suit your preferences.
+
+# Technologies Used
+- `React`
+- `Live2D`
+- `WebSocket`
+- `WebRTC`
+- `Azure Cognitive Language Services`
+- `ChatGPT-4`
 
 # Installation
 Clone the repository:
