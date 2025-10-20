@@ -9,13 +9,13 @@ export default function ChatAIFriendView(props) {
   return (
     <div className={styles.chatFriendOuterContainer}>
       <NavLink
-        to={`/chat/chtholly/${friend?.conversationId}/${friend?.user._id}`}
+        to={`/chat/chtholly/${friend?.conversationId}/${friend?.user?._id}`}
         className={({ isActive }) => (isActive ? styles.active : undefined)}
       >
         <button className={styles.chatFriendContainer}>
           <Avatar friend={friend} />
           <div className={styles.chatFriendNameContainer}>
-            <p>{friend.user.username}</p>
+            <p>{friend?.user?.username}</p>
           </div>
         </button>
       </NavLink>

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Register.module.scss";
 import { Link } from "react-router-dom";
 import { register } from "../../api/register/register";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
-import config from "../../config/config";
+// import HCaptcha from "@hcaptcha/react-hcaptcha"; // 已注释
+// import config from "../../config/config"; // 如果只用于 HCaptcha，可以注释
 import WindowCloseIcon from "../../components/WindoCloseIcon/WindowCloseIcon";
 import WindowError from "../../components/WindowError/WindowError";
 import { UserContext } from "../../context/UserInfoProvider";
@@ -19,13 +19,13 @@ export default function RegisterPage() {
   const [passwordRecorder, setPasswordRecorder] = useState("");
   const [checked, setChecked] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [hcToken, setHcToken] = useState(null);
+  // const [hcToken, setHcToken] = useState(null); // 已移除
   const [isRegistering, setIsRegistering] = useState(false);
   const [hasPassedChecks, setHasPassedChecks] = useState(false);
   const navigate = useNavigate();
 
   const myRef = useRef(null);
-  const captchaRef = useRef(null);
+  // const captchaRef = useRef(null); // 已移除
 
   const userInfo = useContext(UserContext);
 
@@ -33,9 +33,9 @@ export default function RegisterPage() {
     navigate("/chat");
   }
 
-  const resetCaptcha = () => {
-    captchaRef.current.resetCaptcha();
-  };
+  // const resetCaptcha = () => { // 已移除
+  //   captchaRef.current.resetCaptcha();
+  // };
 
   const handleClickOutside = (e) => {
     const target = e.target;
@@ -57,7 +57,7 @@ export default function RegisterPage() {
       username: usernameRecorder,
       password: passwordRecorder,
       checked,
-      token: hcToken,
+      // token: hcToken, // 已移除
     };
     const result = await register(data);
     if (result.error) {
@@ -71,19 +71,13 @@ export default function RegisterPage() {
       }, 2000);
     }
     if (!result.error) {
-      if (!hcToken) {
-        setErrorMessage("Please complete HCaptcha verification");
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 2000);
-      } else {
-        setHasPassedChecks(true);
-        setTimeout(() => {
-          navigate("/login");
-        }, 6300);
-      }
+      // 移除了 HCaptcha 验证检查
+      setHasPassedChecks(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 6300);
     }
-    resetCaptcha();
+    // resetCaptcha(); // 已移除
     setIsRegistering(false);
   };
 
@@ -91,18 +85,6 @@ export default function RegisterPage() {
     <>
       {hasPassedChecks ? (
         <div className={styles.oshinokoContainer}>
-          {/*<div className={styles.registerCompleteContainer}>*/}
-          {/*  <img*/}
-          {/*    className={styles.registerCompleteLoadingImg}*/}
-          {/*    src={require("../../assets/RegisterPage/anime_logo.png")}*/}
-          {/*    alt="loading"*/}
-          {/*  />*/}
-          {/*  <img*/}
-          {/*    className={styles.registerCompleteDescImg}*/}
-          {/*    src={require("../../assets/RegisterPage/sao_desc.png")}*/}
-          {/*    alt="description"*/}
-          {/*  />*/}
-          {/*</div>*/}
           <div className={styles.oshinokoBannerContainer}>
             <img
               className={styles.oshinokoBanner}
@@ -186,14 +168,15 @@ export default function RegisterPage() {
                 Policy.
               </label>
             </div>
-            <div className={styles.registerHCaptcha}>
+            {/* HCaptcha 组件已移除 */}
+            {/* <div className={styles.registerHCaptcha}>
               <HCaptcha
                 sitekey={config.hCaptchaSiteKey}
                 onVerify={(token) => setHcToken(token)}
                 onExpire={resetCaptcha}
                 ref={captchaRef}
               />
-            </div>
+            </div> */}
             <button className={styles.registerBtn} disabled={isRegistering}>
               Register
             </button>

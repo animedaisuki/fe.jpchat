@@ -8,8 +8,8 @@ export default function Avatar(props) {
     <div className={styles.userAvatarContainer}>
       <img
         className={styles.userAvatar}
-        src={!previewPic ? friend?.user.avatar : previewPic}
-        alt={friend?.user.username}
+        src={!previewPic ? friend?.user?.avatar : previewPic}
+        alt={friend?.user?.username}
       />
       <div className={styles.onlineStatusCircleOuter}>
         <div

@@ -5,6 +5,7 @@ import Avatar from "../../../../Avatar/Avatar";
 import { HiChatBubbleLeft } from "react-icons/hi2";
 import { useDispatch } from "react-redux";
 import { currentFriendActions } from "../../../../../store/modules/currentFriendSlice";
+import config from "../../../../../config/config";
 
 export default function ActiveFriendsList(props) {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function ActiveFriendsList(props) {
 
   const handleConversationButtonClick = () => {
     //hard code, when the friend is not AI
-    if (friend?.user?._id !== "642f6590587a99d158680216") {
+    if (friend?.user?._id !== config.aiUserId) {
       dispatch(currentFriendActions.setCurrentFriend(currentFriend));
     }
   };
@@ -28,15 +29,15 @@ export default function ActiveFriendsList(props) {
         <div className={styles.activeFriendListAvatarNameGroup}>
           <Avatar friend={friend} />
           <p className={styles.activeFriendListUsername}>
-            {friend?.user.username}
+            {friend?.user?.username}
           </p>
         </div>
         <NavLink
           to={
             // hard code
-            friend?.user?._id !== "642f6590587a99d158680216"
-              ? `/chat/${friend?.conversationId}/${friend?.user._id}`
-              : `/chat/chtholly/${friend?.conversationId}/${friend?.user._id}`
+            friend?.user?._id !== config.aiUserId
+              ? `/chat/${friend?.conversationId}/${friend?.user?._id}`
+              : `/chat/chtholly/${friend?.conversationId}/${friend?.user?._id}`
           }
         >
           <button
